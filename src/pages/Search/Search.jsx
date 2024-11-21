@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SearchIcon from "../../assets/img/Search/Search.svg";
+import { useNavigate } from "react-router-dom";
 import LocateIcon from "../../assets/img/Search/loc.svg";
+import SearchIcon from "../../assets/img/Search/Search.svg";
 import BackIcon from "../../assets/img/Search/back.svg";
 import TimeIcon from "../../assets/img/Search/time.svg";
 import ShopCard from "../../components/Main/ShopCard";
@@ -13,6 +14,7 @@ const dummyPopularRestaurants = [
 ];
 
 const SearchPage = () => {
+  const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState("");
   const [recentSearches, setRecentSearches] = useState(() => {
     const savedSearches = localStorage.getItem("recentSearches");
@@ -38,11 +40,29 @@ const SearchPage = () => {
   }, []);
 
   const handleSearch = () => {
-    if (!searchInput.trim()) return; 
-    const updatedSearches = [searchInput, ...recentSearches.filter((item) => item !== searchInput)]; // 중복 제거
+    if (!searchInput.trim()) return;
+    const updatedSearches = [searchInput, ...recentSearches.filter((item) => item !== searchInput)];
     setRecentSearches(updatedSearches);
     localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
-    setSearchInput(""); 
+    navigate(`/searchpart?keyword=${encodeURIComponent(searchInput)}`);
+    setSearchInput("");
+  };
+
+  const handleLocate = () => {
+    if (!navigator.geolocation) {
+      alert("현재 위치를 지원하지 않는 브라우저입니다.");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        navigate(`/searchpart?latitude=${latitude}&longitude=${longitude}`);
+      },
+      (error) => {
+        alert("현재 위치를 가져올 수 없습니다. 권한을 확인해주세요.");
+        console.error(error);
+      }
+    );
   };
 
   const handleRemoveTag = (search) => {
@@ -65,13 +85,13 @@ const SearchPage = () => {
           placeholder="음식점, 메뉴, 주소를 검색해보세요"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSearch()} 
+          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
         />
         <img
           src={LocateIcon}
           alt="위치 아이콘"
           className="icon locate-icon"
-          onClick={handleSearch}
+          onClick={handleLocate}
         />
         <img
           src={SearchIcon}
