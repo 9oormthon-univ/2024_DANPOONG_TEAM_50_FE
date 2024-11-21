@@ -375,3 +375,12 @@
   transform: rotate(180deg);
   
 }
+//
+.restaurant-list-container {
+  height: calc(100vh - 180px); 
+  padding-bottom: 40px; 
+  overflow: scroll;
+}
+.restaurant-list-container::-webkit-scrollbar {
+  display: none;
+}
