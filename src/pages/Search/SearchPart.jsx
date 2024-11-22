@@ -18,23 +18,25 @@ const SearchPage2 = () => {
   const [userLocation, setUserLocation] = useState({ logt: null, lat: null });
   const [noResults, setNoResults] = useState(false);
 
-  const location = useLocation(); 
-
-  useEffect(() => {
-    const dummyToken =
-      "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNjI1NzIsImV4cCI6MTczMjI2NDM3MiwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.C7tQeaIReoGxbdc1W-lZBhpuvS9ObR4yreZXHSiHPUG92n1nUGZb_KCCkkHM12c2o7ZtIBDSR2Ec6cCT9Eyl7A";
-    localStorage.setItem("accessToken", dummyToken);
-  }, []);
+  const location = useLocation();
 
   const fetchRestaurants = async (params) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
+      const storedData = JSON.parse(localStorage.getItem("mymoo"));
+      if (!storedData || !storedData["user-token"]) {
+        console.error("Access token not found. Please log in.");
+        return;
+      }
+
+      const accessToken = storedData["user-token"];
+  
       const response = await axios.get("https://api.mymoo.site/api/v1/stores", {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`, 
         },
         params,
       });
+
       const { stores } = response.data;
       const updatedStores = stores.map((restaurant) => {
         let rating = 0;
@@ -55,9 +57,8 @@ const SearchPage2 = () => {
         return { ...restaurant, rating, reviewCount };
       });
 
-      setRestaurants(updatedStores); 
+      setRestaurants(updatedStores);
       setFilteredRestaurants(updatedStores);
-
       setNoResults(updatedStores.length === 0);
     } catch (error) {
       console.error("Error fetching restaurants:", error);
@@ -82,9 +83,9 @@ const SearchPage2 = () => {
   useEffect(() => {
     if (filterRating) {
       const filtered = restaurants.filter((restaurant) => restaurant.rating >= 4.0);
-      setFilteredRestaurants(filtered); 
+      setFilteredRestaurants(filtered);
     } else {
-      setFilteredRestaurants(restaurants); 
+      setFilteredRestaurants(restaurants);
     }
   }, [filterRating, restaurants]);
 
@@ -142,7 +143,7 @@ const SearchPage2 = () => {
   };
 
   const handleBackButtonClick = () => {
-    window.history.back(); 
+    window.history.back();
   };
 
   const handleLocateClick = () => {
@@ -151,7 +152,7 @@ const SearchPage2 = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ lat: latitude, logt: longitude });
-          fetchRestaurants({ lat: latitude, logt: longitude }); 
+          fetchRestaurants({ lat: latitude, logt: longitude });
         },
         (error) => {
           console.error("Error getting location: ", error);
@@ -182,7 +183,7 @@ const SearchPage2 = () => {
           src={LocateIcon}
           alt="위치 아이콘"
           className="icon locate-icon"
-          onClick={handleLocateClick} 
+          onClick={handleLocateClick}
         />
         <img
           src={SearchIcon}
@@ -191,7 +192,6 @@ const SearchPage2 = () => {
           onClick={handleSearch}
         />
       </div>
-
       <div className="sort-buttons">
         <div className="left-buttons">
           <button className="sort-button" onClick={handleSortPrice}>
@@ -214,7 +214,6 @@ const SearchPage2 = () => {
           <img src={UnderIcon} alt="정렬 아이콘" />
         </button>
       </div>
-
       <div className="restaurant-list-container">
         {filteredRestaurants.length > 0 && !noResults ? (
           <div className="restaurant-list">
@@ -237,7 +236,6 @@ const SearchPage2 = () => {
           <div className="no-results">검색 가능한 가게가 없습니다</div>
         )}
       </div>
-
       {sortModalVisible && (
         <>
           <div className="modal-overlay" onClick={toggleSortModal}></div>
