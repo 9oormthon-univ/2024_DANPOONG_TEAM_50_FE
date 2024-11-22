@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LocationIcon from "../../assets/img/Search/locate.svg";
 import StarIcon from "../../assets/img/Search/star=on.svg";
@@ -16,18 +17,29 @@ const SearchCard = ({
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [allDonation, setAllDonation] = useState(0);
+  const [priceRange, setPriceRange] = useState("메뉴 정보 없음");
 
-  const accessToken =
-    "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNjQxMzksImV4cCI6MTczMjI2NTkzOSwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.nWzoWEemQSMi3yqFy8TzTLDV210kXmnEqo7cFsd3C0MvDGYyJqyGFHfO49MUgtc5G70zSD0tNxl2_8zn2H80AA";
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchStoreDetails = async () => {
       try {
-        const response = await axios.get(`https://api.mymoo.site/api/v1/stores/${id}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const storedData = JSON.parse(localStorage.getItem("mymoo"));
+        const accessToken = storedData?.["user-token"];
+
+        if (!accessToken) {
+          console.error("Access token not found. Please log in.");
+          return;
+        }
+
+        const response = await axios.get(
+          `https://api.mymoo.site/api/v1/stores/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
         const { allDonation, likeable } = response.data;
 
         setAllDonation(allDonation);
@@ -37,11 +49,55 @@ const SearchCard = ({
       }
     };
 
+    const fetchStoreMenus = async () => {
+      try {
+        const storedData = JSON.parse(localStorage.getItem("mymoo"));
+        const accessToken = storedData?.["user-token"];
+
+        if (!accessToken) {
+          console.error("Access token not found. Please log in.");
+          return;
+        }
+
+        const response = await axios.get(
+          `https://api.mymoo.site/api/v1/stores/${id}/menus`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        const menus = response.data.menus;
+
+        if (menus && menus.length > 0) {
+          const prices = menus.map((menu) => menu.price);
+          const minPrice = Math.min(...prices);
+          const maxPrice = Math.max(...prices);
+          setPriceRange(`${minPrice.toLocaleString()} ~ ${maxPrice.toLocaleString()}`);
+        } else {
+          setPriceRange("메뉴 정보 없음");
+        }
+      } catch (error) {
+        console.error(`Failed to fetch menus for storeId: ${id}`, error);
+        setPriceRange("메뉴 정보 없음");
+      }
+    };
+
     fetchStoreDetails();
+    fetchStoreMenus();
   }, [id]);
 
   const handleToggleFavorite = async () => {
     try {
+      const storedData = JSON.parse(localStorage.getItem("mymoo"));
+      const accessToken = storedData?.["user-token"];
+
+      if (!accessToken) {
+        console.error("Access token not found. Please log in.");
+        return;
+      }
+
       const updatedFavoriteStatus = !isFavorite;
 
       await axios.patch(`https://api.mymoo.site/api/v1/stores/${id}`, null, {
@@ -59,8 +115,12 @@ const SearchCard = ({
     }
   };
 
+  const handleCardClick = () => {
+    navigate(`/api/v1/stores/${id}`); 
+  };
+
   return (
-    <div className="list-card">
+    <div className="list-card" onClick={handleCardClick}> 
       <img src={imgSrc} alt={title} className="card-image" />
       <div className="card-details">
         <div className="title-row">
@@ -75,7 +135,10 @@ const SearchCard = ({
             src={isFavorite ? HeartFilledIcon : HeartIcon}
             alt="favorite"
             className="favorite-icon"
-            onClick={handleToggleFavorite}
+            onClick={(e) => {
+              e.stopPropagation(); 
+              handleToggleFavorite();
+            }}
           />
         </div>
         <div className="location-row">
@@ -84,6 +147,9 @@ const SearchCard = ({
         </div>
         <div className="distance-row">
           <span>현 위치에서 {distance}m</span>
+        </div>
+        <div className="price-row">
+          <span>{priceRange}</span>
         </div>
         <div className="review-row">
           <span>리뷰 {reviewCount}개</span>
