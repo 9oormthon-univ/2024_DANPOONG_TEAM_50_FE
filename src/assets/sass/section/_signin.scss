@@ -1,0 +1,94 @@
+/* 부모 컨테이너를 화면 가운데 정렬 */
+.signin-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  height: 100dvh; 
+  padding: 18px;
+  width: 100%;
+  background-color: white;
+}
+
+.LogoSection {
+  margin-bottom: 54px; 
+}
+
+.logo {
+  width: 75px;
+  height: 43px;
+}
+
+.IdInputBox, .PwInputBox {
+  width: 354px;
+  height: 42px;
+  margin-bottom: 9px; 
+  padding: 0 10px;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: regular;
+  font-family: "Pretendard-Regular";
+}
+
+.StartBtn {
+  width: 354px;
+  height: 47px;
+  margin-top: 15px;
+  background-color: #FFE136;
+  border: none;
+  color: #000000;
+  font-family: "Pretendard-SemiBold";
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.TextTotalComponent {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  gap: 15px; 
+  font-size: 10px;
+  color: #b3b3b3;
+  font-family: "Pretendard-Medium";
+}
+
+.TextDiv{
+  cursor: pointer;
+}
+
+.LineTotalComponent {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 30px 0;
+}
+
+.LineTotalComponent .WlineImg {
+  flex-grow: 1; 
+  height: 1px;
+  background-color: #b3b3b3;
+}
+
+.LineTotalComponent .TextDivw {
+  margin: 0 10px;
+  font-size: 12px;
+  color: #b3b3b3;
+  font-family: "Pretendard-Regular";
+}
+
+.SocialButtonSection {
+  display: flex;
+  justify-content: center;
+  gap: 20px; 
+}
+
+.SocialButtonSection img {
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+}
