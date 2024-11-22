@@ -7,60 +7,100 @@ import TimeIcon from "../../assets/img/Order/time.png";
 import MenuBox from "../../components/Order/MenuBox";
 import HeartIcon from "../../assets/img/Order/heart.png";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
+import { useNavigate } from "react-router-dom";
 const Order = () => {
-  const [menuCnt, setMenuCnt] = useState(0);
+  const navigate = useNavigate();
   const [storeInfo, setStoreInfo] = useState([]);
   const [menuArr, setMenuArr] = useState([]);
-  // 가게 정보
-  const fetchStore = () => {
-    fetch(`https://api.mymoo.site/api/v1/stores/1`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIxMjQxMzYsImV4cCI6MTczMjEyNTkzNiwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.gNtiP2CBsPBslVZuAiSnCZcZuX49BUu4Kj8hP4mQRtE-1EGBMXnCAwdbj9Ve5rdE2Gt9-3gLFhz_LHmDTAFJ9Q`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        console.log("Response status:", response.status);
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Fetched data:", data);
-        setStoreInfo(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  };
-  // 메뉴판
-  const fetchMenus = () => {
-    fetch(`https://api.mymoo.site/api/v1/stores/1/menus`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIxMjQxMzYsImV4cCI6MTczMjEyNTkzNiwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.gNtiP2CBsPBslVZuAiSnCZcZuX49BUu4Kj8hP4mQRtE-1EGBMXnCAwdbj9Ve5rdE2Gt9-3gLFhz_LHmDTAFJ9Q`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        console.log("Response status:", response.status);
-        return response.json();
-      })
-      .then((data) => {
-        setMenuCnt(data.total_count);
-        setMenuArr(data.menus);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  };
-
-  // fetchDashpage 호출을 useEffect 내부로 이동
+  const [donateData, setDonateDate] = useState([]);
+  const [token, setToken] = useState(0);
+  const [userRole, setUserRole] = useState("");
+  const [storeName, setStoreName] = useState("");
+  // 스토리지 끌어오기
   useEffect(() => {
-    fetchStore();
-    fetchMenus();
-  }, []); // 빈 배열([])로 설정해 컴포넌트가 마운트될 때 한 번만 실행
+    console.log("here");
+    const storedData = localStorage.getItem("mymoo");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setUserRole(parsedData.role);
+      setToken(parsedData["user-token"]);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const fetchStore = () => {
+        fetch(`https://api.mymoo.site/api/v1/stores/1`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            console.log("Response status:", response.status);
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Fetched data:", data);
+            setStoreInfo(data);
+            setStoreName(data.name);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      };
+      // 메뉴판
+      const fetchMenus = () => {
+        fetch(`https://api.mymoo.site/api/v1/stores/1/menus`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            console.log("Response status:", response.status);
+            return response.json();
+          })
+          .then((data) => {
+            setMenuArr(data.menus);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      };
+
+      // 메뉴판
+      const fetchDonates = () => {
+        fetch(`https://api.mymoo.site/api/v1/donations/stores/3`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            console.log("Response status:", response.status);
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            setDonateDate(data.donations);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      };
+      fetchStore();
+      fetchMenus();
+      fetchDonates();
+    }
+    // 가게 정보
+  }, [token]);
 
   const [selectId, setSelectId] = useState(1);
   const menuSelect = (id) => {
@@ -74,7 +114,7 @@ const Order = () => {
           <div className="restaurant-img">
             <img
               className="img-width"
-              src="https://d12zq4w4guyljn.cloudfront.net/300_300_20230601035123_photo1_49cacd37483c.jpg"
+              src={storeInfo.imagePath}
               alt="shop-top-img"
             />
           </div>
@@ -108,7 +148,18 @@ const Order = () => {
                 </span>
               </div>
             </div>
-            <div className="donate-btn">식당 후원하기</div>
+            {userRole === "DONATOR" && (
+              <div
+                className="donate-btn"
+                onClick={() =>
+                  navigate("/donate", {
+                    state: { storeName },
+                  })
+                }
+              >
+                식당 후원하기
+              </div>
+            )}
           </div>
         </div>
         <div className="menu-bar">
@@ -150,6 +201,7 @@ const Order = () => {
               <div className="add-menu-area">
                 <div className="add-menu">추가 메뉴</div>
                 <MenuBox
+                  key={-1}
                   menu="음료수"
                   price={2000}
                   img={
@@ -158,6 +210,7 @@ const Order = () => {
                   des={"시원한 음료수"}
                 />
                 <MenuBox
+                  key={0}
                   menu="단무지"
                   price={1000}
                   img={
@@ -171,31 +224,15 @@ const Order = () => {
           {selectId === 2 && (
             <div className="menu-2-area">
               <div className="donate-rate">5000-10000원</div>
-              <PriceBox
-                price={5000}
-                donator={"이*림"}
-                date={"2024.11.11"}
-                place={"떠밥 강남점"}
-              />
-              <PriceBox
-                price={9000}
-                donator={"이*림"}
-                date={"2024.11.11"}
-                place={"떠밥 강남점"}
-              />
-              <div className="donate-rate">11000-15000원</div>
-              <PriceBox
-                price={12000}
-                donator={"이*림"}
-                date={"2024.11.11"}
-                place={"이삭토스트 신설동점"}
-              />
-              <PriceBox
-                price={19000}
-                donator={"이*림"}
-                date={"2024.11.11"}
-                place={"육전식당 신설동점"}
-              />
+              {donateData.map((donate, idx) => (
+                <PriceBox
+                  key={idx}
+                  price={donate.point}
+                  donator={donate.donator}
+                  date={donate.donatedAt}
+                  place={storeInfo.name}
+                />
+              ))}
             </div>
           )}
         </div>
