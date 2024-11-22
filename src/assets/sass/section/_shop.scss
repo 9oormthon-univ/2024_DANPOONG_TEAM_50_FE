@@ -1,0 +1,44 @@
+.qr-scan-page {
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .qr-scan-area-bg {
+    width: 100%;
+    height: 100dvh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.522);
+  }
+  .qr-scan-area-main {
+    margin-top: -5rem;
+    z-index: 10;
+    text-align: center;
+    button {
+      width: 50%;
+      padding: 0.7rem;
+      border: none;
+      font-family: "Pretendard-Medium";
+      font-size: 0.9rem;
+      border-radius: 3px;
+      box-shadow: #0000007e 2px 2px;
+      margin-bottom: 3rem;
+    }
+    .notice-txt {
+      text-align: center;
+      font-size: 0.9rem;
+      font-family: "Pretendard-Regular";
+      color: #ffffff;
+      margin-top: 1rem;
+    }
+  }
+  .qr-scan-area {
+    .frame-img {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+    }
+  }
+}

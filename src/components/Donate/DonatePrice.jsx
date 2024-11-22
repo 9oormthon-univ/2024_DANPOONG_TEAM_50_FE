@@ -3,7 +3,7 @@ import Price1 from "../../assets/img/Order/price/1.png";
 import Price2 from "../../assets/img/Order/price/2.png";
 import Price3 from "../../assets/img/Order/price/3.png";
 import { useNavigate } from "react-router-dom";
-const PriceBox = ({ price, donator, date, place }) => {
+const DonatePrice = ({ price, donator, date, place, donateStatus }) => {
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState("");
   useEffect(() => {
@@ -30,18 +30,21 @@ const PriceBox = ({ price, donator, date, place }) => {
     priceImg = Price3;
   }
   const formattedPrice = price.toLocaleString();
-
+  console.log(donateStatus);
   return (
     <div onClick={goPay}>
-      <div className="donate-price-box">
+      <div className="donate-price-box donator-price-box">
         <div className="donate-price-img">
           <img src={priceImg} alt="이미지" className="img-width" />
         </div>
         <div className="donate-price-detail">
-          <div className="donate-price-title">{formattedPrice}원권</div>
-          <div className="price-donator">
-            후원자 <span className="grey">{donator}님</span>
-          </div>
+          <div className="donate-place-title">{place}</div>
+          <div className="donate-price-title">{formattedPrice}원</div>
+          {donateStatus === true ? (
+            <div className="donate-status">후원 완료</div>
+          ) : (
+            <div className="donate-status ing">후원 대기 중</div>
+          )}
           <div className="donate-price-date">후원날짜 {date}</div>
         </div>
       </div>
@@ -49,4 +52,4 @@ const PriceBox = ({ price, donator, date, place }) => {
   );
 };
 
-export default PriceBox;
+export default DonatePrice;
