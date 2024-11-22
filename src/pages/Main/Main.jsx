@@ -7,41 +7,58 @@ import Ad1Icon from "../../assets/img/Main/ad.svg";
 import Ad2Icon from "../../assets/img/Main/ad.svg";
 import Ad3Icon from "../../assets/img/Main/ad.svg";
 import profileImg from "../../assets/img/Main/profile.svg";
+import profileImg1 from "../../assets/img/Main/profile1.svg";
+import profileImg2 from "../../assets/img/Main/profile2.svg";
 import RecentImg from "../../assets/img/Main/recent.svg";
+import RecentImg2 from "../../assets/img/Main/recent2.svg";
+import RecentImg3 from "../../assets/img/Main/recent3.svg";
+import RecentImg4 from "../../assets/img/Main/recent4.svg";
+import RecentImg5 from "../../assets/img/Main/recent5.svg";
 import ReviewCard from "../../components/Main/ReviewCard";
 import ShopCard from "../../components/Main/ShopCard";
+import LogoIcon from "../../assets/img/Main/logo.svg";
 
-//테스트용 더미데이터
+//더미데이터
 const dummyReviews = [
   {
     id: 1,
-    storeName: "철새타령 한우곰탕집",
+    storeName: "철수네닭갈비 압구정점",
     nickname: "민트초코",
-    profileImg: profileImg,
+    profileImg: profileImg1,
     rating: 4,
     userInfo: "09년생 / 여",
-    date: "2주 전",
-    description: "사장님이 너무 친절하고 맛도 맛있게 끓여져있습니다. 최고예요! 이야이야오",
+    date: "1일전",
+    description: "사장님이 너무 친절하셨고 밥도 맛있게 잘먹었습니다. 최고에요!",
   },
   {
     id: 2,
     storeName: "한끼식당 용산",
-    nickname: "홍길동",
-    profileImg: profileImg,
-    rating: 3,
+    nickname: "규성",
+    profileImg: profileImg2,
+    rating: 5,
     userInfo: "91년생 / 남",
-    date: "3주 전",
-    description: "밥반찬도 예쁘게 나와요! 여기는 절 재방문했을 정도로 좋아요.",
+    date: "1주 전",
+    description: "밑반찬도 메인메뉴도 맛있어요!여기선 꼭 제육볶음을 먹어보세요!",
   },
   {
     id: 3,
-    storeName: "알아 곱창집",
-    nickname: "곱창러버",
-    profileImg: profileImg,
+    storeName: "신의한국수 이수점",
+    nickname: "도도희",
+    profileImg: profileImg2,
     rating: 5,
-    userInfo: "85년생 / 여",
-    date: "1달 전",
-    description: "알이 많고 깔끔한 곱창.",
+    userInfo: "11년생 / 여",
+    date: "5일전",
+    description: "양이 엄청 많아요 ㄷㄷ 계란듬뿍 김밥 진짜 간도 딱 맞고 맛있어요",
+  },
+  {
+    id: 4,
+    storeName: "아차산떡볶이 사당점",
+    nickname: "개굴이",
+    profileImg: profileImg1,
+    rating: 5,
+    userInfo: "03년생 / 여",
+    date: "2주 전",
+    description: "종종 자주 먹고 있는데 항상 서비스를 잘 챙겨주세요 감사합니다!",
   },
 ];
 
@@ -54,15 +71,27 @@ const dummyRecentShops = [
   },
   {
     id: 2,
-    name: "한솥 도시락",
+    name: "한솥 도시락 강남점",
     rating: 4.0,
-    img: RecentImg,
+    img: RecentImg2,
   },
   {
     id: 3,
-    name: "부산 돼지국밥",
-    rating: 4.5,
-    img: RecentImg,
+    name: "부산돼지국밥 서초점",
+    rating: 3.8,
+    img: RecentImg3,
+  },
+  {
+    id: 4,
+    name: "서가앤쿸 강남역삼점",
+    rating: 4.6,
+    img: RecentImg4,
+  },
+  {
+    id: 5,
+    name: "GS25 강남점",
+    rating: 4.1,
+    img: RecentImg5,
   },
 ];
 
@@ -136,7 +165,7 @@ const Main = () => {
   return (
     <div className="home-container">
       <header className="header">
-        <h1>로고</h1>
+      <img src={LogoIcon} alt="로고" className="logo" />
         <div className="icons">
         <img src={SearchIcon} alt="검색 아이콘" className="icon" onClick={() => navigate('/search')} />
           <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
@@ -158,10 +187,6 @@ const Main = () => {
       <section className="reviews">
         <div className="section-header">
           <h3>리뷰 모아보기</h3>
-          <div className="more">
-            <span>더보기</span>
-            <img src={RightDirectionIcon} alt="더보기 아이콘" className="right-icon" />
-          </div>
         </div>
         <div className="review-list">
           {dummyReviews.map((review) => (
