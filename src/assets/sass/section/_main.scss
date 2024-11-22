@@ -5,6 +5,12 @@
       align-items: center;
       padding-top: 74px;
   
+      .logo {
+        height: 19px; 
+        width: auto; 
+        margin-left: 15px;
+      }
+
       h1 {
         font-size: 22px;
         padding-left: 10px;
@@ -24,13 +30,11 @@
     .banner-container {
       position: relative;
       overflow: hidden;
-      width: 402px;
-      height: 212px;
+      height: 220px;
       margin-top: 10px;
   
       .banner {
         display: flex;
-        transition: transform 0.8s ease-in-out;
         width: 100%;
   
         img {
@@ -48,7 +52,7 @@
       font-size: 12px;
       padding: 10px 0;
       padding-left: 90px;
-      margin-top: -18px;
+      margin-top: -35px;
       border-radius: 10px;
       background-image: url("../../img/Main/locate.svg");
       background-position: center;
@@ -70,20 +74,7 @@
         h3 {
           font-size: 18px;
           margin-left: 13px;
-        }
-  
-        .more {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          font-size: 13px;
-          font-weight: 700;
-  
-          img {
-            width: 36px;
-            height: 36px;
-            margin-left: 4px;
-          }
+          margin-bottom: 5px;
         }
       }
   
@@ -97,7 +88,7 @@
     }
   
     .divider {
-      height: 7px;
+      height: 5px;
       background-color: #efefef;
       margin: 10px 0;
     }
@@ -106,6 +97,7 @@
       h3 {
         font-size: 18px;
         padding-left: 13px;
+        margin-bottom: -5px;
       }
     }
   }
@@ -116,7 +108,7 @@
     flex-direction: column;
     background-color: transparent;
     padding: 11px;
-    border: 0.2px solid gray;
+    border: 0.05px solid rgb(172, 172, 172);
     border-radius: 8px;
     width: 155px;
     height: 100px;
@@ -279,3 +271,254 @@
       }
     }
   }
+
+  //후원자 홈 화면
+
+  //내 후원
+.donation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px auto;
+  width: 100%;
+  height: auto; 
+  margin-left: -10px;
+
+  .user-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    margin-right: 20px;
+
+
+    .user-details {
+      margin-bottom: 10px;
+
+      h3 {
+        margin: 0;
+        font-size: 9px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      p {
+        margin: 5px 0;
+        font-size: 8px;
+        color: #666;
+      }
+    }
+
+    .user-stats {
+      p {
+        margin: 5px 0;
+        font-size: 7px;
+        color: #666;
+
+        span {
+          font-weight: bold;
+          color: #ffd700;
+        }
+      }
+    }
+  }
+
+  .highlight-yellow {
+    color: #ffd700; 
+  }
+}
+
+.profile-img {
+  width: 45px; 
+  height: 45px;
+  border-radius: 50%; 
+}
+
+
+//랭크
+.rank-container {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: -3px;
+}
+
+.rank-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rank-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+
+  &:last-child {
+    border-bottom: none; 
+  }
+}
+
+.rank-left {
+  display: flex;
+  align-items: center;
+  margin-bottom: -5px;
+
+  .rank-number {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .rank-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .rank-info {
+    display: flex;
+    flex-direction: column;
+
+    .rank-name {
+      font-size: 10px;
+      font-weight: bold;
+
+      .rank-gender {
+        font-size: 8px;
+        color: #888;
+        margin-left: 5px;
+      }
+    }
+
+    .rank-date {
+      font-size: 6px;
+      color: #aaa;
+      margin-top: 3px;
+    }
+  }
+}
+
+.rank-right {
+  text-align: right;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+
+  .rank-amount {
+    font-size: 9px;
+    color: #aaa;
+    margin-left: 10px;
+  }
+
+  .rank-total {
+    font-size: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+}
+
+.reviews-content {
+  display: flex;
+  margin-bottom: -30px;
+  overflow: hidden; 
+  flex-wrap: nowrap; 
+}
+
+.rank-card {
+ margin-left: -60px;
+ margin-top: -17px;
+}
+
+.donation-card{
+  margin-top: -25px;
+  z-index: 100;
+}
+
+.reviews {
+  overflow: hidden;
+}
+  .donate-page {
+    width: 100%;
+    height: 100dvh;
+  
+    .donate-page-top {
+      padding: 80px 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      .donate-price-box {
+        padding: 12px 25px 12px 12px;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        border: 1px solid #e2e2e2;
+        border-radius: 10px;
+      }
+      .donate-price-img {
+        flex: 2.5;
+        overflow: hidden;
+        border-radius: 5px;
+      }
+      .donate-price-detail {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        .yellow {
+          color: #ffb800;
+          font-size: 1.1rem;
+          font-family: "Pretendard-SemiBold";
+        }
+        .date {
+          color: #999999;
+          font-size: 0.8rem;
+          font-family: "Pretendard-Regular";
+        }
+      }
+      .donate-checkbox {
+        flex: 0.5;
+  
+        display: flex;
+        align-items: center;
+        text-align: right;
+        input {
+          margin-left: auto;
+          width: 20px;
+          height: 20px;
+          border-radius: 999px;
+        }
+      }
+    }
+
+    .donate-btn-area {
+      position: fixed;
+      bottom: 65px;
+      width: 100%;
+      max-width: 390px;
+      background-color: white;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0.8rem 0.9rem;
+      box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
+      .donate-btn {
+        border-radius: 5px;
+        width: 100%;
+        padding: 14px 0;
+        text-align: center;
+        font-family: "Pretendard-SemiBold";
+        font-size: 1.1rem;
+        background-color: #ffe136;
+      }
+    }
+  }
+  

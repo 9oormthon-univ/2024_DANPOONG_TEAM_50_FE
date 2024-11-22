@@ -1,0 +1,395 @@
+.search-page {
+    padding: 20px;
+    position: relative;
+  
+    .back-icon {
+      position: absolute;
+      top: 66px;
+      left: 10px;
+      width: 19px;
+      height: 19px;
+      cursor: pointer;
+    }
+  
+    .search-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 337px;
+      height: 36px;
+      border: 1px solid #ffd000;
+      border-radius: 10px;
+      padding: 0 5px;
+      margin: auto 20px;
+      margin-top: 39px;
+  
+      input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 12px;
+        color: #333;
+        outline: none;
+        padding-left: 10px;
+      }
+  
+      .locate-icon {
+        width: 15px;
+        height: 15px;
+        margin-right: 8px;
+      }
+  
+      .search-icon {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  
+    .recent-searches {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+  
+      .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        margin-top: 15px;
+  
+        h4 {
+          font-size: 12px;
+          color: #bcbcbc;
+        }
+  
+        .clear-all {
+          background: none;
+          border: none;
+          font-size: 12px;
+          color: #bcbcbc;
+          cursor: pointer;
+        }
+      }
+  
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+  
+        .search-tag {
+          display: flex;
+          align-items: center;
+          padding: 4px 9px;
+          border: 1px solid #cccccc;
+          border-radius: 20px;
+          font-size: 11px;
+          background-color: transparent;
+  
+          .remove-tag {
+            background: none;
+            border: none;
+            color: #888;
+            margin-left: 5px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  
+    .trending-section {
+      margin-bottom: 20px;
+  
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: #bcbcbc;
+        margin-bottom: 10px;
+  
+        .update-time {
+          display: flex;
+          align-items: center;
+          font-size: 11px;
+          color: rgb(181, 181, 181)cbc;
+  
+          img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  
+    .popular-restaurants {
+      h3 {
+        font-size: 12px;
+        color: #bcbcbc;
+        margin-bottom: 5px;
+      }
+  
+      .shop-list {
+        display: flex;
+        gap: 10px;
+        margin-left: -15px;
+        margin-top: -10px;
+        padding-bottom: 10px;
+  
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+  }
+
+  //상세 검색창
+  .sort-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px -7px;
+    margin-left: 2px;
+  
+    .left-buttons,
+    .right-buttons {
+      display: flex;
+      gap: 10px;
+    }
+  
+    .sort-button {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 11px;
+      background-color: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+  
+      .arrow-icon {
+        width: 12px;
+        height: 12px;
+        margin-left: 5px;
+      }
+  
+      &.active {
+        border-color: #ffd700;
+        color: #ffd700;
+  
+        .arrow-icon {
+          width: 16px;
+          height: 16px;
+          margin-left: 8px;
+        }
+      }
+  
+      &:hover {
+        background-color: #f9f9f9;
+      }
+    }
+  }
+  
+  // 검색 카드
+  .list-card {
+    display: flex;
+    margin-bottom: 12px;
+    background-color: #fff;
+    position: relative;
+    padding-bottom: 3px;
+  
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #ddd;
+      z-index: 0;
+    }
+  
+    .card-image {
+      width: 148px;
+      height: 124px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 7px;
+    }
+  
+    .card-details {
+      flex: 1;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  
+      .title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        .title-and-rating {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+  
+          .title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+          }
+  
+          .rating-row {
+            display: flex;
+            align-items: center;
+  
+            .star-icon {
+              width: 12px;
+              height: 12px;
+              margin-right: 4px;
+            }
+  
+            .rating {
+              font-size: 11px;
+            }
+          }
+        }
+  
+        .favorite-icon {
+          width: 18px;
+          height: 18px;
+          cursor: pointer;
+          margin-left: auto;
+          flex-shrink: 0;
+        }
+      }
+  
+      .location-row {
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+        color: #aaaaaa;
+        margin-top: 5px;
+  
+        .location-icon {
+          width: 11px;
+          height: 11px;
+          margin-right: 4px;
+        }
+      }
+  
+      .distance-row {
+        font-size: 10px;
+        margin-top: 5px;
+        color: #666;
+      }
+  
+      .price-row {
+        font-size: 12px;
+        margin-top: 5px;
+        color: #333;
+        font-weight: bold;
+      }
+  
+      .review-row {
+        font-size: 10px;
+        margin-top: 5px;
+        color: #999;
+      }
+  
+      .donation-row {
+        font-size: 10px;
+        text-align: right;
+        margin-top: 15px;
+  
+        span {
+          &.label {
+            color: #333;
+          }
+  
+          &.amount {
+            color: #ff9900;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  .location-text {
+    display: inline-block;
+    max-width: 200px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    vertical-align: middle;
+  }
+  
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 390px;
+  height: 272px;
+  background: #fff;
+  border-radius: 30px 30px 0 0;
+  padding: 20px;
+  z-index: 1100;
+  margin: 0 auto;
+  right: 0;
+}
+
+.modal-content h3 {
+  font-size: 18px;
+  margin-bottom: 25px;
+  margin-top: 15px;
+}
+
+.radio-buttons label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.radio-buttons input[type="radio"] {
+  appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.radio-buttons input[type="radio"]:checked {
+  border: 6px solid #ffcc00;
+}
+
+.sort-button .arrow-icon.rotated {
+  transform: rotate(180deg);
+  
+}
+//
+.restaurant-list-container {
+  height: calc(100vh - 180px); 
+  padding-bottom: 40px; 
+  overflow: scroll;
+}
+.restaurant-list-container::-webkit-scrollbar {
+  display: none;
+}
