@@ -8,7 +8,6 @@ import Signin from "./pages/Signin/Signin";
 
 import SearchPart from './pages/Search/SearchPart';
 import Map from './pages/Map/Map';
-import Heart from './pages/Heart/Heart';
 
 const App = () => {
   return (
@@ -21,7 +20,7 @@ const App = () => {
                   <Route path='/Searchpart' element={<SearchPart />} />
                   <Route path="/Signin" element={<Signin />} />
                   <Route path='/Map' element={<Map />} />
-                  <Route path='/Heart' element={<Heart />} />
+
               </Routes>
               <NavBar />
           </div>
