@@ -22,7 +22,7 @@ const SearchPage2 = () => {
 
   useEffect(() => {
     const dummyToken =
-      "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyMTIwMzksImV4cCI6MTczMjIxMzgzOSwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.VR2UBenQgVf2hZRxTYIEd5Vi8UTs0YbXQbI-2MJswDrb4H6blWYY_n9rRvBmIESUa5u6lDF_dzkuNKa00edaPg";
+      "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNjI1NzIsImV4cCI6MTczMjI2NDM3MiwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.C7tQeaIReoGxbdc1W-lZBhpuvS9ObR4yreZXHSiHPUG92n1nUGZb_KCCkkHM12c2o7ZtIBDSR2Ec6cCT9Eyl7A";
     localStorage.setItem("accessToken", dummyToken);
   }, []);
 
