@@ -1,12 +1,24 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import Price1 from "../../assets/img/Order/price/1.png";
 import Price2 from "../../assets/img/Order/price/2.png";
 import Price3 from "../../assets/img/Order/price/3.png";
 import { useNavigate } from "react-router-dom";
 const PriceBox = ({ price, donator, date, place }) => {
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useState("");
+  useEffect(() => {
+    const storedData = localStorage.getItem("mymoo");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setUserRole(parsedData.role);
+    }
+  }, []);
   const goPay = () => {
-    navigate("/orderpay", { state: { price, donator, date, place } });
+    if (userRole === "CHILD") {
+      navigate("/orderpay", { state: { price, donator, date, place } });
+    } else {
+      alert("아동만 사용 가능합니다");
+    }
   };
   let priceImg;
 
