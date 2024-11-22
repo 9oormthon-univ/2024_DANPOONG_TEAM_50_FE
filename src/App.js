@@ -4,6 +4,7 @@ import Main from './pages/Main/Main'
 import NavBar from './components/Nav/Navbar';
 import Search from './pages/Search/Search';
 import SearchPart from './pages/Search/SearchPart';
+import Map from './pages/Map/Map';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
                   <Route path='/' element={<Main />} />
                   <Route path='/Search' element={<Search />} />
                   <Route path='/Searchpart' element={<SearchPart />} />
+                  <Route path='/Map' element={<Map />} />
               </Routes>
               <NavBar />
           </div>
