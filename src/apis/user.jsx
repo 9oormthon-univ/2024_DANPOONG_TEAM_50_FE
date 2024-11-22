@@ -38,3 +38,14 @@ export const SigninAPI = async (data) => {
     }
   };
   
+
+export const getUserInfoAPI = async () => {
+  try {
+    const response = await axiosInstance.get(`/api/v1/accounts/`);
+    console.log("사용자 정보 응답 데이터:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("사용자 정보 요청 에러:", error.response || error.message);
+    throw error;
+  }
+};
