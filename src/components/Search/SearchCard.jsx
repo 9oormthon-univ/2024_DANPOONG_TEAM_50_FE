@@ -16,10 +16,9 @@ const SearchCard = ({
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [allDonation, setAllDonation] = useState(0);
-  const [priceRange, setPriceRange] = useState("");
 
   const accessToken =
-    "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNjI1NzIsImV4cCI6MTczMjI2NDM3MiwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.C7tQeaIReoGxbdc1W-lZBhpuvS9ObR4yreZXHSiHPUG92n1nUGZb_KCCkkHM12c2o7ZtIBDSR2Ec6cCT9Eyl7A";
+    "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNjQxMzksImV4cCI6MTczMjI2NTkzOSwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.nWzoWEemQSMi3yqFy8TzTLDV210kXmnEqo7cFsd3C0MvDGYyJqyGFHfO49MUgtc5G70zSD0tNxl2_8zn2H80AA";
 
   useEffect(() => {
     const fetchStoreDetails = async () => {
@@ -38,35 +37,7 @@ const SearchCard = ({
       }
     };
 
-    const fetchStoreMenus = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.mymoo.site/api/v1/stores/${id}/menus`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-
-        const menus = response.data.menus;
-
-        if (menus && menus.length > 0) {
-          const prices = menus.map((menu) => menu.price);
-          const minPrice = Math.min(...prices);
-          const maxPrice = Math.max(...prices);
-          setPriceRange(`${minPrice.toLocaleString()} ~ ${maxPrice.toLocaleString()}`);
-        } else {
-          setPriceRange("메뉴 정보 없음");
-        }
-      } catch (error) {
-        console.error(`Failed to fetch menus for storeId: ${id}`, error);
-        setPriceRange("메뉴 정보 없음");
-      }
-    };
-
     fetchStoreDetails();
-    fetchStoreMenus();
   }, [id]);
 
   const handleToggleFavorite = async () => {
@@ -113,9 +84,6 @@ const SearchCard = ({
         </div>
         <div className="distance-row">
           <span>현 위치에서 {distance}m</span>
-        </div>
-        <div className="price-row">
-          <span>{priceRange}원</span>
         </div>
         <div className="review-row">
           <span>리뷰 {reviewCount}개</span>
