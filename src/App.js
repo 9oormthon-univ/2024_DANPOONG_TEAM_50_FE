@@ -5,25 +5,49 @@ import Main2 from './pages/Main/Main2'
 import NavBar from './components/Nav/Navbar';
 import Search from './pages/Search/Search';
 import Signin from "./pages/Signin/Signin";
-
 import SearchPart from './pages/Search/SearchPart';
 import Map from './pages/Map/Map';
-
+import Order from "./pages/Order/Order";
+import OrderPay from "./pages/Order/OrderPay";
+import OrderMenu from "./pages/Order/OrderMenu";
+import OrderFinish from "./pages/Order/OrderFinish";
+import Donate from "./pages/Donate/Donate";
+import QrScan from "./pages/shop/QrScan";
+import Thanks from "./pages/Thanks/Thanks";
+import DonateFinish from "./pages/Donate/DonateFinish";
+import ShopFinish from "./pages/shop/ShopFinish";
+import ThanksFinish from "./pages/Thanks/ThanksFinish";
+import DonateList from "./pages/Donate/DonateList";
 const App = () => {
   return (
-      <BrowserRouter>
-          <div className="app-container">
-              <Routes>
-                  <Route path='/' element={<Main />} />
-                  <Route path='/donation' element={<Main2 />} />
-                  <Route path='/Search' element={<Search />} />
-                  <Route path='/Searchpart' element={<SearchPart />} />
-                  <Route path="/Signin" element={<Signin />} />
-                  <Route path='/Map' element={<Map />} />
-              </Routes>
-              <NavBar />
-          </div>
-      </BrowserRouter>
+    <BrowserRouter
+      future={{ v7_relativeSplatPath: true, v7_startTransition: true }}
+    >
+      <div className="common-layout">
+        <div className="app-main">
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/donation' element={<Main2 />} />
+            <Route path='/Search' element={<Search />} />
+            <Route path='/Searchpart' element={<SearchPart />} />
+            <Route path="/Signin" element={<Signin />} />
+            <Route path='/Map' element={<Map />} />  
+            <Route path="/order/:place" element={<OrderMenu />} />
+            <Route path="/order/" element={<Order />} />
+            <Route path="/orderpay" element={<OrderPay />} />
+            <Route path="/finish" element={<OrderFinish />} />
+            <Route path="/donate" element={<Donate />} />
+            <Route path="/shop" element={<QrScan />} />
+            <Route path="/donate/finish" element={<DonateFinish />} />
+            <Route path="/shop/finish" element={<ShopFinish />} />
+            <Route path="/thanks" element={<Thanks />} />
+            <Route path="/thanks/finish" element={<ThanksFinish />} />
+            <Route path="/my/donatelist" element={<DonateList />} />
+          </Routes>
+          <NavBar />
+        </div>
+      </div>
+    </BrowserRouter>
   );
 };
 
