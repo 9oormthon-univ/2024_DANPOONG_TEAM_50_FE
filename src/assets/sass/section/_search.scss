@@ -393,3 +393,16 @@
 .restaurant-list-container::-webkit-scrollbar {
   display: none;
 }
+
+//좋아요
+.heart-page {
+  .heart-title {
+    font-size: 20px;
+    margin: 50px 0 10px 10px;
+  }
+
+  .favorite-list {
+    width: 95%;
+    margin-left: 10px;
+  }
+}
