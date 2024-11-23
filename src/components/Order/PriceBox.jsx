@@ -3,9 +3,10 @@ import Price1 from "../../assets/img/Order/price/1.png";
 import Price2 from "../../assets/img/Order/price/2.png";
 import Price3 from "../../assets/img/Order/price/3.png";
 import { useNavigate } from "react-router-dom";
-const PriceBox = ({ price, donator, date, place }) => {
+const PriceBox = ({ dId, price, donator, date, place }) => {
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState("");
+
   useEffect(() => {
     const storedData = localStorage.getItem("mymoo");
     if (storedData) {
@@ -15,7 +16,7 @@ const PriceBox = ({ price, donator, date, place }) => {
   }, []);
   const goPay = () => {
     if (userRole === "CHILD") {
-      navigate("/orderpay", { state: { price, donator, date, place } });
+      navigate("/orderpay", { state: { price, donator, date, place, dId } });
     } else {
       alert("아동만 사용 가능합니다");
     }
