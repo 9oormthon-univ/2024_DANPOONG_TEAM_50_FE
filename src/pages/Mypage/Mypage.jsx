@@ -74,6 +74,7 @@ const MyPage = () => {
   }, [token, setToken]);
 
   return (
+    <div>
     <div className="mypage-page">
       <header className="mypage-header">
         <h1>My</h1>
@@ -187,6 +188,8 @@ const MyPage = () => {
         </ul>
       </section>
 
+      
+    </div>
       <section className="menu-section menu-selection-2">
         <h3>문의 및 알림</h3>
         <ul>
