@@ -7,18 +7,27 @@ import TimeIcon from "../../assets/img/Order/time.png";
 import MenuBox from "../../components/Order/MenuBox";
 import HeartIcon from "../../assets/img/Order/heart.png";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
+<<<<<<< HEAD
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Order = () => {
   const navigate = useNavigate();
   const location = useLocation();
+=======
+import { useNavigate } from "react-router-dom";
+const Order = () => {
+  const navigate = useNavigate();
+>>>>>>> a2dc071e60ab034d54d5d541a162d2c4a5956d7c
   const [storeInfo, setStoreInfo] = useState([]);
   const [menuArr, setMenuArr] = useState([]);
   const [donateData, setDonateDate] = useState([]);
   const [token, setToken] = useState(0);
   const [userRole, setUserRole] = useState("");
   const [storeName, setStoreName] = useState("");
+<<<<<<< HEAD
   const [storeId, setStoreId] = useState(null);
+=======
+>>>>>>> a2dc071e60ab034d54d5d541a162d2c4a5956d7c
   // 스토리지 끌어오기
   useEffect(() => {
     console.log("here");
@@ -27,6 +36,7 @@ const Order = () => {
       const parsedData = JSON.parse(storedData);
       setUserRole(parsedData.role);
       setToken(parsedData["user-token"]);
+<<<<<<< HEAD
       const params = new URLSearchParams(location.search);
       const id = params.get("key"); // `?=5`에서 key가 없으므로 빈 문자열로 가져옴
       if (id) {
@@ -35,11 +45,19 @@ const Order = () => {
       }
     }
   }, [location, storeId]);
+=======
+    }
+  }, []);
+>>>>>>> a2dc071e60ab034d54d5d541a162d2c4a5956d7c
 
   useEffect(() => {
     if (token) {
       const fetchStore = () => {
+<<<<<<< HEAD
         fetch(`https://api.mymoo.site/api/v1/stores/${storeId}`, {
+=======
+        fetch(`https://api.mymoo.site/api/v1/stores/1`, {
+>>>>>>> a2dc071e60ab034d54d5d541a162d2c4a5956d7c
           method: "GET",
           credentials: "include",
           headers: {
@@ -62,7 +80,11 @@ const Order = () => {
       };
       // 메뉴판
       const fetchMenus = () => {
+<<<<<<< HEAD
         fetch(`https://api.mymoo.site/api/v1/stores/${storeId}/menus`, {
+=======
+        fetch(`https://api.mymoo.site/api/v1/stores/1/menus`, {
+>>>>>>> a2dc071e60ab034d54d5d541a162d2c4a5956d7c
           method: "GET",
           credentials: "include",
           headers: {
@@ -84,7 +106,11 @@ const Order = () => {
 
       // 메뉴판
       const fetchDonates = () => {
+<<<<<<< HEAD
         fetch(`https://api.mymoo.site/api/v1/donations/stores/${storeId}`, {
+=======
+        fetch(`https://api.mymoo.site/api/v1/donations/stores/3`, {
+>>>>>>> a2dc071e60ab034d54d5d541a162d2c4a5956d7c
           method: "GET",
           credentials: "include",
           headers: {
@@ -109,7 +135,11 @@ const Order = () => {
       fetchDonates();
     }
     // 가게 정보
+<<<<<<< HEAD
   }, [token, storeId]);
+=======
+  }, [token]);
+>>>>>>> a2dc071e60ab034d54d5d541a162d2c4a5956d7c
 
   const [selectId, setSelectId] = useState(1);
   const menuSelect = (id) => {
