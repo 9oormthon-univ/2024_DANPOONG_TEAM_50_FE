@@ -49,3 +49,16 @@ export const getUserInfoAPI = async () => {
     throw error;
   }
 };
+
+// 회원가입 API 추가
+export const SignupAPI = async (data) => {
+  console.log('회원가입 요청 데이터:', data);
+  try {
+    const response = await axiosInstance.post(`/api/v1/accounts/signup`, data);
+    console.log('회원가입 응답 데이터:', response.data);
+    return response;
+  } catch (error) {
+    console.error('회원가입 요청 에러:', error.response || error.message);
+    throw error;
+  }
+};
