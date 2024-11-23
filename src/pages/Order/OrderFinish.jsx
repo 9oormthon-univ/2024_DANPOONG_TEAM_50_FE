@@ -39,9 +39,27 @@ const OrderFinish = () => {
       <div className="orderfinish-bottom">
         <div className="reco-title">미르미님이 좋아할 만한 다른 식당</div>
         <div className="reco-area">
-          <RecoBox />
-          <RecoBox />
-          <RecoBox />
+      <RecoBox
+            store={"미도인 강남점"}
+            text={"그 유명한 스테이크 웨이팅 덮밥집"}
+            img={
+              "https://lh6.googleusercontent.com/proxy/MBuStOETfZGnRi2S3hXXyY-GJ_6zf0KqHMmVMX1OoZ1NT2jIgTaF2n6NkWWmu_-EAYBVl67rd_C_3FluI-8VPymNEBQejR0jf43i5lVoRXqJKLVjCPLJyEl-0ZHTpyEpyrE_IyUdtES8KjXl12FKbYTb7Nvod0FIaUjX9hmB0H8Rzl3m4RM"
+            }
+          />
+          <RecoBox
+            store={"은행골 홍대점"}
+            text={"가성비 스시가 먹고싶다면?"}
+            img={
+              "https://mblogthumb-phinf.pstatic.net/MjAxODA4MDZfNTIg/MDAxNTMzNTU3MTU3Mzg4.L8QJ9K-PcEgQMPJbifTvaYTE79ZBKgMLBUJ5OW9vfgAg.8psvAjo9rMttO4ZfZAHNWqyHtVhz-FWQ1t-O6DKpXuAg.JPEG.jm_park97/IMG_1273.jpg?type=w800"
+            }
+          />
+          <RecoBox
+            store={"정돈 혜화점"}
+            text={"정석적인 돈카츠, SNS에서 핫한 그 맛집"}
+            img={
+              "https://d12zq4w4guyljn.cloudfront.net/750_750_20240722125146_photo1_edaface0d64a.jpg"
+            }
+          />
         </div>
       </div>
     </div>
