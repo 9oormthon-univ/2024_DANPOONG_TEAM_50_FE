@@ -13,6 +13,10 @@ const truncateText = (text, maxLength) => {
   return text;
 };
 
+const formatDistance = (distance) => {
+  return `${distance.toFixed(1)} km`;
+};
+
 const SearchCard = ({
   imgSrc,
   title,
@@ -21,6 +25,7 @@ const SearchCard = ({
   reviewCount,
   likeCount,
   usableDonation = 0,
+  distance, 
   id,
   showDistance = false, 
 }) => {
@@ -126,6 +131,11 @@ const SearchCard = ({
             {truncateText(location, 20)}
           </span>
         </div>
+        {showDistance && distance && ( 
+          <div className="distance-row">
+            <span>{formatDistance(distance)}</span>
+          </div>
+        )}
         <div className="review-row">
           <span>리뷰 {reviewCount}개</span>
         </div>
