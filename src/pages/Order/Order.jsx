@@ -235,7 +235,7 @@ const Order = () => {
               <div className="donate-rate">5000-10000원</div>
               {donateData.map((donate, idx) => (
                 <PriceBox
-                  key={idx}
+                  key={donate.donationId}
                   price={donate.point}
                   donator={donate.donator}
                   date={donate.donatedAt}
