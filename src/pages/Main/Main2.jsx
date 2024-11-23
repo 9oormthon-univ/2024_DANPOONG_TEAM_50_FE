@@ -32,7 +32,7 @@ const dummyRecentShops = [
   },
   {
     id: 3,
-    name: "부산돼지국밥 서초점",
+    name: "짱돼지국밥 서초점",
     rating: 3.8,
     img: RecentImg3,
   },
