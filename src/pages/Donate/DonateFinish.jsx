@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const DonateFinish = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.state.store);
+  const price = location.state.selectedPrice;
   const [token, setToken] = useState("");
   useEffect(() => {
     console.log("here");
@@ -23,17 +23,20 @@ const DonateFinish = () => {
     if (token) {
       console.log(token);
       const fetchStore = () => {
-        fetch(`https://api.mymoo.site/api/v1/donations/stores/5`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            point: 20000, // JSON.stringify로 바꿔야 함
-          }),
-        })
+        fetch(
+          `https://api.mymoo.site/api/v1/donations/stores/${location.state.storeId}`,
+          {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              point: price, // JSON.stringify로 바꿔야 함
+            }),
+          }
+        )
           .then((response) => {
             console.log("Response status:", response.status);
           })
