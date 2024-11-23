@@ -42,7 +42,7 @@ const PriceBox = ({ price, donator, date, place }) => {
           <div className="price-donator">
             후원자 <span className="grey">{donator}님</span>
           </div>
-          <div className="donate-price-date">후원날짜 {date}</div>
+          <div className="donate-price-date">후원날짜 {date.split("T")[0]}</div>
         </div>
       </div>
     </div>
