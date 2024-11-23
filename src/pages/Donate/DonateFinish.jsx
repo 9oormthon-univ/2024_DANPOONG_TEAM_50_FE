@@ -61,10 +61,10 @@ const DonateFinish = () => {
         </div>
 
         <div className="btn-area">
-          <div className="thanks-btn" onClick={() => navigate("/")}>
+          <div className="thanks-btn" onClick={() => navigate("/main2")}>
             홈으로
           </div>
-          <div className="orderlist-btn">후원 내역 보기</div>
+          <div className="orderlist-btn"  onClick={() => navigate("/my/donatelist")}>후원 내역 보기</div>
         </div>
         <div className="orderfinish-detail">
           <div className="detail-txt">
