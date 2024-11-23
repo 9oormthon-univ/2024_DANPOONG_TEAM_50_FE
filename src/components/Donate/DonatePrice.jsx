@@ -17,7 +17,7 @@ const DonatePrice = ({ price, donator, date, place, donateStatus }) => {
     if (userRole === "CHILD") {
       navigate("/orderpay", { state: { price, donator, date, place } });
     } else {
-      alert("아동만 사용 가능합니다");
+      navigate("/my/donatedetail", { state: { price, donator, date, place } });
     }
   };
   let priceImg;
