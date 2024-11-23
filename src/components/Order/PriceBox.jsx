@@ -3,7 +3,7 @@ import Price1 from "../../assets/img/Order/price/1.png";
 import Price2 from "../../assets/img/Order/price/2.png";
 import Price3 from "../../assets/img/Order/price/3.png";
 import { useNavigate } from "react-router-dom";
-const PriceBox = ({ dId, price, donator, date, place }) => {
+const PriceBox = ({ price, donator, date, place, dId }) => {
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState("");
 
