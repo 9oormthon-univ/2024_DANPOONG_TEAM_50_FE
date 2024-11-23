@@ -11,7 +11,7 @@ const ThanksFinish = () => {
         <div className="finish-img">
           <img src={FinishImg} alt="img" className="img-width" />
         </div>
-        <div className="ok-btn" onClick={() => navigate("/")}>
+        <div className="ok-btn" onClick={() => navigate("/main")}>
           확인
         </div>
       </div>
