@@ -85,7 +85,7 @@ const MyPage = () => {
 
       <section className="profile-section">
         <img
-          src={user.userRole === "child" ? childProfile : adultProfile}
+          src={user.userRole === "CHILD" ? childProfile : adultProfile}
           alt="프로필"
           className="profile-image"
         />
@@ -94,7 +94,7 @@ const MyPage = () => {
             <h2>
               {user.nickname}
               <span className="badge">
-                {user.userRole === "child" ? "아동회원" : "일반회원"}
+                {user.userRole === "CHILD" ? "아동회원" : "일반회원"}
               </span>
             </h2>
           </div>
@@ -103,7 +103,7 @@ const MyPage = () => {
       </section>
 
       <section className="stats-section">
-        {user.userRole === "child" ? (
+        {user.userRole === "CHILD" ? (
           <>
             <div className="stat">
               <p>잔액</p>
@@ -140,7 +140,7 @@ const MyPage = () => {
             </div>
           </>
         )}
-        {user.userRole === "child" && (
+        {user.userRole === "CHILD" && (
           <div className="stat">
             <p>리뷰</p>
             <img src={reviewcolorImg} alt="리뷰" />
@@ -152,7 +152,7 @@ const MyPage = () => {
       <section className="menu-section">
         <h3>활동 관리</h3>
         <ul>
-          {user.userRole === "child" ? (
+          {user.userRole === "CHILD" ? (
             <>
               <li>
                 <img src={donateImg} alt="후원 내역" />
