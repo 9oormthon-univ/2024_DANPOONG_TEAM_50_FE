@@ -24,21 +24,21 @@ import Redirection from "./pages/Signin/Redirection";
 import { useNavigate } from "react-router-dom";
 const AppContent = () => {
 
-const navigate = useNavigate();
-
-  useEffect(() => {
+ useEffect(() => {
     const currentUrl = new URL(window.location.href);
 
-    // 도메인 확인: 루트 경로인지 && 쿼리에 code가 포함되어 있는지
+    // 도메인 확인: 루트 경로인지 && 쿼리에 `code`가 포함되어 있는지
     if (
       currentUrl.hostname === "mymoo.site" && // 메인 도메인 확인
       currentUrl.pathname === "/" && // 루트 경로 확인
-      currentUrl.searchParams.has("code") // code 쿼리 파라미터 확인
+      currentUrl.searchParams.has("code") // `code` 쿼리 파라미터 확인
     ) {
       const code = currentUrl.searchParams.get("code"); // code 파라미터 값 가져오기
-      navigate("/intro", { state: { code } });
+      console.log(code);
+      // window.location.href = `/intro?code=${code}`; // 상태를 전달하지 않고 URL 변경
     }
-  }, [navigate]);
+  }, []);
+
   return (
     <div className="common-layout">
       <div className="app-main">
