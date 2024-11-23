@@ -1,12 +1,22 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
 import ShopSuccessImg from "../../assets/img/Order/shop-success.png";
 import RecoBox from "../../components/Order/RecoBox";
 import { useLocation } from "react-router-dom";
 const ShopFinish = () => {
   const location = useLocation();
-  console.log(location.state.scannedData);
-  const token = `eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyMTAwMzksImV4cCI6MTczMjIxMTgzOSwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.ctkUKNSGCjqK37wNZIpcQ2S8593M3BEJqlbGgXTWkVtTxpqKDkCAk-TpvCAmv6cVJz7cQU_bV1lQmRceEdxUiw`;
+  const [token, setToken] = useState(0);
+  const [userRole, setUserRole] = useState("");
+  console.log(location.state.scannedData.dId);
+  useEffect(() => {
+    const storedData = localStorage.getItem("mymoo");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setUserRole(parsedData.role);
+      setToken(parsedData["user-token"]);
+    }
+  }, []);
+
   // 가게 정보
   const fetchScan = () => {
     fetch(`https://api.mymoo.site/api/v1/donation-usages`, {
@@ -17,8 +27,8 @@ const ShopFinish = () => {
         "Content-Type": "application/json",
       },
       body: {
-        donationId: 0,
-        childId: 0,
+        donationId: location.state.scannedData.dId,
+        childId: location.state.scannedData.childId,
       },
     })
       .then((response) => {
