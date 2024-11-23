@@ -21,10 +21,23 @@ import DonateList from "./pages/Donate/DonateList";
 import Mypage from "./pages/Mypage/Mypage";
 import DonateDetail from "./pages/Donate/DonateDetail";
 import Redirection from "./pages/Signin/Redirection";
-
+import { useNavigate } from "react-router-dom";
 const AppContent = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+
+    // 도메인 확인: 루트 경로인지 && 쿼리에 `code`가 포함되어 있는지
+    if (
+      currentUrl.hostname === "mymoo.site" && // 메인 도메인 확인
+      currentUrl.pathname === "/" && // 루트 경로 확인
+      currentUrl.searchParams.has("code") // `code` 쿼리 파라미터 확인
+    ) {
+      navigate("/intro"); // Intro 페이지로 리다이렉트
+    }
+  }, [navigate]);
   return (
     <div className="common-layout">
       <div className="app-main">
@@ -48,7 +61,7 @@ const AppContent = () => {
           <Route path="/my" element={<Mypage />} />
           <Route path="/my/donatelist" element={<DonateList />} />
           <Route path="/my/donatedetail" element={<DonateDetail />} />
-          <Route path="/api/v1/oauth/kakao/" element={<Redirection />} />
+          <Route path="/intro" element={<Redirection />} />
         </Routes>
         {location.pathname !== '/' && <NavBar />}
       </div>
