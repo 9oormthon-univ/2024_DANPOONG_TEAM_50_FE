@@ -4,21 +4,6 @@ import LocateIcon from "../../assets/img/Search/loc.svg";
 import SearchIcon from "../../assets/img/Search/Search.svg";
 import BackIcon from "../../assets/img/Search/back.svg";
 import TimeIcon from "../../assets/img/Search/time.svg";
-import ShopCard from "../../components/Main/ShopCard";
-import RecentImg6 from "../../assets/img/Main/recent6.svg";
-import RecentImg7 from "../../assets/img/Main/recent7.svg";
-import RecentImg8 from "../../assets/img/Main/recent8.svg";
-import RecentImg9 from "../../assets/img/Main/recent9.svg";
-import RecentImg10 from "../../assets/img/Main/recent10.svg";
-
-
-const dummyPopularRestaurants = [
-  { id: 1, name: "김치찌개 강남점", rating: 4.4, img: RecentImg6 },
-  { id: 2, name: "경양카츠 강남점", rating: 4.6, img: RecentImg7 },
-  { id: 3, name: "강경 불고기 역삼점", rating: 4.3, img: RecentImg8 },
-  { id: 4, name: "인생감자탕 신논현점", rating: 4.9, img: RecentImg9 },
-  { id: 5, name: "청학 칡냉면 판교점", rating: 5.0, img: RecentImg10 },
-];
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -48,10 +33,34 @@ const SearchPage = () => {
 
   const handleSearch = () => {
     if (!searchInput.trim()) return;
-    const updatedSearches = [searchInput, ...recentSearches.filter((item) => item !== searchInput)];
-    setRecentSearches(updatedSearches);
-    localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
-    navigate(`/searchpart?keyword=${encodeURIComponent(searchInput)}`);
+
+    // 위치 정보를 포함해 키워드 검색
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const updatedSearches = [
+            searchInput,
+            ...recentSearches.filter((item) => item !== searchInput),
+          ];
+          setRecentSearches(updatedSearches);
+          localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
+
+          navigate(
+            `/searchpart?keyword=${encodeURIComponent(
+              searchInput
+            )}&latitude=${latitude}&longitude=${longitude}`
+          );
+        },
+        (error) => {
+          alert("현재 위치를 가져올 수 없습니다. 권한을 확인해주세요.");
+          console.error(error);
+        }
+      );
+    } else {
+      alert("현재 위치를 지원하지 않는 브라우저입니다.");
+    }
+
     setSearchInput("");
   };
 
@@ -89,7 +98,7 @@ const SearchPage = () => {
 
   return (
     <div className="search-page">
-       <img
+      <img
         src={BackIcon}
         alt="뒤로가기"
         className="back-icon"
@@ -128,7 +137,10 @@ const SearchPage = () => {
           {recentSearches.map((search, index) => (
             <span key={index} className="search-tag">
               {search}{" "}
-              <button className="remove-tag" onClick={() => handleRemoveTag(search)}>
+              <button
+                className="remove-tag"
+                onClick={() => handleRemoveTag(search)}
+              >
                 x
               </button>
             </span>
@@ -143,13 +155,6 @@ const SearchPage = () => {
         </div>
         <img src={TimeIcon} alt="시간 이미지" className="time-icon" />
       </section>
-
-      <section className="popular-restaurants">
-  <h3>내 주변 인기 식당</h3>
-  <div className="shop-list">
-    <img src={require("../../assets/img/Search/near.svg").default} alt="인기 식당" className="scrollable-image" />
-  </div>
-</section>
     </div>
   );
 };
