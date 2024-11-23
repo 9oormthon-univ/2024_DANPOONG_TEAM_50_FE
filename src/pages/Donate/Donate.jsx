@@ -9,6 +9,7 @@ const Donate = () => {
   const navigate = useNavigate();
   const [selectedPrice, setSelectedPrice] = useState(null); // 선택된 가격을 추적
   const store = location.state.storeName;
+  const storeId = location.state.storeId;
   const handleSelect = (price) => {
     setSelectedPrice(price); // 선택된 price 업데이트
     console.log(`후원금액: ${price}`);
@@ -37,7 +38,7 @@ const Donate = () => {
           className="donate-btn"
           onClick={() =>
             navigate("/donate/finish", {
-              state: { selectedPrice, store },
+              state: { selectedPrice, store, storeId },
             })
           }
         >
