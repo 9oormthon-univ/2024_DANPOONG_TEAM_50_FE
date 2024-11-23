@@ -5,6 +5,7 @@ export default function Redirection() {
   useEffect(() => {
     if (logincode) {
       sendLoginRequest();
+      console.log("ss");
     }
   }, []);
 
@@ -42,7 +43,7 @@ export default function Redirection() {
   };
   return (
     <div>
-      <div></div>
+      <div>로그인중</div>
     </div>
   );
 }
