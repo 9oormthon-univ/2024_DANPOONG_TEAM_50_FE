@@ -1,7 +1,6 @@
 .mypage-page {
     display: flex;
     flex-direction: column;
-    height: 100dvh; 
     padding: 18px;
     width: 100%;
     background-color: white;
@@ -121,7 +120,9 @@
 .donatego{
   cursor: pointer;
 }
-
+.menu-selection-2{
+   background: white;
+    padding: 0 18px 80px 18px;}
 .menu-section {
   margin-top: 20px;
 

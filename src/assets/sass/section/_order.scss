@@ -51,7 +51,7 @@
   margin-bottom: 13px;
 }
 .donate-price-img {
-  height: 80px;
+  width:39%;
   border-radius: 4.34px;
   overflow: hidden;
 }
@@ -257,8 +257,8 @@
     }
     .empty-pricebox {
       .nonprice-img {
-        width: 200px;
-        margin: 25% auto 10% auto;
+            margin: 3% auto -1% auto;
+    width: 150px;
       }
     }
   }

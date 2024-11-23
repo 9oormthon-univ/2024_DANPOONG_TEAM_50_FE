@@ -6,6 +6,7 @@
     width: 100%;
     background-color: white;
     position: relative; 
+    overflow: auto;
   }
   
   .signup-header {
@@ -88,7 +89,7 @@
     height: 47px;
     padding: 12px;
     margin-top: 24px;
-    position: fixed; /* 상단에 고정 */
+    position: relative;
     bottom:0;  
     font-size: 16px;
     background: #f3f3f3;
@@ -105,7 +106,7 @@
     padding: 12px;
     margin-top: 24px;
     font-size: 16px;
-    position: fixed; /* 상단에 고정 */
+    position: relative;
     bottom:0;  
     color: #000000;
     background-color: #ffd700;
