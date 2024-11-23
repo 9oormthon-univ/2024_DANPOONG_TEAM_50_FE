@@ -20,6 +20,7 @@ import ThanksFinish from "./pages/Thanks/ThanksFinish";
 import DonateList from "./pages/Donate/DonateList";
 import Mypage from "./pages/Mypage/Mypage";
 import DonateDetail from "./pages/Donate/DonateDetail";
+import Redirection from "./pages/Signin/Redirection";
 
 const AppContent = () => {
   const location = useLocation();
@@ -47,6 +48,7 @@ const AppContent = () => {
           <Route path="/my" element={<Mypage />} />
           <Route path="/my/donatelist" element={<DonateList />} />
           <Route path="/my/donatedetail" element={<DonateDetail />} />
+          <Route path="/api/v1/oauth/kakao/" element={<Redirection />} />
         </Routes>
         {location.pathname !== '/' && <NavBar />}
       </div>
