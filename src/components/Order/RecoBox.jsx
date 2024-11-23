@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecoBox = (store, text, img) => {
+const RecoBox = ({ store, text, img }) => {
   return (
     <div className="reco-restaurant">
       <div className="reco-img">
