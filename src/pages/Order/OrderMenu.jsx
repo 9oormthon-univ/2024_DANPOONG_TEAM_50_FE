@@ -46,9 +46,22 @@ const OrderMenu = () => {
       </div>
       <div className="ordermenu-bottom">
         <div className="add-menu">추가 메뉴</div>
-        <MenuBox menu="(BEST) 동파육 덮밥" price="12,000원" />
-        <MenuBox menu="(BEST) 갈비 덮밥" price="11,000원" />
-        <MenuBox menu="마파두부 덮밥" price="11,000원" />
+        <MenuBox
+          key={-1}
+          menu="음료수"
+          price={2000}
+          img={
+            "https://i.namu.wiki/i/UUUicJzYIISF6z27yGzgl6c-2vdffpFx0fPSI1gWx00LShUqTOUd5z9mYqPsmO-o8NM5ED6tOVwIa4Jz7NIJ4Q.webp"
+          }
+          des={"시원한 음료수"}
+        />
+        <MenuBox
+          key={0}
+          menu="단무지"
+          price={1000}
+          img={"https://ppss.kr/wp-content/uploads/2016/07/0-540x360.jpg"}
+          des={"시원한 단무지"}
+        />
       </div>
       <div className="ordermenu-pay-area">
         <div className="pay-area-detail">
