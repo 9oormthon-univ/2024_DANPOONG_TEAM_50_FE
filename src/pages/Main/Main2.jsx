@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AlarmIcon from "../../assets/img/Main/alarm.svg";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "../../assets/img/Main/Search.svg";
-import RightDirectionIcon from "../../assets/img/Main/right direction.svg";
 import Ad1Icon from "../../assets/img/Main/ad.svg";
 import Ad2Icon from "../../assets/img/Main/ad.svg";
 import Ad3Icon from "../../assets/img/Main/ad.svg";
@@ -20,37 +19,37 @@ import LogoIcon from "../../assets/img/Main/logo.svg";
 
 // 더미 데이터
 const dummyRecentShops = [
-    {
-      id: 1,
-      name: "신전 떡볶이 강남점",
-      rating: 4.2,
-      img: RecentImg,
-    },
-    {
-      id: 2,
-      name: "한솥 도시락 강남점",
-      rating: 4.0,
-      img: RecentImg2,
-    },
-    {
-      id: 3,
-      name: "부산돼지국밥 서초점",
-      rating: 3.8,
-      img: RecentImg3,
-    },
-    {
-      id: 4,
-      name: "서가앤쿸 강남역삼점",
-      rating: 4.6,
-      img: RecentImg4,
-    },
-    {
-      id: 5,
-      name: "GS25 강남점",
-      rating: 4.1,
-      img: RecentImg5,
-    },
-  ];
+  {
+    id: 1,
+    name: "신전 떡볶이 강남점",
+    rating: 4.2,
+    img: RecentImg,
+  },
+  {
+    id: 2,
+    name: "한솥 도시락 강남점",
+    rating: 4.0,
+    img: RecentImg2,
+  },
+  {
+    id: 3,
+    name: "부산돼지국밥 서초점",
+    rating: 3.8,
+    img: RecentImg3,
+  },
+  {
+    id: 4,
+    name: "서가앤쿸 강남역삼점",
+    rating: 4.6,
+    img: RecentImg4,
+  },
+  {
+    id: 5,
+    name: "GS25 강남점",
+    rating: 4.1,
+    img: RecentImg5,
+  },
+];
 
 const user = {
   name: "이*림님",
@@ -68,7 +67,7 @@ const topRankers = [
     name: "이*진님",
     birthYear: "00년생",
     gender: "여",
-    donationAmount: 350000, 
+    donationAmount: 350000,
     lastDonationDate: "2024.11.23",
     avatar: profileImg1,
   },
@@ -77,7 +76,7 @@ const topRankers = [
     name: "김*유님",
     birthYear: "89년생",
     gender: "여",
-    donationAmount: 315000, 
+    donationAmount: 315000,
     lastDonationDate: "2024.11.19",
     avatar: profileImg1,
   },
@@ -91,7 +90,7 @@ const topRankers = [
     avatar: profileImg2,
   },
   {
-    rank: 3,
+    rank: 4,
     name: "성*운님",
     birthYear: "87년생",
     gender: "남",
@@ -124,7 +123,8 @@ const loadKakaoMapScript = () => {
     }
 
     const script = document.createElement("script");
-    script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=43c54f0fc07ce690e0bdb4a55145d1ab&autoload=false&libraries=services;"
+    script.src =
+      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=43c54f0fc07ce690e0bdb4a55145d1ab&libraries=services&autoload=false";
     script.async = true;
 
     script.onload = () => {
@@ -142,7 +142,7 @@ const loadKakaoMapScript = () => {
 };
 
 const Main2 = () => {
-  const [currentLocation, setCurrentLocation] = useState("위치 정보를 가져오는 중");
+  const [currentLocation, setCurrentLocation] = useState("위치 정보를 가져오는 중...");
   const [bannerIndex, setBannerIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -167,19 +167,25 @@ const Main2 = () => {
             const { latitude, longitude } = position.coords;
 
             const geocoder = new kakaoMaps.services.Geocoder();
-            geocoder.coord2Address(longitude, latitude, (result, status) => {
-              if (status === kakaoMaps.services.Status.OK) {
-                setCurrentLocation(result[0].address.address_name);
-              } else {
-                setCurrentLocation("주소 정보를 불러올 수 없습니다.");
+            geocoder.coord2Address(
+              longitude,
+              latitude,
+              (result, status) => {
+                if (status === kakaoMaps.services.Status.OK) {
+                  const address = result[0]?.address?.address_name || "주소 정보 없음";
+                  setCurrentLocation(address);
+                } else {
+                  setCurrentLocation("주소 정보를 불러올 수 없습니다.");
+                }
               }
-            });
+            );
           },
           () => {
             setCurrentLocation("위치 정보를 불러올 수 없습니다.");
           }
         );
-      } catch {
+      } catch (error) {
+        console.error("위치 정보 로드 실패:", error);
         setCurrentLocation("위치 정보를 불러올 수 없습니다.");
       }
     };
@@ -189,55 +195,64 @@ const Main2 = () => {
 
   return (
     <div className="content-wrapper">
-    <div className="home-container">
-      <header className="header">
-      <img src={LogoIcon} alt="로고" className="logo" />
-        <div className="icons">
-          <img src={SearchIcon} alt="검색 아이콘" className="icon" onClick={() => navigate('/search')} />
-          <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
-        </div>
-      </header>
-
-      <div className="banner-container">
-        <div className="banner">
-          {banners.map((banner, index) => (
-            <img key={index} src={banner} className={`banner-image ${index === bannerIndex ? "active" : ""}`}
+      <div className="home-container">
+        <header className="header">
+          <img src={LogoIcon} alt="로고" className="logo" />
+          <div className="icons">
+            <img
+              src={SearchIcon}
+              alt="검색 아이콘"
+              className="icon"
+              onClick={() => navigate("/search")}
             />
-          ))}
-        </div>
-      </div>
-      <div className="location">
-        <span>{currentLocation}</span>
-      </div>
-      <section className="reviews">
-  <div className="section-header">
-    <h3>후원 랭킹</h3>
-  </div>
-  <div className="reviews-content">
-    <div className="donation-card">
-      <DonationCard user={user} topRankers={topRankers} />
-    </div>
-    <div className="rank-card">
-      <Rank topRankers={topRankers} />
-    </div>
-  </div>
-</section>
-      <div className="divider" />
+            <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
+          </div>
+        </header>
 
-      <section className="recent-shops">
-        <h3>최근 이용한 가게</h3>
-        <div className="shop-list">
-          {dummyRecentShops.map((shop) => (
-            <ShopCard
-              key={shop.id}
-              imgSrc={shop.img}
-              name={shop.name}
-              rating={shop.rating}
-            />
-          ))}
+        <div className="banner-container">
+          <div className="banner">
+            {banners.map((banner, index) => (
+              <img
+                key={index}
+                src={banner}
+                alt={`배너 ${index + 1}`}
+                className={`banner-image ${index === bannerIndex ? "active" : ""}`}
+              />
+            ))}
+          </div>
         </div>
-      </section>
-    </div>
+        <div className="location">
+          <span>{currentLocation}</span>
+        </div>
+        <section className="reviews">
+          <div className="section-header">
+            <h3>후원 랭킹</h3>
+          </div>
+          <div className="reviews-content">
+            <div className="donation-card">
+              <DonationCard user={user} topRankers={topRankers} />
+            </div>
+            <div className="rank-card">
+              <Rank topRankers={topRankers} />
+            </div>
+          </div>
+        </section>
+        <div className="divider" />
+
+        <section className="recent-shops">
+          <h3>최근 이용한 가게</h3>
+          <div className="shop-list">
+            {dummyRecentShops.map((shop) => (
+              <ShopCard
+                key={shop.id}
+                imgSrc={shop.img}
+                name={shop.name}
+                rating={shop.rating}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

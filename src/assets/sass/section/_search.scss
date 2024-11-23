@@ -1,6 +1,7 @@
 .search-page {
     padding: 20px;
     position: relative;
+    overflow-x: hidden;
   
     .back-icon {
       position: absolute;
@@ -131,15 +132,21 @@
   
       .shop-list {
         display: flex;
-        gap: 10px;
-        margin-left: -15px;
-        margin-top: -10px;
-        padding-bottom: 10px;
-  
-        &::-webkit-scrollbar {
-          display: none;
-        }
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch; 
+        margin-left: -20px;
       }
+      
+      .scrollable-image {
+        max-height: 100%; 
+        scroll-snap-align: center;
+      }
+
+      .shop-list::-webkit-scrollbar {
+        display: none; 
+      }
+      
     }
   }
 
