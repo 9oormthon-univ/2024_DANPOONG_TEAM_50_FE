@@ -5,7 +5,15 @@ import { useNavigate } from "react-router-dom";
 const QrZone = ({ onClose, place, price, donator, dId }) => {
   const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(7); // 초기 시간 10초
-
+  const [childId, setChildId] = useState(0);
+  useEffect(() => {
+    console.log("here");
+    const storedData = localStorage.getItem("mymoo");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setChildId(parsedData.accountId);
+    }
+  }, [childId]);
   useEffect(() => {
     if (timeLeft === 0) {
       onClose(); // 시간이 0이 되면 onClose 실행
@@ -33,7 +41,7 @@ const QrZone = ({ onClose, place, price, donator, dId }) => {
           <QRCodeCanvas
             className="Qr-img"
             onClick={() => navigate("/finish")}
-            value={JSON.stringify({ place, price, donator, dId })}
+            value={JSON.stringify({ place, price, donator, dId, childId })}
           />
         </div>
         <div className="timer-zone">{formatTime(timeLeft)}</div>
