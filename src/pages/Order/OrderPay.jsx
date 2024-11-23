@@ -31,6 +31,7 @@ const OrderPay = () => {
           place={location.state.place}
           price={formattedPrice}
           donator={location.state.donator}
+          dId={location.state.dId}
         />
       ) : null}
       <div className="orderpay-top">
