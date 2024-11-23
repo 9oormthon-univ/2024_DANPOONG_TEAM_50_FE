@@ -68,7 +68,7 @@ const OrderMenu = () => {
           <div className="price">10000원</div>
           <div className="txt">주문 시 잔액 25000원</div>
         </div>
-        <div className="order-btn" onClick={() => navigate("/pay")}>
+        <div className="order-btn" onClick={alert("금액권을 이용해주세요")}>
           주문하기
         </div>
       </div>
