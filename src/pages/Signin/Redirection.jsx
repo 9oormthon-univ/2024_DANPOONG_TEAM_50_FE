@@ -49,7 +49,7 @@ export default function Redirection() {
 
         setTimeout(() => {
           if (isNewUser === true) {
-            navigate("/");
+            navigate("/signup");
           } else {
             if (userRole === "DONATOR") {
               navigate("/Main2");
