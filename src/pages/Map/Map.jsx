@@ -135,10 +135,32 @@ const Map = () => {
   };
 
   const handleSearch = () => {
-    if (keyword.trim()) {
-      fetchStores({ keyword });
+    if (!keyword.trim()) {
+      alert("검색어를 입력해주세요.");
+      return;
     }
+  
+    if (!map || !navigator.geolocation) {
+      alert("지도 또는 위치 정보를 사용할 수 없습니다.");
+      return;
+    }
+  
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+  
+        fetchStores({
+          keyword: keyword.trim(),
+          lat: latitude,
+          logt: longitude,
+        });
+      },
+      () => {
+        alert("현재 위치를 가져올 수 없습니다.");
+      }
+    );
   };
+  
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {

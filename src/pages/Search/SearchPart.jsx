@@ -53,10 +53,15 @@ const SearchPage2 = () => {
     const latitude = queryParams.get("latitude");
     const longitude = queryParams.get("longitude");
 
-    if (keyword && latitude && longitude) {
-      setSearchKeyword(keyword);
+    // 위치 정보와 키워드로 초기 검색 실행
+    if (latitude && longitude) {
       setUserLocation({ logt: longitude, lat: latitude });
-      fetchRestaurants({ keyword, lat: latitude, logt: longitude });
+      const params = { lat: latitude, logt: longitude };
+      if (keyword) {
+        params.keyword = keyword;
+        setSearchKeyword(keyword);
+      }
+      fetchRestaurants(params);
     }
   }, [location.search]);
 
@@ -74,11 +79,15 @@ const SearchPage2 = () => {
   };
 
   const handleSearch = () => {
-    if (searchKeyword.trim() && userLocation.lat && userLocation.logt) {
-      fetchRestaurants({ keyword: searchKeyword, lat: userLocation.lat, logt: userLocation.logt });
+    const params = { lat: userLocation.lat, logt: userLocation.logt };
+    if (searchKeyword.trim()) {
+      params.keyword = searchKeyword;
+    }
+    if (userLocation.lat && userLocation.logt) {
+      fetchRestaurants(params);
       setNoResults(false);
     } else {
-      console.error("Keyword and location are required for search.");
+      console.error("Location is required for search.");
       setNoResults(true);
     }
   };

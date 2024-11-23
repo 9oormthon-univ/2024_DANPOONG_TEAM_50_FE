@@ -1,168 +1,165 @@
 .search-page {
-    padding: 20px;
-    position: relative;
-    overflow-x: hidden;
-  
-    .back-icon {
-      position: absolute;
-      top: 66px;
-      left: 10px;
-      width: 19px;
-      height: 19px;
-      cursor: pointer;
-    }
-  
-    .search-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 337px;
-      height: 36px;
-      border: 1px solid #ffd000;
-      border-radius: 10px;
-      padding: 0 5px;
-      margin: auto 20px;
-      margin-top: 39px;
-  
-      input {
-        flex: 1;
-        border: none;
-        background: transparent;
-        font-size: 12px;
-        color: #333;
-        outline: none;
-        padding-left: 10px;
-      }
-  
-      .locate-icon {
-        width: 15px;
-        height: 15px;
-        margin-right: 8px;
-      }
-  
-      .search-icon {
-        width: 28px;
-        height: 28px;
-      }
-    }
-  
-    .recent-searches {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-  
-      .header-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        margin-top: 15px;
-  
-        h4 {
-          font-size: 12px;
-          color: #bcbcbc;
-        }
-  
-        .clear-all {
-          background: none;
-          border: none;
-          font-size: 12px;
-          color: #bcbcbc;
-          cursor: pointer;
-        }
-      }
-  
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-  
-        .search-tag {
-          display: flex;
-          align-items: center;
-          padding: 4px 9px;
-          border: 1px solid #cccccc;
-          border-radius: 20px;
-          font-size: 11px;
-          background-color: transparent;
-  
-          .remove-tag {
-            background: none;
-            border: none;
-            color: #888;
-            margin-left: 5px;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-  
-    .trending-section {
-      margin-bottom: 20px;
-  
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 10px;
-        color: #bcbcbc;
-        margin-bottom: 10px;
-  
-        .update-time {
-          display: flex;
-          align-items: center;
-          font-size: 11px;
-          color: rgb(181, 181, 181)cbc;
-  
-          img {
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-          }
-        }
-      }
-    }
-  
-    .popular-restaurants {
-      h3 {
-        font-size: 12px;
-        color: #bcbcbc;
-        margin-bottom: 5px;
-      }
-  
-      .shop-list {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch; 
-        margin-left: -20px;
-      }
-      
-      .scrollable-image {
-        max-height: 100%; 
-        scroll-snap-align: center;
-      }
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
 
-      .shop-list::-webkit-scrollbar {
-        display: none; 
-      }
-      
+  .back-icon {
+    position: absolute;
+    top: 66px;
+    left: 10px;
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 337px;
+    height: 36px;
+    border: 1px solid #ffd000;
+    border-radius: 10px;
+    padding: 0 5px;
+    margin: auto 20px;
+    margin-top: 39px;
+
+    input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 12px;
+      color: #333;
+      outline: none;
+      padding-left: 10px;
+    }
+
+    .locate-icon {
+      width: 15px;
+      height: 15px;
+      margin-right: 8px;
+    }
+
+    .search-icon {
+      width: 28px;
+      height: 28px;
     }
   }
 
-  //상세 검색창
+  .recent-searches {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-top: 15px;
+
+      h4 {
+        font-size: 12px;
+        color: #bcbcbc;
+      }
+
+      .clear-all {
+        background: none;
+        border: none;
+        font-size: 12px;
+        color: #bcbcbc;
+        cursor: pointer;
+      }
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .search-tag {
+        display: flex;
+        align-items: center;
+        padding: 4px 9px;
+        border: 1px solid #cccccc;
+        border-radius: 20px;
+        font-size: 11px;
+        background-color: transparent;
+
+        .remove-tag {
+          background: none;
+          border: none;
+          color: #888;
+          margin-left: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .trending-section {
+    margin-bottom: 20px;
+    text-align: center; /* 중앙 정렬 */
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #bcbcbc;
+      margin-bottom: 10px;
+
+      .update-time {
+        font-size: 11px;
+        color: rgb(181, 181, 181);
+      }
+    }
+
+    .time-icon {
+      display: block; 
+      width: 360px; 
+      height: 180px; 
+      margin-left:-4px;
+    }
+  }
+
+  .popular-restaurants {
+    h3 {
+      font-size: 12px;
+      color: #bcbcbc;
+      margin-bottom: 5px;
+    }
+
+    .shop-list {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      margin-left: -20px;
+    }
+
+    .scrollable-image {
+      max-height: 100%;
+      scroll-snap-align: center;
+    }
+
+    .shop-list::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   .sort-buttons {
     display: flex;
     justify-content: space-between;
     margin: 15px -7px;
     margin-left: 2px;
-  
+
     .left-buttons,
     .right-buttons {
       display: flex;
       gap: 10px;
     }
-  
+
     .sort-button {
       padding: 6px 10px;
       border: 1px solid #ccc;
@@ -174,38 +171,37 @@
       white-space: nowrap;
       display: flex;
       align-items: center;
-  
+
       .arrow-icon {
         width: 12px;
         height: 12px;
         margin-left: 5px;
       }
-  
+
       &.active {
         border-color: #ffd700;
         color: #ffd700;
-  
+
         .arrow-icon {
           width: 16px;
           height: 16px;
           margin-left: 8px;
         }
       }
-  
+
       &:hover {
         background-color: #f9f9f9;
       }
     }
   }
-  
-  // 검색 카드
+
   .list-card {
     display: flex;
     margin-bottom: 12px;
     background-color: #fff;
     position: relative;
     padding-bottom: 3px;
-  
+
     &::after {
       content: "";
       position: absolute;
@@ -216,7 +212,7 @@
       background-color: #ddd;
       z-index: 0;
     }
-  
+
     .card-image {
       width: 148px;
       height: 124px;
@@ -224,46 +220,46 @@
       border-radius: 10px;
       margin-top: 7px;
     }
-  
+
     .card-details {
       flex: 1;
       padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-  
+
       .title-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
-  
+
         .title-and-rating {
           display: flex;
           align-items: center;
           gap: 8px;
-  
+
           .title {
             font-size: 13px;
             font-weight: bold;
             color: #333;
           }
-  
+
           .rating-row {
             display: flex;
             align-items: center;
-  
+
             .star-icon {
               width: 12px;
               height: 12px;
               margin-right: 4px;
             }
-  
+
             .rating {
               font-size: 11px;
             }
           }
         }
-  
+
         .favorite-icon {
           width: 18px;
           height: 18px;
@@ -272,58 +268,56 @@
           flex-shrink: 0;
         }
       }
-  
+
       .location-row {
         display: flex;
         align-items: center;
         font-size: 10px;
         color: #aaaaaa;
         margin-top: 5px;
-  
+
         .location-icon {
           width: 11px;
           height: 11px;
           margin-right: 4px;
         }
       }
-  
+
       .distance-row {
         font-size: 10px;
         margin-top: 5px;
         color: #666;
       }
-  
+
       .price-row {
         font-size: 12px;
         margin-top: 5px;
         color: #333;
         font-weight: bold;
       }
-  
-      .review-row
-       {
+
+      .review-row {
         font-size: 10px;
         margin-top: 5px;
         color: #999;
       }
 
-      .like-row
-      {
+      .like-row {
         font-size: 10px;
         margin-top: 5px;
         color: #999;
       }
-  
+
       .donation-row {
         font-size: 10px;
         text-align: right;
         margin-top: 15px;
-  
+
         span {
           &.label {
             color: #333;
           }
-  
+
           &.amount {
             color: #ff9900;
             font-weight: bold;
@@ -332,6 +326,7 @@
       }
     }
   }
+}
 
   .location-text {
     display: inline-block;

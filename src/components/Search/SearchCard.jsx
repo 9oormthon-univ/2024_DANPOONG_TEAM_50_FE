@@ -11,21 +11,14 @@ const SearchCard = ({
   title,
   rating,
   location,
-  distance,
   reviewCount,
   likeCount,
   usableDonation = 0,
   id,
+  showDistance = false, // 기본값: false
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
-
-  const truncateText = (text, maxLength) => {
-    if (text.length > maxLength) {
-      return `${text.substring(0, maxLength)}...`;
-    }
-    return text;
-  };
 
   useEffect(() => {
     const fetchStoreDetails = async () => {
@@ -122,12 +115,7 @@ const SearchCard = ({
         </div>
         <div className="location-row">
           <img src={LocationIcon} alt="location" className="location-icon" />
-          <span className="location-text">
-            {truncateText(location, 20)}
-          </span>
-        </div>
-        <div className="distance-row">
-          <span>현 위치에서 {Math.round(distance / 1000)}km</span>
+          <span className="location-text">{location}</span>
         </div>
         <div className="review-row">
           <span>리뷰 {reviewCount}개</span>
