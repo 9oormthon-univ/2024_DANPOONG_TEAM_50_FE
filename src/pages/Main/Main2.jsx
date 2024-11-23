@@ -188,6 +188,7 @@ const Main2 = () => {
   }, []);
 
   return (
+    <div className="content-wrapper">
     <div className="home-container">
       <header className="header">
       <img src={LogoIcon} alt="로고" className="logo" />
@@ -236,6 +237,7 @@ const Main2 = () => {
           ))}
         </div>
       </section>
+    </div>
     </div>
   );
 };
