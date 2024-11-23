@@ -13,13 +13,19 @@ const SearchCard = ({
   location,
   distance,
   reviewCount,
+  likeCount,
+  usableDonation = 0,
   id,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [allDonation, setAllDonation] = useState(0);
-  const [priceRange, setPriceRange] = useState("메뉴 정보 없음");
-
   const navigate = useNavigate();
+
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return `${text.substring(0, maxLength)}...`;
+    }
+    return text;
+  };
 
   useEffect(() => {
     const fetchStoreDetails = async () => {
@@ -40,9 +46,8 @@ const SearchCard = ({
             },
           }
         );
-        const { allDonation, likeable } = response.data;
 
-        setAllDonation(allDonation);
+        const { likeable } = response.data;
         setIsFavorite(!likeable);
       } catch (error) {
         console.error(
@@ -52,45 +57,7 @@ const SearchCard = ({
       }
     };
 
-    const fetchStoreMenus = async () => {
-      try {
-        const storedData = JSON.parse(localStorage.getItem("mymoo"));
-        const accessToken = storedData?.["user-token"];
-
-        if (!accessToken) {
-          console.error("Access token not found. Please log in.");
-          return;
-        }
-
-        const response = await axios.get(
-          `https://api.mymoo.site/api/v1/stores/${id}/menus`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-
-        const menus = response.data.menus;
-
-        if (menus && menus.length > 0) {
-          const prices = menus.map((menu) => menu.price);
-          const minPrice = Math.min(...prices);
-          const maxPrice = Math.max(...prices);
-          setPriceRange(
-            `${minPrice.toLocaleString()} ~ ${maxPrice.toLocaleString()}`
-          );
-        } else {
-          setPriceRange("메뉴 정보 없음");
-        }
-      } catch (error) {
-        console.error(`Failed to fetch menus for storeId: ${id}`, error);
-        setPriceRange("메뉴 정보 없음");
-      }
-    };
-
     fetchStoreDetails();
-    fetchStoreMenus();
   }, [id]);
 
   const handleToggleFavorite = async () => {
@@ -140,7 +107,7 @@ const SearchCard = ({
             <h4 className="title">{title}</h4>
             <div className="rating-row">
               <img src={StarIcon} alt="rating" className="star-icon" />
-              <span className="rating">{rating}</span>
+              <span className="rating">{rating.toFixed(1)}</span>
             </div>
           </div>
           <img
@@ -155,20 +122,24 @@ const SearchCard = ({
         </div>
         <div className="location-row">
           <img src={LocationIcon} alt="location" className="location-icon" />
-          <span className="location-text">{location}</span>
+          <span className="location-text">
+            {truncateText(location, 20)}
+          </span>
         </div>
         <div className="distance-row">
-          <span>현 위치에서 {distance}m</span>
-        </div>
-        <div className="price-row">
-          <span>{priceRange}</span>
+          <span>현 위치에서 {Math.round(distance / 1000)}km</span>
         </div>
         <div className="review-row">
           <span>리뷰 {reviewCount}개</span>
         </div>
+        <div className="like-row">
+          <span>좋아요 {likeCount}개</span>
+        </div>
         <div className="donation-row">
           <span className="label">총 후원금 </span>
-          <span className="amount">{allDonation.toLocaleString()}원</span>
+          <span className="amount">
+            {usableDonation ? usableDonation.toLocaleString() : "0"}원
+          </span>
         </div>
       </div>
     </div>
