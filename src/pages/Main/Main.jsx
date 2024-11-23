@@ -165,7 +165,7 @@ const Main = () => {
   return (
     <div className="content-wrapper">
   <div className="home-container">
-    <header className="header">
+    <header className="header real-header">
       <img src={LogoIcon} alt="로고" className="logo" />
       <div className="icons">
         <img
