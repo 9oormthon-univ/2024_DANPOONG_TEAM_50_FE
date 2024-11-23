@@ -1,4 +1,4 @@
-import React from 'react';
+import {useEffect, React} from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Main from './pages/Main/Main';
 import Main2 from './pages/Main/Main2';
