@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
 
-const QrZone = ({ onClose }) => {
+const QrZone = ({ onClose, place, price, donator }) => {
   const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(7); // 초기 시간 10초
 
@@ -33,7 +33,7 @@ const QrZone = ({ onClose }) => {
           <QRCodeCanvas
             className="Qr-img"
             onClick={() => navigate("/finish")}
-            value={"주문 완료!"}
+            value={(place, price, donator)}
           />
         </div>
         <div className="timer-zone">{formatTime(timeLeft)}</div>
