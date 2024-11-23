@@ -25,7 +25,14 @@ const OrderPay = () => {
 
   return (
     <div className="orderpay-page">
-      {isShow ? <QrZone onClose={closeQrBox} /> : null}
+      {isShow ? (
+        <QrZone
+          onClose={closeQrBox}
+          place={location.state.place}
+          price={formattedPrice}
+          donator={location.state.donator}
+        />
+      ) : null}
       <div className="orderpay-top">
         <div className="menu-name">
           <div className="menu-place">{location.state.place}</div>
