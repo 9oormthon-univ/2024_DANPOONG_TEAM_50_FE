@@ -1,6 +1,8 @@
 import { React, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Redirection() {
+  const navigate = useNavigate();
   const location = useLocation();
   const logincode = location.state?.code;
   useEffect(() => {
@@ -27,14 +29,39 @@ export default function Redirection() {
       if (response.ok) {
         const data = await response.json();
         console.log("Received data:", data);
+
         const accessToken = data.accessToken;
         const refreshToken = data.refreshToken;
-
+        const accountId = data.accoutId;
+        const userRole = data.userRole;
+        const isNewUser = data.isNewUser;
         // setLoginSuccess(true);
         // setIsNewMember(data.isNewMember);
+        localStorage.setItem(
+          "mymoo",
+          JSON.stringify({
+            "user-token": accessToken,
+            "refresh-token": refreshToken,
+            role: userRole,
+            accountId: accountId,
+          })
+        );
 
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+        setTimeout(() => {
+          if (isNewUser === true) {
+            navigate("/");
+          } else {
+            if (userRole === "DONATOR") {
+              navigate("/Main2");
+            } else if (userRole === "CHILD") {
+              navigate("/Main");
+            } else if (userRole === "STORE") {
+              navigate("/Shop");
+            } else {
+              alert("권한이 없는 사용자입니다.");
+            }
+          }
+        });
       } else {
         console.error("Network response was not ok");
       }
