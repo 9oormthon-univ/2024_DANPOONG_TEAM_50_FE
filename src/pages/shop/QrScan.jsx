@@ -47,7 +47,7 @@ const QrScan = () => {
               style={{ width: "300px", height: "300px", objectFit: "cover" }}
               constraints={{
                 video: {
-                  facingMode: { exact: "environment" }, // 후면 카메라 설정
+                  facingMode: "user",
                 },
               }}
             />
