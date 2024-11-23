@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LocationIcon from "../../assets/img/Search/locate.svg";
@@ -20,8 +20,9 @@ const SearchCard = ({
   location,
   reviewCount,
   likeCount,
-  usableDonation = 0,
+  usableDonation = 45000,
   id,
+  distance, 
   showDistance = false, 
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -93,7 +94,6 @@ const SearchCard = ({
       );
     }
   };
-
   const handleCardClick = () => {
     navigate(`/order?key=${id}`);
   };
@@ -126,6 +126,11 @@ const SearchCard = ({
             {truncateText(location, 20)}
           </span>
         </div>
+        {showDistance && distance && ( 
+          <div className="distance-row">
+            <span>{distance.toFixed(1)} km</span>
+          </div>
+        )}
         <div className="review-row">
           <span>리뷰 {reviewCount}개</span>
         </div>
@@ -144,3 +149,4 @@ const SearchCard = ({
 };
 
 export default SearchCard;
+
