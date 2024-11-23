@@ -2,7 +2,11 @@ import React from "react";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
 import SuccessImg from "../../assets/img/Order/success.png";
 import RecoBox from "../../components/Order/RecoBox";
+import { useNavigate } from "react-router-dom";
+
 const OrderFinish = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="orderfinish-page">
       <OrderNavbar text={"주문완료"} />
@@ -12,7 +16,9 @@ const OrderFinish = () => {
         </div>
 
         <div className="btn-area">
-          <div className="thanks-btn">감사 편지 쓰기</div>
+          <div className="thanks-btn" onClick={() => navigate("/thanks")}>
+            감사 편지 쓰기
+          </div>
           <div className="orderlist-btn">주문 내역 보기</div>
         </div>
         <div className="orderfinish-detail">
