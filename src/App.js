@@ -20,13 +20,13 @@ import ThanksFinish from "./pages/Thanks/ThanksFinish";
 import DonateList from "./pages/Donate/DonateList";
 import Mypage from "./pages/Mypage/Mypage";
 import DonateDetail from "./pages/Donate/DonateDetail";
-import Heart from "./pages/Heart/Heart";
 import Redirection from "./pages/Signin/Redirection";
 import { useNavigate } from "react-router-dom";
-
 const AppContent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
 
- useEffect(() => {
+  useEffect(() => {
     const currentUrl = new URL(window.location.href);
 
     // 도메인 확인: 루트 경로인지 && 쿼리에 `code`가 포함되어 있는지
@@ -35,12 +35,10 @@ const AppContent = () => {
       currentUrl.pathname === "/" && // 루트 경로 확인
       currentUrl.searchParams.has("code") // `code` 쿼리 파라미터 확인
     ) {
-      const code = currentUrl.searchParams.get("code"); // code 파라미터 값 가져오기
-      console.log(code);
-      // window.location.href = `/intro?code=${code}`; // 상태를 전달하지 않고 URL 변경
+     const code = currentUrl.searchParams.get("code"); // code 파라미터 값 가져오기
+      navigate("/intro", { state: { code } });
     }
-  }, []);
-
+  }, [navigate]);
   return (
     <div className="common-layout">
       <div className="app-main">
@@ -64,10 +62,7 @@ const AppContent = () => {
           <Route path="/my" element={<Mypage />} />
           <Route path="/my/donatelist" element={<DonateList />} />
           <Route path="/my/donatedetail" element={<DonateDetail />} />
-          <Route path="/heart" element={<Heart />} />
-
           <Route path="/intro" element={<Redirection />} />
-
         </Routes>
         {location.pathname !== '/' && <NavBar />}
       </div>
