@@ -57,46 +57,51 @@ const Signin = () => {
     //};
 
     const handleStartBtnClick = async () => {
-        console.log("로그인 버튼 클릭");
-        try {
+      console.log("로그인 버튼 클릭");
+      try {
           const res = await SigninAPI(loginInfo);
-          console.log("서버 응답 데이터:", res.data); // 응답 데이터 확인 로그
-      
-          // 서버 응답 데이터에 success 키가 없는 경우
+          console.log("서버 응답 데이터:", res.data); 
+  
           if (res.data.accessToken) {
-            console.log("로그인 성공:", res.data);
-            setUserToken(res.data.accessToken);
-      
-            // 로컬 스토리지에 사용자 정보 저장
-            const { accessToken, refreshToken, userRole, accountId } = res.data;
-            localStorage.setItem(
-              'mymoo',
-              JSON.stringify({
-                'user-token': accessToken,
-                'refresh-token': refreshToken,
-                role: userRole,
-                accountId: accountId,
-              })
-            );
-      
-            navigate('/'); // 홈으로 이동
+              console.log("로그인 성공:", res.data);
+              setUserToken(res.data.accessToken);
+  
+              const { accessToken, refreshToken, userRole, accountId } = res.data;
+              localStorage.setItem(
+                  'mymoo',
+                  JSON.stringify({
+                      'user-token': accessToken,
+                      'refresh-token': refreshToken,
+                      role: userRole,
+                      accountId: accountId,
+                  })
+              );
+
+              if (userRole === 'DONATOR') {
+                  navigate('/Main2'); 
+              } else if (userRole === 'CHILD') {
+                  navigate('/Main');
+              } else {
+                  alert('권한이 없는 사용자입니다.');
+              }
           } else {
-            console.log("로그인 실패: 서버 응답에서 성공 상태를 찾을 수 없습니다.");
+              console.log("로그인 실패: 서버 응답에서 성공 상태를 찾을 수 없습니다.");
           }
-        } catch (error) {
+      } catch (error) {
           if (error.response) {
-            const { code } = error.response.data;
-            console.log("에러 코드:", code);
-            if (code === 'WRONG_PASSWORD') {
-              alert('비밀번호가 틀렸습니다.');
-            } else if (code === 'NOT_FOUND_EMAIL') {
-              alert('존재하지 않는 이메일입니다.');
-            }
+              const { code } = error.response.data;
+              console.log("에러 코드:", code);
+              if (code === 'WRONG_PASSWORD') {
+                  alert('비밀번호가 틀렸습니다.');
+              } else if (code === 'NOT_FOUND_EMAIL') {
+                  alert('존재하지 않는 이메일입니다.');
+              }
           } else {
-            console.error("로그인 실패:", error.message);
+              console.error("로그인 실패:", error.message);
           }
-        }
-      };
+      }
+  };
+  
       
       const handleSignupClick = () => {
         navigate('/signupadult'); // 회원가입 페이지로 이동
