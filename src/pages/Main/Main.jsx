@@ -163,63 +163,70 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="home-container">
-      <header className="header">
+    <div className="content-wrapper">
+  <div className="home-container">
+    <header className="header">
       <img src={LogoIcon} alt="로고" className="logo" />
-        <div className="icons">
-        <img src={SearchIcon} alt="검색 아이콘" className="icon" onClick={() => navigate('/search')} />
-          <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
-        </div>
-      </header>
-
-      <div className="banner-container">
-        <div className="banner" > 
-          {banners.map((banner, index) => (
-            <img key={index} src={banner} className="banner-image" />
-          ))}
-        </div>
+      <div className="icons">
+        <img
+          src={SearchIcon}
+          alt="검색 아이콘"
+          className="icon"
+          onClick={() => navigate("/search")}
+        />
+        <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
       </div>
+    </header>
 
-      <div className="location">
-        <span>{currentLocation}</span>
+    <div className="banner-container">
+      <div className="banner">
+        {banners.map((banner, index) => (
+          <img key={index} src={banner} className="banner-image" />
+        ))}
       </div>
-
-      <section className="reviews">
-        <div className="section-header">
-          <h3>리뷰 모아보기</h3>
-        </div>
-        <div className="review-list">
-          {dummyReviews.map((review) => (
-            <ReviewCard
-              key={review.id}
-              storeName={review.storeName}
-              nickname={review.nickname}
-              profileImg={review.profileImg}
-              rating={review.rating}
-              description={review.description}
-              userInfo={review.userInfo}
-              date={review.date}
-            />
-          ))}
-        </div>
-      </section>
-
-      <div className="divider" />
-
-      <section className="recent-shops">
-        <h3>최근 이용한 가게</h3>
-        <div className="shop-list">
-          {dummyRecentShops.map((shop) => (
-            <ShopCard
-              key={shop.id}
-              imgSrc={shop.img}
-              name={shop.name}
-              rating={shop.rating}
-            />
-          ))}
-        </div>
-      </section>
     </div>
+
+    <div className="location">
+      <span>{currentLocation}</span>
+    </div>
+
+    <section className="reviews">
+      <div className="section-header">
+        <h3>리뷰 모아보기</h3>
+      </div>
+      <div className="review-list">
+        {dummyReviews.map((review) => (
+          <ReviewCard
+            key={review.id}
+            storeName={review.storeName}
+            nickname={review.nickname}
+            profileImg={review.profileImg}
+            rating={review.rating}
+            description={review.description}
+            userInfo={review.userInfo}
+            date={review.date}
+          />
+        ))}
+      </div>
+    </section>
+
+    <div className="divider" />
+
+    <section className="recent-shops">
+      <h3>최근 이용한 가게</h3>
+      <div className="shop-list">
+        {dummyRecentShops.map((shop) => (
+          <ShopCard
+            key={shop.id}
+            imgSrc={shop.img}
+            name={shop.name}
+            rating={shop.rating}
+          />
+        ))}
+      </div>
+    </section>
+  </div>
+</div>
   );
 };
 
