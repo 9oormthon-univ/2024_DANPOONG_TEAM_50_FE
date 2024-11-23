@@ -52,8 +52,6 @@ const SearchPage2 = () => {
     const keyword = queryParams.get("keyword");
     const latitude = queryParams.get("latitude");
     const longitude = queryParams.get("longitude");
-
-    // 위치 정보와 키워드로 초기 검색 실행
     if (latitude && longitude) {
       setUserLocation({ logt: longitude, lat: latitude });
       const params = { lat: latitude, logt: longitude };
