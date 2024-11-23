@@ -54,7 +54,7 @@ const Map = () => {
         position: markerPosition,
         image: new window.kakao.maps.MarkerImage(
           HereIcon,
-          new window.kakao.maps.Size(50, 70)
+          new window.kakao.maps.Size(40, 50)
         ),
       });
 
