@@ -388,7 +388,7 @@
   margin-bottom: -5px;
 
   .rank-number {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     margin-right: 10px;
   }
@@ -409,9 +409,9 @@
       font-weight: bold;
 
       .rank-gender {
-        font-size: 8px;
+        font-size: 7px;
         color: #888;
-        margin-left: 5px;
+        margin-left: 3px;
       }
     }
 
@@ -432,11 +432,11 @@
   .rank-amount {
     font-size: 9px;
     color: #aaa;
-    margin-left: 10px;
+    margin-left: 5px;
   }
 
   .rank-total {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: bold;
     color: #333;
   }
@@ -537,4 +537,5 @@
       }
     }
   }
+  
   
