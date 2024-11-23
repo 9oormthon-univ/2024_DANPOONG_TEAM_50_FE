@@ -2,17 +2,21 @@ import { React, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function Redirection() {
-   const navigate = useNavigate();
+    const navigate = useNavigate();
   const location = useLocation();
-  const logincode = location.state?.code;
-  useEffect(() => {
-    if (logincode) {
-      sendLoginRequest();
-      console.log(logincode);
-    }
-  }, []);
 
-  const sendLoginRequest = async () => {
+  useEffect(() => {
+    console.log("s");
+    const searchParams = new URLSearchParams(location.search);
+    const logincode = searchParams.get("code"); // URL에서 'code' 파라미터 값 가져오기
+    if (logincode) {
+      console.log("Received code:", logincode);
+      sendLoginRequest(logincode);
+    }
+  }, [location]);
+
+
+  const sendLoginRequest = async (logincode) => {
     try {
       const response = await fetch(
         `https://api.mymoo.site/api/v1/oauth/kakao/callback?code=${logincode}`,
