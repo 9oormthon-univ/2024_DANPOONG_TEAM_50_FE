@@ -8,7 +8,7 @@ import MenuBox from "../../components/Order/MenuBox";
 import HeartIcon from "../../assets/img/Order/heart.png";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import nonPrice from "../../assets/img/Order/price/none-pricebox.png";
 const Order = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -232,17 +232,24 @@ const Order = () => {
           )}
           {selectId === 2 && (
             <div className="menu-2-area">
-              <div className="donate-rate">5000-10000원</div>
-              {donateData.map((donate, idx) => (
-                <PriceBox
-                  key={idx}
-                  dId={donate.donationId}
-                  price={donate.point}
-                  donator={donate.donator}
-                  date={donate.donatedAt}
-                  place={storeInfo.name}
-                />
-              ))}
+              {donateData.length > 0 ? (
+                donateData.map((donate, idx) => (
+                  <PriceBox
+                    key={idx}
+                    dId={donate.donationId}
+                    price={donate.point}
+                    donator={donate.donator}
+                    date={donate.donatedAt}
+                    place={storeInfo.name}
+                  />
+                ))
+              ) : (
+                <div className="empty-pricebox">
+                  <div className="nonprice-img">
+                    <img src={nonPrice} alt="img" className="img-width" />
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
