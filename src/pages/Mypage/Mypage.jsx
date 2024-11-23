@@ -187,7 +187,7 @@ const MyPage = () => {
         </ul>
       </section>
 
-      <section className="menu-section">
+      <section className="menu-section menu-selection-2">
         <h3>문의 및 알림</h3>
         <ul>
           <li>
