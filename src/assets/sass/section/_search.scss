@@ -153,11 +153,13 @@
     justify-content: space-between;
     margin: 15px -7px;
     margin-left: 2px;
+    color: #333;
 
     .left-buttons,
     .right-buttons {
       display: flex;
       gap: 10px;
+      color: #333;
     }
 
     .sort-button {
@@ -171,6 +173,7 @@
       white-space: nowrap;
       display: flex;
       align-items: center;
+      color: #333;
 
       .arrow-icon {
         width: 12px;

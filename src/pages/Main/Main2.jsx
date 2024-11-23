@@ -5,6 +5,7 @@ import SearchIcon from "../../assets/img/Main/Search.svg";
 import Ad1Icon from "../../assets/img/Main/ad.svg";
 import Ad2Icon from "../../assets/img/Main/ad.svg";
 import Ad3Icon from "../../assets/img/Main/ad.svg";
+import Rankimg from "../../assets/img/Main/rank.svg";
 import profileImg1 from "../../assets/img/Main/profile1.svg";
 import profileImg2 from "../../assets/img/Main/profile2.svg";
 import RecentImg from "../../assets/img/Main/recent.svg";
@@ -13,8 +14,6 @@ import RecentImg3 from "../../assets/img/Main/recent3.svg";
 import RecentImg4 from "../../assets/img/Main/recent4.svg";
 import RecentImg5 from "../../assets/img/Main/recent5.svg";
 import ShopCard from "../../components/Main/ShopCard";
-import DonationCard from "../../components/Main/Donation";
-import Rank from "../../components/Main/Rank";
 import LogoIcon from "../../assets/img/Main/logo.svg";
 
 // 더미 데이터
@@ -225,18 +224,14 @@ const Main2 = () => {
           <span>{currentLocation}</span>
         </div>
         <section className="reviews">
-          <div className="section-header">
-            <h3>후원 랭킹</h3>
-          </div>
-          <div className="reviews-content">
-            <div className="donation-card">
-              <DonationCard user={user} topRankers={topRankers} />
-            </div>
-            <div className="rank-card">
-              <Rank topRankers={topRankers} />
-            </div>
-          </div>
-        </section>
+  <div className="section-header">
+    <h3>후원 랭킹</h3>
+  </div>
+  <div className="rank-icons">
+    <img src={Rankimg} alt="랭킹 아이콘 " className="rank-icon" />
+  </div>
+</section>
+
         <div className="divider" />
 
         <section className="recent-shops">
