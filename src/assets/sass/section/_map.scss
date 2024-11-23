@@ -6,7 +6,6 @@
 
   .top-bar {
     position: absolute;
-    top: 0;
     left: 0;
     width: 390px;
     height: 100px;
@@ -17,6 +16,7 @@
     padding: 0 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    margin-top: -40px;
 
     .icon {
       margin-top: 45px;
@@ -38,7 +38,7 @@
 
   .search-bar {
     position: absolute;
-    top: 120px;
+    top: 80px;
     left: 18px;
     right: 16px;
     display: flex;
@@ -76,8 +76,8 @@
 
   .locate-icon {
     position: absolute;
-    left: 310px;
-    top: 700px;
+    left: 80%; 
+    top: 80vh; 
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -87,12 +87,12 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    transition: bottom 0.3s ease;
-
+    transition: top 0.3s ease; 
+  
     &.card-visible {
-      top: 500px; 
+      z-index: -1;
     }
-}
+  }  
 }
 
 //
@@ -175,5 +175,8 @@
   position: relative; 
   top: -70px; 
   z-index: 1000; 
+  color:#333;
 }
+
+
 
