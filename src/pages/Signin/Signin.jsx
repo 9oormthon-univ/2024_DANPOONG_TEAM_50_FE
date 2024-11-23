@@ -104,7 +104,7 @@ const Signin = () => {
   };
 
   const handleSignupClick = () => {
-    navigate("/signupadult"); // 회원가입 페이지로 이동
+    navigate("/signup"); // 회원가입 페이지로 이동
   };
   const handleKakaoLogin = () => {
     fetch(`https://api.mymoo.site/api/v1/oauth/kakao`, {
