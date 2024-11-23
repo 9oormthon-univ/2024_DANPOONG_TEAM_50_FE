@@ -1,11 +1,12 @@
 import { React, useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 export default function Redirection() {
-  const logincode = new URL(window.location.href).searchParams.get("code");
+  const location = useLocation();
+  const logincode = location.state?.code;
   useEffect(() => {
     if (logincode) {
       sendLoginRequest();
-      console.log("ss");
+      console.log(logincode);
     }
   }, []);
 
