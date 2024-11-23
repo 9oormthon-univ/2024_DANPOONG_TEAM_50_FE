@@ -38,7 +38,7 @@ const dummyRecentShops = [
   },
   {
     id: 4,
-    name: "서가앤쿸 강남역삼점",
+    name: "서가앤쿸 강남점",
     rating: 4.6,
     img: RecentImg4,
   },
