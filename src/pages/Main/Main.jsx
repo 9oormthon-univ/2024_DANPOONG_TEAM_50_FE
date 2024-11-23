@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AlarmIcon from "../../assets/img/Main/alarm.svg"; 
+import AlarmIcon from "../../assets/img/Main/alarm.svg";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "../../assets/img/Main/Search.svg";
-import RightDirectionIcon from "../../assets/img/Main/right direction.svg"; 
+import RightDirectionIcon from "../../assets/img/Main/right direction.svg";
 import Ad1Icon from "../../assets/img/Main/ad.svg";
 import Ad2Icon from "../../assets/img/Main/ad.svg";
 import Ad3Icon from "../../assets/img/Main/ad.svg";
@@ -38,7 +38,8 @@ const dummyReviews = [
     rating: 5,
     userInfo: "91년생 / 남",
     date: "1주 전",
-    description: "밑반찬도 메인메뉴도 맛있어요!여기선 꼭 제육볶음을 먹어보세요!",
+    description:
+      "밑반찬도 메인메뉴도 맛있어요!여기선 꼭 제육볶음을 먹어보세요!",
   },
   {
     id: 3,
@@ -48,7 +49,8 @@ const dummyReviews = [
     rating: 5,
     userInfo: "11년생 / 여",
     date: "5일전",
-    description: "양이 엄청 많아요 ㄷㄷ 계란듬뿍 김밥 진짜 간도 딱 맞고 맛있어요",
+    description:
+      "양이 엄청 많아요 ㄷㄷ 계란듬뿍 김밥 진짜 간도 딱 맞고 맛있어요",
   },
   {
     id: 4,
@@ -58,7 +60,8 @@ const dummyReviews = [
     rating: 5,
     userInfo: "03년생 / 여",
     date: "2주 전",
-    description: "종종 자주 먹고 있는데 항상 서비스를 잘 챙겨주세요 감사합니다!",
+    description:
+      "종종 자주 먹고 있는데 항상 서비스를 잘 챙겨주세요 감사합니다!",
   },
 ];
 
@@ -111,7 +114,8 @@ const useInterval = (callback, delay) => {
 };
 
 const Main = () => {
-  const [currentLocation, setCurrentLocation] = useState("위치 정보를 가져오는 중");
+  const [currentLocation, setCurrentLocation] =
+    useState("위치 정보를 가져오는 중");
   const [bannerIndex, setBannerIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -125,7 +129,7 @@ const Main = () => {
     const fetchLocation = async () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          async position => {
+          async (position) => {
             const { latitude, longitude } = position.coords;
             await new Promise((resolve) => {
               if (window.kakao && window.kakao.maps) {
@@ -152,7 +156,7 @@ const Main = () => {
           },
           () => {
             setCurrentLocation("위치 정보를 불러올 수 없습니다.");
-          }
+          },
         );
       } else {
         setCurrentLocation("위치 정보를 사용할 수 없습니다.");
@@ -165,15 +169,20 @@ const Main = () => {
   return (
     <div className="home-container">
       <header className="header">
-      <img src={LogoIcon} alt="로고" className="logo" />
+        <img src={LogoIcon} alt="로고" className="logo" />
         <div className="icons">
-        <img src={SearchIcon} alt="검색 아이콘" className="icon" onClick={() => navigate('/search')} />
+          <img
+            src={SearchIcon}
+            alt="검색 아이콘"
+            className="icon"
+            onClick={() => navigate("/search")}
+          />
           <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
         </div>
       </header>
 
       <div className="banner-container">
-        <div className="banner" > 
+        <div className="banner">
           {banners.map((banner, index) => (
             <img key={index} src={banner} className="banner-image" />
           ))}

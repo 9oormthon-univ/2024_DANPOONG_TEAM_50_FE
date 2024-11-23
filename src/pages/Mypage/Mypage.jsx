@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { userTokenState, userState } from '../../stores/user.jsx';
-import { useRecoilState, useRecoilValue, RecoilRoot } from 'recoil';
-import { getUserInfoAPI } from '../../apis/user.jsx';
+import React, { useEffect, useState } from "react";
+import { userTokenState, userState } from "../../stores/user.jsx";
+import { useRecoilState, useRecoilValue, RecoilRoot } from "recoil";
+import { getUserInfoAPI } from "../../apis/user.jsx";
 
-import adultProfile from '../../assets/img/Mypage/adultprofile.png'; 
-import alarmImg from '../../assets/img/Mypage/alarm.png'; 
-import balanceImg from '../../assets/img/Mypage/balance.png'; 
-import cardImg from '../../assets/img/Mypage/card.png'; 
-import childProfile from '../../assets/img/Mypage/childprofile.png'; 
-import couponImg from '../../assets/img/Mypage/coupon.png'; 
-import donateImg from '../../assets/img/Mypage/donate.png'; 
-import noticeImg from '../../assets/img/Mypage/notice.png'; 
-import phoneImg from '../../assets/img/Mypage/phone.png'; 
-import pointImg from '../../assets/img/Mypage/point.png'; 
-import policyImg from '../../assets/img/Mypage/policy.png'; 
-import questionImg from '../../assets/img/Mypage/question.png'; 
-import reviewImg from '../../assets/img/Mypage/review.png'; 
-import reviewcolorImg from '../../assets/img/Mypage/reviewcolor.png'; 
-import searchImg from '../../assets/img/Mypage/search.png'; 
-import goImg from '../../assets/img/Mypage/go.png';
-import settingImg from '../../assets/img/Mypage/setting.png'; 
-import balance2Img from '../../assets/img/Mypage/balance2.png'; 
-import point2Img from '../../assets/img/Mypage/point2.png';
-import coupon2Img from '../../assets/img/Mypage/coupon2.png'; 
-import chargeImg from '../../assets/img/Mypage/charge.png'; 
+import adultProfile from "../../assets/img/Mypage/adultprofile.png";
+import alarmImg from "../../assets/img/Mypage/alarm.png";
+import balanceImg from "../../assets/img/Mypage/balance.png";
+import cardImg from "../../assets/img/Mypage/card.png";
+import childProfile from "../../assets/img/Mypage/childprofile.png";
+import couponImg from "../../assets/img/Mypage/coupon.png";
+import donateImg from "../../assets/img/Mypage/donate.png";
+import noticeImg from "../../assets/img/Mypage/notice.png";
+import phoneImg from "../../assets/img/Mypage/phone.png";
+import pointImg from "../../assets/img/Mypage/point.png";
+import policyImg from "../../assets/img/Mypage/policy.png";
+import questionImg from "../../assets/img/Mypage/question.png";
+import reviewImg from "../../assets/img/Mypage/review.png";
+import reviewcolorImg from "../../assets/img/Mypage/reviewcolor.png";
+import searchImg from "../../assets/img/Mypage/search.png";
+import goImg from "../../assets/img/Mypage/go.png";
+import settingImg from "../../assets/img/Mypage/setting.png";
+import balance2Img from "../../assets/img/Mypage/balance2.png";
+import point2Img from "../../assets/img/Mypage/point2.png";
+import coupon2Img from "../../assets/img/Mypage/coupon2.png";
+import chargeImg from "../../assets/img/Mypage/charge.png";
 
 const MyPage = () => {
   const [token, setToken] = useRecoilState(userTokenState);
-  console.log('JWT 토큰:', token); // Recoil 상태에서 가져온 JWT 토큰 출력
+  console.log("JWT 토큰:", token); // Recoil 상태에서 가져온 JWT 토큰 출력
 
   const [user, setUser] = useRecoilState(userState); // 사용자 정보 상태 관리
 
@@ -45,30 +45,30 @@ const MyPage = () => {
         userRole: responseData.userRole,
       });
     } catch (error) {
-      console.error('사용자 정보를 가져오는 중 오류 발생:', error);
+      console.error("사용자 정보를 가져오는 중 오류 발생:", error);
     }
   };
 
-    // 컴포넌트가 마운트될 때 사용자 정보 가져오기
-    useEffect(() => {
-      // Recoil 상태에 토큰이 없는 경우 로컬 스토리지에서 가져옴
-      if (!token) {
-        const storedData = localStorage.getItem('mymoo');
-        if (storedData) {
-          const { 'user-token': storedToken } = JSON.parse(storedData);
-          if (storedToken) {
-            setToken(storedToken); // Recoil 상태에 토큰 저장
-          } else {
-            console.error('로컬 스토리지에 JWT 토큰이 없습니다.');
-          }
+  // 컴포넌트가 마운트될 때 사용자 정보 가져오기
+  useEffect(() => {
+    // Recoil 상태에 토큰이 없는 경우 로컬 스토리지에서 가져옴
+    if (!token) {
+      const storedData = localStorage.getItem("mymoo");
+      if (storedData) {
+        const { "user-token": storedToken } = JSON.parse(storedData);
+        if (storedToken) {
+          setToken(storedToken); // Recoil 상태에 토큰 저장
         } else {
-          console.error('로컬 스토리지에 데이터가 없습니다.');
+          console.error("로컬 스토리지에 JWT 토큰이 없습니다.");
         }
       } else {
-        // 토큰이 존재하면 사용자 정보 가져오기
-        fetchUserInfo();
+        console.error("로컬 스토리지에 데이터가 없습니다.");
       }
-    }, [token, setToken]);
+    } else {
+      // 토큰이 존재하면 사용자 정보 가져오기
+      fetchUserInfo();
+    }
+  }, [token, setToken]);
 
   return (
     <div className="mypage-page">
@@ -82,61 +82,62 @@ const MyPage = () => {
 
       <section className="profile-section">
         <img
-          src={user.userRole === 'child' ? childProfile : adultProfile}
+          src={user.userRole === "child" ? childProfile : adultProfile}
           alt="프로필"
           className="profile-image"
         />
         <div className="profile-info">
           <div className="profile-info2">
-          <h2>
-            {user.nickname}
-            <span className="badge">{user.userRole === 'child' ? '아동회원' : '일반회원'}</span>
-          </h2>
+            <h2>
+              {user.nickname}
+              <span className="badge">
+                {user.userRole === "child" ? "아동회원" : "일반회원"}
+              </span>
+            </h2>
           </div>
           <p>{user.email}</p>
         </div>
       </section>
 
-       <section className="stats-section">
-
-       {user.userRole === 'child' ? (
-        <>
-          <div className="stat">
-            <p>잔액</p>
-            <img src={balanceImg} alt="잔액" />
-            <p>12,000원</p>
-          </div>
-          <div className="stat">
-            <p>포인트</p>
-            <img src={pointImg} alt="포인트" />
-            <p>{user.point}p</p>
-          </div>
-          <div className="stat">
-            <p>쿠폰</p>
-            <img src={couponImg} alt="쿠폰" />
-            <p>1장</p>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="stat">
-            <p>잔액</p>
-            <img src={balance2Img} alt="잔액" />
-            <p>12,000원</p>
-          </div>
-          <div className="stat">
-            <p>포인트</p>
-            <img src={point2Img} alt="포인트" />
-            <p>{user.point}p</p>
-          </div>
-          <div className="stat">
-            <p>쿠폰</p>
-            <img src={coupon2Img} alt="쿠폰" />
-            <p>1장</p>
-          </div>
-        </>
-      )}
-        {user.userRole === 'child' && (
+      <section className="stats-section">
+        {user.userRole === "child" ? (
+          <>
+            <div className="stat">
+              <p>잔액</p>
+              <img src={balanceImg} alt="잔액" />
+              <p>12,000원</p>
+            </div>
+            <div className="stat">
+              <p>포인트</p>
+              <img src={pointImg} alt="포인트" />
+              <p>{user.point}p</p>
+            </div>
+            <div className="stat">
+              <p>쿠폰</p>
+              <img src={couponImg} alt="쿠폰" />
+              <p>1장</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="stat">
+              <p>잔액</p>
+              <img src={balance2Img} alt="잔액" />
+              <p>12,000원</p>
+            </div>
+            <div className="stat">
+              <p>포인트</p>
+              <img src={point2Img} alt="포인트" />
+              <p>{user.point}p</p>
+            </div>
+            <div className="stat">
+              <p>쿠폰</p>
+              <img src={coupon2Img} alt="쿠폰" />
+              <p>1장</p>
+            </div>
+          </>
+        )}
+        {user.userRole === "child" && (
           <div className="stat">
             <p>리뷰</p>
             <img src={reviewcolorImg} alt="리뷰" />
@@ -148,7 +149,7 @@ const MyPage = () => {
       <section className="menu-section">
         <h3>활동 관리</h3>
         <ul>
-          {user.userRole === 'child' ? (
+          {user.userRole === "child" ? (
             <>
               <li>
                 <img src={donateImg} alt="후원 내역" />

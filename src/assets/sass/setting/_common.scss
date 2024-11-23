@@ -7,7 +7,7 @@
   overflow-x: hidden;
 }
 * {
-  font-family: "Pretendard-Regular", sans-serif; 
+  font-family: "Pretendard-Regular", sans-serif;
 }
 
 body,
@@ -28,7 +28,8 @@ body,
 // 폰트 :프리텐다드 (regular-medium-semibold-bold)
 @font-face {
   font-family: "Pretendard-Bold";
-  src: url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Bold.otf")
+  src:
+    url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Bold.otf")
       format("opentype"),
     url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff2https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Bold.woff2")
       format("woff2"),
@@ -39,7 +40,8 @@ body,
 
 @font-face {
   font-family: "Pretendard-Medium";
-  src: url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Medium.otf")
+  src:
+    url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Medium.otf")
       format("opentype"),
     url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff2https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Medium.woff2")
       format("woff2"),
@@ -50,7 +52,8 @@ body,
 
 @font-face {
   font-family: "Pretendard-Regular";
-  src: url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Regular.otf")
+  src:
+    url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Regular.otf")
       format("opentype"),
     url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff2https://cdn.banggooso.com/sr/assets/fonts/Pretendard-Regular.woff2")
       format("woff2"),
@@ -61,7 +64,8 @@ body,
 
 @font-face {
   font-family: "Pretendard-SemiBold";
-  src: url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-SemiBold.otf")
+  src:
+    url("https://cdn.banggooso.com/sr/assets/fonts/Pretendard-SemiBold.otf")
       format("opentype"),
     url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff2https://cdn.banggooso.com/sr/assets/fonts/Pretendard-SemiBold.woff2")
       format("woff2"),

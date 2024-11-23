@@ -13,12 +13,24 @@ const renderStars = (rating) => {
   ));
 };
 
-const ReviewCard = ({ storeName, nickname, profileImg, rating, description, userInfo, date }) => {
+const ReviewCard = ({
+  storeName,
+  nickname,
+  profileImg,
+  rating,
+  description,
+  userInfo,
+  date,
+}) => {
   return (
     <div className="review-card">
       <div className="header">
         <div className="profile-and-info">
-          <img src={profileImg} alt={`${nickname} 프로필`} className="profile-img" />
+          <img
+            src={profileImg}
+            alt={`${nickname} 프로필`}
+            className="profile-img"
+          />
           <div className="user-info">
             <h4 className="store-name">{storeName}</h4>
             <div className="nickname-and-details">
@@ -38,4 +50,3 @@ const ReviewCard = ({ storeName, nickname, profileImg, rating, description, user
 };
 
 export default ReviewCard;
-

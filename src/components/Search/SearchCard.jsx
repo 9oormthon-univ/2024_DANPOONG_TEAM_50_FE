@@ -19,7 +19,7 @@ const SearchCard = ({
   const [allDonation, setAllDonation] = useState(0);
   const [priceRange, setPriceRange] = useState("메뉴 정보 없음");
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchStoreDetails = async () => {
@@ -38,14 +38,17 @@ const SearchCard = ({
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
-          }
+          },
         );
         const { allDonation, likeable } = response.data;
 
         setAllDonation(allDonation);
         setIsFavorite(!likeable);
       } catch (error) {
-        console.error(`Failed to fetch store details for storeId: ${id}`, error);
+        console.error(
+          `Failed to fetch store details for storeId: ${id}`,
+          error,
+        );
       }
     };
 
@@ -65,7 +68,7 @@ const SearchCard = ({
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
-          }
+          },
         );
 
         const menus = response.data.menus;
@@ -74,7 +77,9 @@ const SearchCard = ({
           const prices = menus.map((menu) => menu.price);
           const minPrice = Math.min(...prices);
           const maxPrice = Math.max(...prices);
-          setPriceRange(`${minPrice.toLocaleString()} ~ ${maxPrice.toLocaleString()}`);
+          setPriceRange(
+            `${minPrice.toLocaleString()} ~ ${maxPrice.toLocaleString()}`,
+          );
         } else {
           setPriceRange("메뉴 정보 없음");
         }
@@ -106,21 +111,28 @@ const SearchCard = ({
         },
       });
 
-      const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
-      const updatedFavorites = { ...storedFavorites, [id]: updatedFavoriteStatus };
+      const storedFavorites =
+        JSON.parse(localStorage.getItem("favorites")) || {};
+      const updatedFavorites = {
+        ...storedFavorites,
+        [id]: updatedFavoriteStatus,
+      };
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       setIsFavorite(updatedFavoriteStatus);
     } catch (error) {
-      console.error(`Failed to update favorite status for storeId: ${id}`, error);
+      console.error(
+        `Failed to update favorite status for storeId: ${id}`,
+        error,
+      );
     }
   };
 
   const handleCardClick = () => {
-    navigate(`/api/v1/stores/${id}`); 
+    navigate(`/api/v1/stores/${id}`);
   };
 
   return (
-    <div className="list-card" onClick={handleCardClick}> 
+    <div className="list-card" onClick={handleCardClick}>
       <img src={imgSrc} alt={title} className="card-image" />
       <div className="card-details">
         <div className="title-row">
@@ -136,7 +148,7 @@ const SearchCard = ({
             alt="favorite"
             className="favorite-icon"
             onClick={(e) => {
-              e.stopPropagation(); 
+              e.stopPropagation();
               handleToggleFavorite();
             }}
           />

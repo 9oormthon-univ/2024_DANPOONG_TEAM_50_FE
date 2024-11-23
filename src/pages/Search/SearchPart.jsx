@@ -29,10 +29,10 @@ const SearchPage2 = () => {
       }
 
       const accessToken = storedData["user-token"];
-  
+
       const response = await axios.get("https://api.mymoo.site/api/v1/stores", {
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
         },
         params,
       });
@@ -82,7 +82,9 @@ const SearchPage2 = () => {
 
   useEffect(() => {
     if (filterRating) {
-      const filtered = restaurants.filter((restaurant) => restaurant.rating >= 4.0);
+      const filtered = restaurants.filter(
+        (restaurant) => restaurant.rating >= 4.0,
+      );
       setFilteredRestaurants(filtered);
     } else {
       setFilteredRestaurants(restaurants);
@@ -114,7 +116,7 @@ const SearchPage2 = () => {
     const sortedRestaurants = [...filteredRestaurants].sort((a, b) =>
       nextOrder === "고가순"
         ? b.priceRange?.split("~")[0] - a.priceRange?.split("~")[0]
-        : a.priceRange?.split("~")[0] - b.priceRange?.split("~")[0]
+        : a.priceRange?.split("~")[0] - b.priceRange?.split("~")[0],
     );
     setFilteredRestaurants(sortedRestaurants);
   };
@@ -126,11 +128,17 @@ const SearchPage2 = () => {
   const handleSort = (sortType) => {
     let sortedRestaurants = [];
     if (sortType === "좋아요 많은 순") {
-      sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.donationAmount - a.donationAmount);
+      sortedRestaurants = [...filteredRestaurants].sort(
+        (a, b) => b.donationAmount - a.donationAmount,
+      );
     } else if (sortType === "높은 후원금액 순") {
-      sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.donationAmount - a.donationAmount);
+      sortedRestaurants = [...filteredRestaurants].sort(
+        (a, b) => b.donationAmount - a.donationAmount,
+      );
     } else if (sortType === "리뷰 많은 순") {
-      sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.reviewCount - a.reviewCount);
+      sortedRestaurants = [...filteredRestaurants].sort(
+        (a, b) => b.reviewCount - a.reviewCount,
+      );
     }
 
     setFilteredRestaurants(sortedRestaurants);
@@ -156,7 +164,7 @@ const SearchPage2 = () => {
         },
         (error) => {
           console.error("Error getting location: ", error);
-        }
+        },
       );
     } else {
       console.error("Geolocation is not supported by this browser.");

@@ -1,12 +1,12 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Main from './pages/Main/Main'
-import Main2 from './pages/Main/Main2'
-import NavBar from './components/Nav/Navbar';
-import Search from './pages/Search/Search';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./pages/Main/Main";
+import Main2 from "./pages/Main/Main2";
+import NavBar from "./components/Nav/Navbar";
+import Search from "./pages/Search/Search";
 import Signin from "./pages/Signin/Signin";
-import SearchPart from './pages/Search/SearchPart';
-import Map from './pages/Map/Map';
+import SearchPart from "./pages/Search/SearchPart";
+import Map from "./pages/Map/Map";
 import Order from "./pages/Order/Order";
 import OrderPay from "./pages/Order/OrderPay";
 import OrderMenu from "./pages/Order/OrderMenu";
@@ -28,12 +28,12 @@ const App = () => {
       <div className="common-layout">
         <div className="app-main">
           <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/donation' element={<Main2 />} />
-            <Route path='/Search' element={<Search />} />
-            <Route path='/Searchpart' element={<SearchPart />} />
+            <Route path="/" element={<Main />} />
+            <Route path="/donation" element={<Main2 />} />
+            <Route path="/Search" element={<Search />} />
+            <Route path="/Searchpart" element={<SearchPart />} />
             <Route path="/Signin" element={<Signin />} />
-            <Route path='/Map' element={<Map />} />  
+            <Route path="/Map" element={<Map />} />
             <Route path="/order/:place" element={<OrderMenu />} />
             <Route path="/order/" element={<Order />} />
             <Route path="/orderpay" element={<OrderPay />} />

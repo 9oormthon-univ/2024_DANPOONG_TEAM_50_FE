@@ -11,7 +11,6 @@ import RecentImg8 from "../../assets/img/Main/recent8.svg";
 import RecentImg9 from "../../assets/img/Main/recent9.svg";
 import RecentImg10 from "../../assets/img/Main/recent10.svg";
 
-
 const dummyPopularRestaurants = [
   { id: 1, name: "김치찌개 강남점", rating: 4.4, img: RecentImg6 },
   { id: 2, name: "경양카츠 강남점", rating: 4.6, img: RecentImg7 },
@@ -48,7 +47,10 @@ const SearchPage = () => {
 
   const handleSearch = () => {
     if (!searchInput.trim()) return;
-    const updatedSearches = [searchInput, ...recentSearches.filter((item) => item !== searchInput)];
+    const updatedSearches = [
+      searchInput,
+      ...recentSearches.filter((item) => item !== searchInput),
+    ];
     setRecentSearches(updatedSearches);
     localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
     navigate(`/searchpart?keyword=${encodeURIComponent(searchInput)}`);
@@ -68,7 +70,7 @@ const SearchPage = () => {
       (error) => {
         alert("현재 위치를 가져올 수 없습니다. 권한을 확인해주세요.");
         console.error(error);
-      }
+      },
     );
   };
 
@@ -119,7 +121,10 @@ const SearchPage = () => {
           {recentSearches.map((search, index) => (
             <span key={index} className="search-tag">
               {search}{" "}
-              <button className="remove-tag" onClick={() => handleRemoveTag(search)}>
+              <button
+                className="remove-tag"
+                onClick={() => handleRemoveTag(search)}
+              >
                 x
               </button>
             </span>
@@ -139,7 +144,12 @@ const SearchPage = () => {
         <h3>내 주변 인기 식당</h3>
         <div className="shop-list">
           {dummyPopularRestaurants.map((shop) => (
-            <ShopCard key={shop.id} imgSrc={shop.img} name={shop.name} rating={shop.rating} />
+            <ShopCard
+              key={shop.id}
+              imgSrc={shop.img}
+              name={shop.name}
+              rating={shop.rating}
+            />
           ))}
         </div>
       </section>

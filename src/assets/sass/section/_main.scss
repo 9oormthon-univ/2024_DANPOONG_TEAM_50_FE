@@ -1,280 +1,280 @@
 .home-container {
-    .header {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 74px;
+
+    .logo {
+      height: 19px;
+      width: auto;
+      margin-left: 15px;
+    }
+
+    h1 {
+      font-size: 22px;
+      padding-left: 10px;
+    }
+
+    .icons {
+      display: flex;
+      gap: 16px;
+
+      .icon {
+        width: 45px;
+        height: 45px;
+      }
+    }
+  }
+
+  .banner-container {
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+    margin-top: 10px;
+
+    .banner {
+      display: flex;
+      width: 100%;
+
+      img {
+        flex: 0 0 100%;
+        width: 402px;
+        height: 212px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .location {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 10px 0;
+    padding-left: 90px;
+    margin-top: -35px;
+    border-radius: 10px;
+    background-image: url("../../img/Main/locate.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #000;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .reviews,
+  .recent-shops {
+    margin: 16px 0;
+
+    .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 74px;
-  
-      .logo {
-        height: 19px; 
-        width: auto; 
-        margin-left: 15px;
+
+      h3 {
+        font-size: 18px;
+        margin-left: 13px;
+        margin-bottom: 5px;
+      }
+    }
+
+    .review-list,
+    .shop-list {
+      display: flex;
+      overflow-x: auto;
+      gap: 16px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .divider {
+    height: 5px;
+    background-color: #efefef;
+    margin: 10px 0;
+  }
+
+  .recent-shops {
+    h3 {
+      font-size: 18px;
+      padding-left: 13px;
+      margin-bottom: -5px;
+    }
+  }
+}
+
+//리뷰
+.review-card {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  padding: 11px;
+  border: 0.05px solid rgb(172, 172, 172);
+  border-radius: 8px;
+  width: 155px;
+  height: 100px;
+  text-align: left;
+  margin: 10px -15px 0 12px;
+
+  .header {
+    display: flex;
+    margin: -73px 0 3px;
+
+    .profile-and-info {
+      display: flex;
+      align-items: center;
+
+      .profile-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-right: 10px;
       }
 
-      h1 {
-        font-size: 22px;
-        padding-left: 10px;
-      }
-  
-      .icons {
+      .user-info {
         display: flex;
-        gap: 16px;
-  
-        .icon {
-          width: 45px;
-          height: 45px;
+        flex-direction: column;
+
+        .store-name {
+          font-size: 10px;
+          font-weight: bold;
+          margin: 0;
+        }
+
+        .nickname-and-details {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          .nickname {
+            font-size: 8px;
+            color: #555;
+          }
+
+          .user-details {
+            font-size: 8px;
+            color: #888;
+          }
+        }
+
+        .rating-info {
+          display: flex;
+          align-items: center;
+          margin-top: 2px;
+
+          .stars {
+            display: flex;
+
+            .star-icon {
+              width: 7px;
+              height: 6px;
+              margin-right: 1px;
+            }
+          }
+
+          .date {
+            font-size: 6px;
+            color: #888;
+            margin-left: 4px;
+          }
         }
       }
     }
-  
-    .banner-container {
-      position: relative;
-      overflow: hidden;
-      height: 220px;
-      margin-top: 10px;
-  
-      .banner {
-        display: flex;
-        width: 100%;
-  
-        img {
-          flex: 0 0 100%; 
-          width: 402px; 
-          height: 212px; 
-          object-fit: cover;
-        }
-      }
+  }
+
+  .description {
+    font-size: 10px;
+    color: #333;
+    margin-top: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.review-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-card {
+    flex: 0 0 auto;
+  }
+}
+
+//최근 방문한 가게
+.review-list,
+.shop-list {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-card,
+  .shop-card {
+    flex: 0 0 auto;
+  }
+}
+
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 150px;
+  margin: 15px -13px 0 15px;
+
+  .shop-image {
+    width: 155px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 4px;
+    gap: 5px;
+
+    .shop-name {
+      font-size: 13px;
+      font-weight: bold;
     }
-  
-    .location {
+
+    .rating {
       display: flex;
       align-items: center;
       font-size: 12px;
-      padding: 10px 0;
-      padding-left: 90px;
-      margin-top: -35px;
-      border-radius: 10px;
-      background-image: url("../../img/Main/locate.svg");
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #000;
-      position: relative;
-      z-index: 1000;
-    }
-  
-    .reviews,
-    .recent-shops {
-      margin: 16px 0;
-  
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-  
-        h3 {
-          font-size: 18px;
-          margin-left: 13px;
-          margin-bottom: 5px;
-        }
-      }
-  
-      .review-list,
-      .shop-list {
-        display: flex;
-        overflow-x: auto;
-        gap: 16px;
-        padding-bottom: 10px;
-      }
-    }
-  
-    .divider {
-      height: 5px;
-      background-color: #efefef;
-      margin: 10px 0;
-    }
-  
-    .recent-shops {
-      h3 {
-        font-size: 18px;
-        padding-left: 13px;
-        margin-bottom: -5px;
-      }
-    }
-  }
-  
-  //리뷰
-  .review-card {
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-    padding: 11px;
-    border: 0.05px solid rgb(172, 172, 172);
-    border-radius: 8px;
-    width: 155px;
-    height: 100px;
-    text-align: left;
-    margin: 10px -15px 0 12px;
-  
-    .header {
-      display: flex;
-      margin: -73px 0 3px;
-  
-      .profile-and-info {
-        display: flex;
-        align-items: center;
-  
-        .profile-img {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          margin-right: 10px;
-        }
-  
-        .user-info {
-          display: flex;
-          flex-direction: column;
-  
-          .store-name {
-            font-size: 10px;
-            font-weight: bold;
-            margin: 0;
-          }
-  
-          .nickname-and-details {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-  
-            .nickname {
-              font-size: 8px;
-              color: #555;
-            }
-  
-            .user-details {
-              font-size: 8px;
-              color: #888;
-            }
-          }
-  
-          .rating-info {
-            display: flex;
-            align-items: center;
-            margin-top: 2px;
-  
-            .stars {
-              display: flex;
-  
-              .star-icon {
-                width: 7px;
-                height: 6px;
-                margin-right: 1px;
-              }
-            }
-  
-            .date {
-              font-size: 6px;
-              color: #888;
-              margin-left: 4px;
-            }
-          }
-        }
-      }
-    }
-  
-    .description {
-      font-size: 10px;
-      color: #333;
-      margin-top: 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-    .review-list {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    
-      scrollbar-width: none; 
-      -ms-overflow-style: none; 
-      
-      &::-webkit-scrollbar {
-        display: none; 
-      }
-  
-      .review-card {
-        flex: 0 0 auto;
-      }
-    }
-    
-  //최근 방문한 가게
-  .review-list,
-  .shop-list {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  
-    scrollbar-width: none;
-    -ms-overflow-style: none; 
-    &::-webkit-scrollbar {
-      display: none; 
-    }
-  
-    .review-card,
-    .shop-card {
-      flex: 0 0 auto;
-    }
-  }
-  
-  .shop-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 150px;
-    margin: 15px -13px 0 15px;
-  
-    .shop-image {
-      width: 155px;
-      border-radius: 8px;
-      margin-bottom: 5px;
-    }
-  
-    .info-row {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      width: 100%;
-      padding: 0 4px;
-      gap: 5px;
-  
-      .shop-name {
-        font-size: 13px;
-        font-weight: bold;
-      }
-  
-      .rating {
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        color: #666;
-  
-        .star-icon {
-          width: 12px;
-          height: 12px;
-          margin-right: 2px;
-        }
-      }
-    }
-  }
+      color: #666;
 
-  //후원자 홈 화면
+      .star-icon {
+        width: 12px;
+        height: 12px;
+        margin-right: 2px;
+      }
+    }
+  }
+}
 
-  //내 후원
+//후원자 홈 화면
+
+//내 후원
 .donation {
   display: flex;
   justify-content: space-between;
@@ -283,7 +283,7 @@
   padding: 20px;
   margin: 10px auto;
   width: 100%;
-  height: auto; 
+  height: auto;
   margin-left: -10px;
 
   .user-info {
@@ -296,7 +296,6 @@
     border: 1px solid #e5e5e5;
     border-radius: 10px;
     margin-right: 20px;
-
 
     .user-details {
       margin-bottom: 10px;
@@ -330,16 +329,15 @@
   }
 
   .highlight-yellow {
-    color: #ffd700; 
+    color: #ffd700;
   }
 }
 
 .profile-img {
-  width: 45px; 
+  width: 45px;
   height: 45px;
-  border-radius: 50%; 
+  border-radius: 50%;
 }
-
 
 //랭크
 .rank-container {
@@ -362,7 +360,7 @@
   padding: 7px 0;
 
   &:last-child {
-    border-bottom: none; 
+    border-bottom: none;
   }
 }
 
@@ -429,16 +427,16 @@
 .reviews-content {
   display: flex;
   margin-bottom: -30px;
-  overflow: hidden; 
-  flex-wrap: nowrap; 
+  overflow: hidden;
+  flex-wrap: nowrap;
 }
 
 .rank-card {
- margin-left: -60px;
- margin-top: -17px;
+  margin-left: -60px;
+  margin-top: -17px;
 }
 
-.donation-card{
+.donation-card {
   margin-top: -25px;
   z-index: 100;
 }
@@ -446,79 +444,78 @@
 .reviews {
   overflow: hidden;
 }
-  .donate-page {
-    width: 100%;
-    height: 100dvh;
-  
-    .donate-page-top {
-      padding: 80px 17px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      .donate-price-box {
-        padding: 12px 25px 12px 12px;
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-        border: 1px solid #e2e2e2;
-        border-radius: 10px;
-      }
-      .donate-price-img {
-        flex: 2.5;
-        overflow: hidden;
-        border-radius: 5px;
-      }
-      .donate-price-detail {
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 9px;
-        .yellow {
-          color: #ffb800;
-          font-size: 1.1rem;
-          font-family: "Pretendard-SemiBold";
-        }
-        .date {
-          color: #999999;
-          font-size: 0.8rem;
-          font-family: "Pretendard-Regular";
-        }
-      }
-      .donate-checkbox {
-        flex: 0.5;
-  
-        display: flex;
-        align-items: center;
-        text-align: right;
-        input {
-          margin-left: auto;
-          width: 20px;
-          height: 20px;
-          border-radius: 999px;
-        }
-      }
-    }
+.donate-page {
+  width: 100%;
+  height: 100dvh;
 
-    .donate-btn-area {
-      position: fixed;
-      bottom: 65px;
-      width: 100%;
-      max-width: 390px;
-      background-color: white;
+  .donate-page-top {
+    padding: 80px 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    .donate-price-box {
+      padding: 12px 25px 12px 12px;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      padding: 0.8rem 0.9rem;
-      box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
-      .donate-btn {
-        border-radius: 5px;
-        width: 100%;
-        padding: 14px 0;
-        text-align: center;
-        font-family: "Pretendard-SemiBold";
+      gap: 12px;
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
+    }
+    .donate-price-img {
+      flex: 2.5;
+      overflow: hidden;
+      border-radius: 5px;
+    }
+    .donate-price-detail {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      .yellow {
+        color: #ffb800;
         font-size: 1.1rem;
-        background-color: #ffe136;
+        font-family: "Pretendard-SemiBold";
+      }
+      .date {
+        color: #999999;
+        font-size: 0.8rem;
+        font-family: "Pretendard-Regular";
+      }
+    }
+    .donate-checkbox {
+      flex: 0.5;
+
+      display: flex;
+      align-items: center;
+      text-align: right;
+      input {
+        margin-left: auto;
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
       }
     }
   }
-  
+
+  .donate-btn-area {
+    position: fixed;
+    bottom: 65px;
+    width: 100%;
+    max-width: 390px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.8rem 0.9rem;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
+    .donate-btn {
+      border-radius: 5px;
+      width: 100%;
+      padding: 14px 0;
+      text-align: center;
+      font-family: "Pretendard-SemiBold";
+      font-size: 1.1rem;
+      background-color: #ffe136;
+    }
+  }
+}

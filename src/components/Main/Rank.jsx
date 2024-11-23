@@ -21,7 +21,9 @@ const Rank = ({ topRankers }) => {
                     {ranker.birthYear} / {ranker.gender}
                   </span>
                 </p>
-                <p className="rank-date">최근 후원 날짜 {ranker.lastDonationDate}</p>
+                <p className="rank-date">
+                  최근 후원 날짜 {ranker.lastDonationDate}
+                </p>
               </div>
             </div>
             <div className="rank-right">

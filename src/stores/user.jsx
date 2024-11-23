@@ -1,19 +1,19 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 export const userTokenState = atom({
-  key: 'userTokenState', 
-  default: '', 
+  key: "userTokenState",
+  default: "",
 });
 
 export const userState = atom({
-  key: 'userState', 
+  key: "userState",
   default: {
-    accountId: null, 
-    email: '', 
-    phone_number: '',
-    nickname: '', 
-    point: 0, 
-    profileImageUrl: '',
-    userRole: 'child', 
+    accountId: null,
+    email: "",
+    phone_number: "",
+    nickname: "",
+    point: 0,
+    profileImageUrl: "",
+    userRole: "child",
   },
 });

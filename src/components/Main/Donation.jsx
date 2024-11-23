@@ -11,12 +11,11 @@ const Donation = ({ user }) => {
           <p>최근 후원 날짜: {user.lastDonationDate}</p>
         </div>
         <div className="user-avatar">
-        <img src={user.profileImg} className="profile-img" />
+          <img src={user.profileImg} className="profile-img" />
         </div>
         <div className="user-stats">
           <p>
-            현재 등수:{" "}
-            <span className="highlight-yellow">{user.rank}등</span>
+            현재 등수: <span className="highlight-yellow">{user.rank}등</span>
           </p>
           <p>
             누적 후원금액: <span>{user.donationAmount}</span>

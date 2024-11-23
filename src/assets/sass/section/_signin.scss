@@ -2,16 +2,16 @@
 .signin-page {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  height: 100dvh; 
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
   padding: 18px;
   width: 100%;
   background-color: white;
 }
 
 .LogoSection {
-  margin-bottom: 54px; 
+  margin-bottom: 54px;
 }
 
 .logo {
@@ -19,10 +19,11 @@
   height: 43px;
 }
 
-.IdInputBox, .PwInputBox {
+.IdInputBox,
+.PwInputBox {
   width: 354px;
   height: 42px;
-  margin-bottom: 9px; 
+  margin-bottom: 9px;
   padding: 0 10px;
   border: 1px solid #b3b3b3;
   border-radius: 5px;
@@ -35,7 +36,7 @@
   width: 354px;
   height: 47px;
   margin-top: 15px;
-  background-color: #FFE136;
+  background-color: #ffe136;
   border: none;
   color: #000000;
   font-family: "Pretendard-SemiBold";
@@ -50,13 +51,13 @@
   display: flex;
   justify-content: center;
   margin: 15px 0;
-  gap: 15px; 
+  gap: 15px;
   font-size: 10px;
   color: #b3b3b3;
   font-family: "Pretendard-Medium";
 }
 
-.TextDiv{
+.TextDiv {
   cursor: pointer;
 }
 
@@ -69,7 +70,7 @@
 }
 
 .LineTotalComponent .WlineImg {
-  flex-grow: 1; 
+  flex-grow: 1;
   height: 1px;
   background-color: #b3b3b3;
 }
@@ -84,7 +85,7 @@
 .SocialButtonSection {
   display: flex;
   justify-content: center;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .SocialButtonSection img {

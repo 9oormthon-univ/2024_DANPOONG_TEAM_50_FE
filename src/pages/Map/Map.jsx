@@ -10,15 +10,15 @@ import MapCard from "../../components/Map/MapCard";
 
 const Map = () => {
   const navigate = useNavigate();
-  const [stores, setStores] = useState([]); 
-  const [selectedStore, setSelectedStore] = useState(null); 
-  const [keyword, setKeyword] = useState(""); 
-  const [map, setMap] = useState(null); 
-  const [marker, setMarker] = useState(null); 
-  const [currentIndex, setCurrentIndex] = useState(0); 
-  const [isCardVisible, setIsCardVisible] = useState(false); 
+  const [stores, setStores] = useState([]);
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [keyword, setKeyword] = useState("");
+  const [map, setMap] = useState(null);
+  const [marker, setMarker] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isCardVisible, setIsCardVisible] = useState(false);
   const accessToken =
-    "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNTY5NDUsImV4cCI6MTczMjI1ODc0NSwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.knLQu0jPt9BlkqLQjmCK-NfsvtLtCDVl6ogeSHHPMvZfHcTuOvL6OxoqlbX4_mj56E5Cm4n0zogaWxZ8dERovA"; 
+    "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNTY5NDUsImV4cCI6MTczMjI1ODc0NSwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.knLQu0jPt9BlkqLQjmCK-NfsvtLtCDVl6ogeSHHPMvZfHcTuOvL6OxoqlbX4_mj56E5Cm4n0zogaWxZ8dERovA";
 
   useEffect(() => {
     const loadKakaoMap = () => {
@@ -50,13 +50,13 @@ const Map = () => {
 
       const markerPosition = new window.kakao.maps.LatLng(
         selectedStore.latitude,
-        selectedStore.longitude
+        selectedStore.longitude,
       );
       const newMarker = new window.kakao.maps.Marker({
         position: markerPosition,
         image: new window.kakao.maps.MarkerImage(
           HereIcon,
-          new window.kakao.maps.Size(50, 70)
+          new window.kakao.maps.Size(50, 70),
         ),
       });
 
@@ -94,7 +94,7 @@ const Map = () => {
         setSelectedStore(null);
       }
 
-      setIsCardVisible(fetchedStores.length > 0); 
+      setIsCardVisible(fetchedStores.length > 0);
     } catch (error) {
       console.error("Error fetching stores:", error);
       alert("가게 데이터를 불러오지 못했습니다.");
@@ -122,7 +122,7 @@ const Map = () => {
           map.panTo(locPosition);
           fetchStores({ lat: latitude, logt: longitude });
         },
-        () => alert("현재 위치를 가져올 수 없습니다.")
+        () => alert("현재 위치를 가져올 수 없습니다."),
       );
     } else {
       alert("브라우저에서 현재 위치를 지원하지 않습니다.");
