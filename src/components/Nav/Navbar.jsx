@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import homeOnIcon from '../../assets/img/Nav/home=on.svg';
 import homeOffIcon from '../../assets/img/Nav/home=off.svg';
@@ -44,6 +44,15 @@ const getNavItems = (role) => {
 };
 
 const NavBar = () => {
+  const location = useLocation();
+
+  // 숨기고 싶은 경로들
+  const hiddenPaths = ["/signin", "/signup", "/signupchild", "/signupadult"];
+
+  // 현재 경로가 hiddenPaths에 포함되어 있으면 null 반환
+  if (hiddenPaths.includes(location.pathname)) {
+    return null;
+  }
   
   // 로컬 스토리지에서 mymoo 데이터 가져오기
   const mymooData = localStorage.getItem('mymoo');
