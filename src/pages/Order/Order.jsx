@@ -7,15 +7,18 @@ import TimeIcon from "../../assets/img/Order/time.png";
 import MenuBox from "../../components/Order/MenuBox";
 import HeartIcon from "../../assets/img/Order/heart.png";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
 const Order = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [storeInfo, setStoreInfo] = useState([]);
   const [menuArr, setMenuArr] = useState([]);
   const [donateData, setDonateDate] = useState([]);
   const [token, setToken] = useState(0);
   const [userRole, setUserRole] = useState("");
   const [storeName, setStoreName] = useState("");
+  const [storeId, setStoreId] = useState(null);
   // 스토리지 끌어오기
   useEffect(() => {
     console.log("here");
@@ -24,13 +27,19 @@ const Order = () => {
       const parsedData = JSON.parse(storedData);
       setUserRole(parsedData.role);
       setToken(parsedData["user-token"]);
+      const params = new URLSearchParams(location.search);
+      const id = params.get("key"); // `?=5`에서 key가 없으므로 빈 문자열로 가져옴
+      if (id) {
+        setStoreId(id); // storeId 상태 업데이트
+        console.log(storeId);
+      }
     }
-  }, []);
+  }, [location, storeId]);
 
   useEffect(() => {
     if (token) {
       const fetchStore = () => {
-        fetch(`https://api.mymoo.site/api/v1/stores/1`, {
+        fetch(`https://api.mymoo.site/api/v1/stores/${storeId}`, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -53,7 +62,7 @@ const Order = () => {
       };
       // 메뉴판
       const fetchMenus = () => {
-        fetch(`https://api.mymoo.site/api/v1/stores/1/menus`, {
+        fetch(`https://api.mymoo.site/api/v1/stores/${storeId}/menus`, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -75,7 +84,7 @@ const Order = () => {
 
       // 메뉴판
       const fetchDonates = () => {
-        fetch(`https://api.mymoo.site/api/v1/donations/stores/3`, {
+        fetch(`https://api.mymoo.site/api/v1/donations/stores/${storeId}`, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -100,7 +109,7 @@ const Order = () => {
       fetchDonates();
     }
     // 가게 정보
-  }, [token]);
+  }, [token, storeId]);
 
   const [selectId, setSelectId] = useState(1);
   const menuSelect = (id) => {
