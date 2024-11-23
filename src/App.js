@@ -28,11 +28,11 @@ const App = () => {
       <div className="common-layout">
         <div className="app-main">
           <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/donation' element={<Main2 />} />
+            <Route path='/Main' element={<Main />} />
+            <Route path='/Main2' element={<Main2 />} />
             <Route path='/Search' element={<Search />} />
             <Route path='/Searchpart' element={<SearchPart />} />
-            <Route path="/Signin" element={<Signin />} />
+            <Route path="/" element={<Signin />} />
             <Route path='/Map' element={<Map />} />  
             <Route path="/order/:place" element={<OrderMenu />} />
             <Route path="/order/" element={<Order />} />
