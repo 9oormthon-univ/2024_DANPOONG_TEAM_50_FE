@@ -2,10 +2,9 @@ import { React, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function Redirection() {
-  const navigate = useNavigate();
+   const navigate = useNavigate();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const logincode = searchParams.get("code");
+  const logincode = location.state?.code;
   useEffect(() => {
     if (logincode) {
       sendLoginRequest();
