@@ -10,15 +10,13 @@ import MapCard from "../../components/Map/MapCard";
 
 const Map = () => {
   const navigate = useNavigate();
-  const [stores, setStores] = useState([]); 
-  const [selectedStore, setSelectedStore] = useState(null); 
-  const [keyword, setKeyword] = useState(""); 
-  const [map, setMap] = useState(null); 
-  const [marker, setMarker] = useState(null); 
-  const [currentIndex, setCurrentIndex] = useState(0); 
-  const [isCardVisible, setIsCardVisible] = useState(false); 
-  const accessToken =
-    "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzIyNTY5NDUsImV4cCI6MTczMjI1ODc0NSwidXNlcklkIjoyLCJhdXRoIjoiRE9OQVRPUiJ9.knLQu0jPt9BlkqLQjmCK-NfsvtLtCDVl6ogeSHHPMvZfHcTuOvL6OxoqlbX4_mj56E5Cm4n0zogaWxZ8dERovA"; 
+  const [stores, setStores] = useState([]);
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [keyword, setKeyword] = useState("");
+  const [map, setMap] = useState(null);
+  const [marker, setMarker] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isCardVisible, setIsCardVisible] = useState(false);
 
   useEffect(() => {
     const loadKakaoMap = () => {
@@ -67,7 +65,36 @@ const Map = () => {
     }
   }, [selectedStore, map]);
 
+  const refreshToken = async () => {
+    const storedData = JSON.parse(localStorage.getItem("mymoo"));
+    if (!storedData || !storedData["refresh-token"]) {
+      alert("로그인이 필요합니다.");
+      return null;
+    }
+
+    try {
+      const response = await axios.post("https://api.mymoo.site/api/v1/refresh", {
+        refreshToken: storedData["refresh-token"],
+      });
+      const newAccessToken = response.data["user-token"];
+      storedData["user-token"] = newAccessToken;
+      localStorage.setItem("mymoo", JSON.stringify(storedData));
+      return newAccessToken;
+    } catch (error) {
+      console.error("토큰 갱신 실패:", error);
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      return null;
+    }
+  };
+
   const fetchStores = async (params) => {
+    let storedData = JSON.parse(localStorage.getItem("mymoo"));
+    if (!storedData || !storedData["user-token"]) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
+    let accessToken = storedData["user-token"];
     try {
       const response = await axios.get("https://api.mymoo.site/api/v1/stores", {
         headers: {
@@ -94,10 +121,16 @@ const Map = () => {
         setSelectedStore(null);
       }
 
-      setIsCardVisible(fetchedStores.length > 0); 
+      setIsCardVisible(fetchedStores.length > 0);
     } catch (error) {
       console.error("Error fetching stores:", error);
-      alert("가게 데이터를 불러오지 못했습니다.");
+
+      if (error.response?.status === 401) {
+        accessToken = await refreshToken();
+        if (accessToken) fetchStores(params);
+      } else {
+        alert("가게 데이터를 불러오지 못했습니다.");
+      }
     }
   };
 
