@@ -22,6 +22,8 @@ import Mypage from "./pages/Mypage/Mypage";
 import DonateDetail from "./pages/Donate/DonateDetail";
 import Redirection from "./pages/Signin/Redirection";
 import { useNavigate } from "react-router-dom";
+import Heart from "./pages/Heart/Heart";
+
 const AppContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -63,6 +65,7 @@ const AppContent = () => {
           <Route path="/my/donatelist" element={<DonateList />} />
           <Route path="/my/donatedetail" element={<DonateDetail />} />
           <Route path="/intro" element={<Redirection />} />
+          <Route path="/heart" element={<Heart />} />
         </Routes>
         {location.pathname !== '/' && <NavBar />}
       </div>

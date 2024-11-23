@@ -6,6 +6,13 @@ import StarIcon from "../../assets/img/Search/star=on.svg";
 import HeartIcon from "../../assets/img/Search/like=off.svg";
 import HeartFilledIcon from "../../assets/img/Search/like=on.svg";
 
+const truncateText = (text, maxLength) => {
+  if (text.length > maxLength) {
+    return `${text.substring(0, maxLength)}...`;
+  }
+  return text;
+};
+
 const SearchCard = ({
   imgSrc,
   title,
@@ -15,7 +22,7 @@ const SearchCard = ({
   likeCount,
   usableDonation = 0,
   id,
-  showDistance = false, // 기본값: false
+  showDistance = false, 
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
@@ -115,7 +122,9 @@ const SearchCard = ({
         </div>
         <div className="location-row">
           <img src={LocationIcon} alt="location" className="location-icon" />
-          <span className="location-text">{location}</span>
+          <span className="location-text">
+            {truncateText(location, 20)}
+          </span>
         </div>
         <div className="review-row">
           <span>리뷰 {reviewCount}개</span>

@@ -1,120 +1,136 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import PriceBox from "../../components/Order/PriceBox";
 import MapIcon from "../../assets/img/Order/map.png";
 import CallIcon from "../../assets/img/Order/call.png";
 import TimeIcon from "../../assets/img/Order/time.png";
 import MenuBox from "../../components/Order/MenuBox";
-import HeartIcon from "../../assets/img/Order/heart.png";
-import OrderNavbar from "../../components/Nav/OrderNavbar";
-import { useNavigate, useLocation } from "react-router-dom";
+import HeartIcon from "../../assets/img/Order/like=off.svg";
+import FilledHeartIcon from "../../assets/img/Order/like=on.svg";
 import nonPrice from "../../assets/img/Order/price/none-pricebox.png";
+import OrderNavbar from "../../components/Nav/OrderNavbar";
+
 const Order = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [storeInfo, setStoreInfo] = useState([]);
   const [menuArr, setMenuArr] = useState([]);
-  const [donateData, setDonateDate] = useState([]);
-  const [token, setToken] = useState(0);
+  const [donateData, setDonateData] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+  const [token, setToken] = useState("");
   const [userRole, setUserRole] = useState("");
   const [storeName, setStoreName] = useState("");
   const [storeId, setStoreId] = useState(null);
+  const [selectId, setSelectId] = useState(1);
+
   // 스토리지 끌어오기
   useEffect(() => {
-    console.log("here");
     const storedData = localStorage.getItem("mymoo");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
       setUserRole(parsedData.role);
       setToken(parsedData["user-token"]);
       const params = new URLSearchParams(location.search);
-      const id = params.get("key"); // `?=5`에서 key가 없으므로 빈 문자열로 가져옴
+      const id = params.get("key");
       if (id) {
-        setStoreId(id); // storeId 상태 업데이트
-        console.log(storeId);
+        setStoreId(id);
       }
     }
-  }, [location, storeId]);
+  }, [location]);
 
   useEffect(() => {
-    if (token) {
-      const fetchStore = () => {
-        fetch(`https://api.mymoo.site/api/v1/stores/${storeId}`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-            console.log("Response status:", response.status);
-            return response.json();
-          })
-          .then((data) => {
-            console.log("Fetched data:", data);
-            setStoreInfo(data);
-            setStoreName(data.name);
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
-      };
-      // 메뉴판
-      const fetchMenus = () => {
-        fetch(`https://api.mymoo.site/api/v1/stores/${storeId}/menus`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-            console.log("Response status:", response.status);
-            return response.json();
-          })
-          .then((data) => {
-            setMenuArr(data.menus);
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
+    if (token && storeId) {
+      const fetchStore = async () => {
+        try {
+          const response = await axios.get(
+            `https://api.mymoo.site/api/v1/stores/${storeId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          const { name, address, imagePath, likeable } = response.data;
+          setStoreInfo(response.data);
+          setStoreName(name);
+          setIsLiked(!likeable);
+        } catch (error) {
+          console.error("Error fetching store info:", error);
+        }
       };
 
-      // 메뉴판
-      const fetchDonates = () => {
-        fetch(`https://api.mymoo.site/api/v1/donations/stores/${storeId}`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-            console.log("Response status:", response.status);
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-            setDonateDate(data.donations);
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
+      const fetchMenus = async () => {
+        try {
+          const response = await axios.get(
+            `https://api.mymoo.site/api/v1/stores/${storeId}/menus`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setMenuArr(response.data.menus);
+        } catch (error) {
+          console.error("Error fetching menus:", error);
+        }
       };
+
+      const fetchDonates = async () => {
+        try {
+          const response = await axios.get(
+            `https://api.mymoo.site/api/v1/donations/stores/${storeId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setDonateData(response.data.donations);
+        } catch (error) {
+          console.error("Error fetching donations:", error);
+        }
+      };
+
       fetchStore();
       fetchMenus();
       fetchDonates();
     }
-    // 가게 정보
   }, [token, storeId]);
 
-  const [selectId, setSelectId] = useState(1);
+  const toggleLike = async (e) => {
+    e.stopPropagation(); 
+    const updatedIsLiked = !isLiked;
+    setIsLiked(updatedIsLiked); 
+
+    try {
+      await axios.patch(
+        `https://api.mymoo.site/api/v1/stores/${storeId}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const storedFavorites =
+        JSON.parse(localStorage.getItem("favorites")) || {};
+      const updatedFavorites = {
+        ...storedFavorites,
+        [storeId]: updatedIsLiked,
+      };
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    } catch (error) {
+      console.error("Failed to toggle like status:", error);
+      setIsLiked(!updatedIsLiked); 
+    }
+  };
+
   const menuSelect = (id) => {
     setSelectId(id);
   };
+
   return (
     <div className="order-page">
       <OrderNavbar text={storeInfo.name} />
@@ -123,19 +139,25 @@ const Order = () => {
           <div className="restaurant-img">
             <img
               className="img-width"
-              src={storeInfo.imagePath}
+              src={storeInfo.imagePath || ""}
               alt="shop-top-img"
             />
           </div>
           <div className="restaurant-info flex-col">
-            <div className="info-heart-icon">
-              <img src={HeartIcon} alt="img" className="heart-img" />
+            <div className="info-heart-icon" onClick={toggleLike}>
+              <img
+                src={isLiked ? FilledHeartIcon : HeartIcon}
+                alt="favorite"
+                className="heart-img"
+              />
             </div>
             <div className="restaurant-title">{storeInfo.name}</div>
-            <div className="restaurant-star">⭐⭐⭐ 3.9</div>
+            <div className="restaurant-star">
+            <span className="star-icon">★</span> 3.9
+              </div>
             <div className="restaurant-place detail-txt">
               <img src={MapIcon} alt="icon" className="icon-img" />
-              {storeInfo.address}
+              {storeInfo.address || "주소 정보 없음"}
             </div>
             <div className="restaurant-tel detail-txt">
               <img src={CallIcon} alt="icon" className="icon-img" />

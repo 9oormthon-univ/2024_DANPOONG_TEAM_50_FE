@@ -148,7 +148,9 @@
         width: 93%;
         position: absolute;
         .heart-img {
-          width: 40px;
+            width: 24px; 
+            height: 24px;
+            margin-top: 10px;   
         }
       }
       .info-heart-icon {
@@ -644,4 +646,15 @@
 }
 .bolder {
   font-family: "Pretendard-Bold";
+}
+.restaurant-star {
+  font-size: 16px; 
+  display: flex;
+  align-items: center;
+  color: #333; 
+}
+
+.star-icon {
+  color: #FFD700;
+  margin-right: 5px; 
 }
