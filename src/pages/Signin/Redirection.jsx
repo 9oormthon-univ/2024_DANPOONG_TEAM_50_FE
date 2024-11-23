@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 export default function Redirection() {
   const navigate = useNavigate();
   const location = useLocation();
-  const logincode = location.state?.code;
+  const searchParams = new URLSearchParams(location.search);
+  const logincode = searchParams.get("code");
   useEffect(() => {
     if (logincode) {
       sendLoginRequest();
