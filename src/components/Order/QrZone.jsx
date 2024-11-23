@@ -33,7 +33,7 @@ const QrZone = ({ onClose, place, price, donator, dId }) => {
           <QRCodeCanvas
             className="Qr-img"
             onClick={() => navigate("/finish")}
-            value={(place, price, donator, dId)}
+            value={"dd"}
           />
         </div>
         <div className="timer-zone">{formatTime(timeLeft)}</div>
