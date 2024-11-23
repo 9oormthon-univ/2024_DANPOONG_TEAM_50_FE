@@ -130,3 +130,75 @@
   font-size: 0.9rem;
   margin-left: auto;
 }
+
+// donate detail 페이지
+.donate-detail-page {
+  width: 100%;
+  height: 100dvh;
+  .donate-detail-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-top {
+    padding: 80px 15px 0 15px;
+    .store {
+      color: #b3b3b3;
+      font-size: 0.8rem;
+      font-family: "Pretendard-Regular";
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .price {
+      font-family: "Pretendard-Medium";
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .price-img {
+      width: 300px;
+      margin: 30px auto;
+      text-align: center;
+    }
+  }
+  .donate-detail-mid {
+    padding: 0 15px;
+    border-bottom: solid #e2e2e2 7px;
+  }
+  .letter-zone {
+    padding: 22px 15px 80px 15px;
+    .letter-title {
+      font-family: "Pretendard-SemiBold";
+      font-size: 1.2rem;
+    }
+    .letter-img {
+      margin-top: 28px;
+      width: 360px;
+    }
+  }
+}
+
+.donate-detail {
+  width: 100%;
+  padding: 22px 0;
+  border-top: solid #e2e2e2 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  .detail-txt {
+    font-family: "Pretendard-Regular";
+    font-size: 0.9rem;
+    color: #999999;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .medium {
+    font-family: "Pretendard-Medium";
+    color: #5c5c5c;
+    font-size: 1rem;
+  }
+  .black {
+    color: #000000;
+    font-size: 1.2rem;
+  }
+}
