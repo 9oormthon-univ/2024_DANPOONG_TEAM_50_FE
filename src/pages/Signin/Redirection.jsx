@@ -15,7 +15,7 @@ export default function Redirection() {
       const response = await fetch(
         `https://api.mymoo.site/api/v1/oauth/kakao/callback?code=${logincode}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
