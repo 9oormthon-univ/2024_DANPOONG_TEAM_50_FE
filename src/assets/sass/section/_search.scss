@@ -300,7 +300,15 @@
         font-weight: bold;
       }
   
-      .review-row {
+      .review-row
+       {
+        font-size: 10px;
+        margin-top: 5px;
+        color: #999;
+      }
+
+      .like-row
+      {
         font-size: 10px;
         margin-top: 5px;
         color: #999;

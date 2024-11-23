@@ -83,9 +83,18 @@ const SearchPage = () => {
     localStorage.removeItem("recentSearches");
   };
 
+  const handleBackButtonClick = () => {
+    window.history.back();
+  };
+
   return (
     <div className="search-page">
-      <img src={BackIcon} alt="뒤로가기" className="back-icon" />
+       <img
+        src={BackIcon}
+        alt="뒤로가기"
+        className="back-icon"
+        onClick={handleBackButtonClick}
+      />
       <div className="search-bar">
         <input
           type="text"

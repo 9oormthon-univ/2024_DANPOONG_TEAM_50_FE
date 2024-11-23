@@ -29,37 +29,19 @@ const SearchPage2 = () => {
       }
 
       const accessToken = storedData["user-token"];
-  
+
       const response = await axios.get("https://api.mymoo.site/api/v1/stores", {
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
         },
         params,
       });
 
       const { stores } = response.data;
-      const updatedStores = stores.map((restaurant) => {
-        let rating = 0;
-        let reviewCount = 0;
-        const storeIdRemainder = restaurant.storeId % 3;
 
-        if (storeIdRemainder === 0) {
-          rating = 3.2;
-          reviewCount = 30;
-        } else if (storeIdRemainder === 1) {
-          rating = 3.9;
-          reviewCount = 23;
-        } else if (storeIdRemainder === 2) {
-          rating = 4.9;
-          reviewCount = 112;
-        }
-
-        return { ...restaurant, rating, reviewCount };
-      });
-
-      setRestaurants(updatedStores);
-      setFilteredRestaurants(updatedStores);
-      setNoResults(updatedStores.length === 0);
+      setRestaurants(stores);
+      setFilteredRestaurants(stores);
+      setNoResults(stores.length === 0);
     } catch (error) {
       console.error("Error fetching restaurants:", error);
     }
@@ -71,18 +53,16 @@ const SearchPage2 = () => {
     const latitude = queryParams.get("latitude");
     const longitude = queryParams.get("longitude");
 
-    if (keyword) {
+    if (keyword && latitude && longitude) {
       setSearchKeyword(keyword);
-      fetchRestaurants({ keyword });
-    } else if (latitude && longitude) {
       setUserLocation({ logt: longitude, lat: latitude });
-      fetchRestaurants({ lat: latitude, logt: longitude });
+      fetchRestaurants({ keyword, lat: latitude, logt: longitude });
     }
   }, [location.search]);
 
   useEffect(() => {
     if (filterRating) {
-      const filtered = restaurants.filter((restaurant) => restaurant.rating >= 4.0);
+      const filtered = restaurants.filter((restaurant) => restaurant.stars >= 4.0);
       setFilteredRestaurants(filtered);
     } else {
       setFilteredRestaurants(restaurants);
@@ -94,10 +74,11 @@ const SearchPage2 = () => {
   };
 
   const handleSearch = () => {
-    if (searchKeyword.trim()) {
-      fetchRestaurants({ keyword: searchKeyword });
+    if (searchKeyword.trim() && userLocation.lat && userLocation.logt) {
+      fetchRestaurants({ keyword: searchKeyword, lat: userLocation.lat, logt: userLocation.logt });
       setNoResults(false);
     } else {
+      console.error("Keyword and location are required for search.");
       setNoResults(true);
     }
   };
@@ -108,15 +89,22 @@ const SearchPage2 = () => {
     }
   };
 
-  const handleSortPrice = () => {
-    const nextOrder = priceOrder === "고가순" ? "저가순" : "고가순";
-    setPriceOrder(nextOrder);
-    const sortedRestaurants = [...filteredRestaurants].sort((a, b) =>
-      nextOrder === "고가순"
-        ? b.priceRange?.split("~")[0] - a.priceRange?.split("~")[0]
-        : a.priceRange?.split("~")[0] - b.priceRange?.split("~")[0]
-    );
-    setFilteredRestaurants(sortedRestaurants);
+  const handleLocateClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ lat: latitude, logt: longitude });
+          fetchRestaurants({ lat: latitude, logt: longitude });
+          setNoResults(false);
+        },
+        (error) => {
+          console.error("Error getting location: ", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
   };
 
   const toggleSortModal = () => {
@@ -126,9 +114,9 @@ const SearchPage2 = () => {
   const handleSort = (sortType) => {
     let sortedRestaurants = [];
     if (sortType === "좋아요 많은 순") {
-      sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.donationAmount - a.donationAmount);
+      sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.likeCount - a.likeCount);
     } else if (sortType === "높은 후원금액 순") {
-      sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.donationAmount - a.donationAmount);
+      sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.usableDonation - a.usableDonation);
     } else if (sortType === "리뷰 많은 순") {
       sortedRestaurants = [...filteredRestaurants].sort((a, b) => b.reviewCount - a.reviewCount);
     }
@@ -144,23 +132,6 @@ const SearchPage2 = () => {
 
   const handleBackButtonClick = () => {
     window.history.back();
-  };
-
-  const handleLocateClick = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setUserLocation({ lat: latitude, logt: longitude });
-          fetchRestaurants({ lat: latitude, logt: longitude });
-        },
-        (error) => {
-          console.error("Error getting location: ", error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
   };
 
   return (
@@ -194,14 +165,6 @@ const SearchPage2 = () => {
       </div>
       <div className="sort-buttons">
         <div className="left-buttons">
-          <button className="sort-button" onClick={handleSortPrice}>
-            가격 {priceOrder}
-            <img
-              src={UnderIcon}
-              alt="가격 아이콘"
-              className={`arrow-icon ${priceOrder === "고가순" ? "rotated" : ""}`}
-            />
-          </button>
           <button
             className={`sort-button ${filterRating ? "active" : ""}`}
             onClick={handleFilterRating}
@@ -222,18 +185,19 @@ const SearchPage2 = () => {
                 key={restaurant.storeId}
                 imgSrc={restaurant.imagePath}
                 title={restaurant.name}
-                rating={restaurant.rating}
+                rating={restaurant.stars}
                 location={restaurant.address}
                 distance={restaurant.distance}
                 priceRange={restaurant.priceRange}
                 reviewCount={restaurant.reviewCount}
+                likeCount={restaurant.likeCount}
                 totalDonation={restaurant.usableDonation}
                 id={restaurant.storeId}
               />
             ))}
           </div>
         ) : (
-          <div className="no-results">검색 가능한 가게가 없습니다</div>
+          <div className="no-results">검색 결과가 없습니다</div>
         )}
       </div>
       {sortModalVisible && (
