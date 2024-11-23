@@ -59,7 +59,7 @@ const ShopFinish = () => {
 
         <div className="btn-area">
           <div className="thanks-btn">홈으로</div>
-          <div className="orderlist-btn">후원 내역 보기</div>
+          <div className="orderlist-btn">내역 보기</div>
         </div>
         <div className="orderfinish-detail">
           <div className="detail-txt">
