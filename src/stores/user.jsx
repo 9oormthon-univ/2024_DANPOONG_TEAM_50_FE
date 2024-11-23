@@ -14,6 +14,6 @@ export const userState = atom({
     nickname: '', 
     point: 0, 
     profileImageUrl: '',
-    userRole: 'child', 
+    userRole: 'CHILD', 
   },
 });

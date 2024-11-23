@@ -5,6 +5,9 @@ import Main2 from './pages/Main/Main2';
 import NavBar from './components/Nav/Navbar';
 import Search from './pages/Search/Search';
 import Signin from "./pages/Signin/Signin";
+import Signup from "./pages/Signup/Signup";
+import Signupadult from "./pages/Signup/SignUpAdult";
+import Signupchild from "./pages/Signup/SignUpChild";
 import SearchPart from './pages/Search/SearchPart';
 import Map from './pages/Map/Map';
 import Order from "./pages/Order/Order";
@@ -50,6 +53,9 @@ const AppContent = () => {
           <Route path='/Search' element={<Search />} />
           <Route path='/Searchpart' element={<SearchPart />} />
           <Route path="/" element={<Signin />} />
+    <Route path="/signup" element={<Signup />} />
+            <Route path="/signupchild" element={<Signupchild />} />
+            <Route path="/signupadult" element={<Signupadult />} />
           <Route path='/Map' element={<Map />} />
           <Route path="/order/:place" element={<OrderMenu />} />
           <Route path="/order/" element={<Order />} />

@@ -11,11 +11,27 @@ const QrScan = () => {
 
   const handleScan = (scanData) => {
     if (scanData) {
-      console.log(`Loaded >>>`, scanData.text);
+      const scannedObject = JSON.parse(scanData.text);
+
+      console.log(
+        `Loaded >>>`,
+        scannedObject,
+        scannedObject.dId,
+        scannedObject.childId
+      );
       setData(scanData.text);
       setStartScan(false);
       setLoadingScan(false);
-      navigate("/shop/finish", { state: { scannedData: scanData.text } });
+      console.log(data.dId, data.childId);
+      navigate("/shop/finish", {
+        state: {
+          place: scannedObject.place,
+          donator: scannedObject.donator,
+          price: scannedObject.price,
+          dId: scannedObject.dId,
+          childId: scannedObject.childId,
+        },
+      });
     }
   };
 

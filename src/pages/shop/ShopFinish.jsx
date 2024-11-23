@@ -7,44 +7,47 @@ const ShopFinish = () => {
   const location = useLocation();
   const [token, setToken] = useState(0);
   const [userRole, setUserRole] = useState("");
-  console.log(location.state.scannedData.dId);
+
   useEffect(() => {
+    console.log(location.state.dId); // 정상적으로 출력되어야 합니다.
+
     const storedData = localStorage.getItem("mymoo");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
       setUserRole(parsedData.role);
       setToken(parsedData["user-token"]);
     }
-  }, []);
+  }, [location]);
 
   // 가게 정보
   const fetchScan = () => {
-    fetch(`https://api.mymoo.site/api/v1/donation-usages`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: {
-        donationId: location.state.scannedData.dId,
-        childId: location.state.scannedData.childId,
-      },
-    })
-      .then((response) => {
-        console.log("Response status:", response.status);
-        return response.json();
+    if (token !== 0) {
+      fetch(`https://api.mymoo.site/api/v1/donation-usages`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          donationId: location.state.dId,
+          childAccountId: location.state.childId,
+        }),
       })
-      .then((data) => {
-        console.log("Fetched data:", data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+        .then((response) => {
+          console.log("Response status:", response.status);
+        })
+        .then((data) => {
+          console.log("Fetched data:", data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }
   };
   useEffect(() => {
     fetchScan();
-  }, []); // 빈 배열([])로 설정해 컴포넌트가 마운트될 때 한 번만 실행
+  }, [token]); // 빈 배열([])로 설정해 컴포넌트가 마운트될 때 한 번만 실행
 
   return (
     <div className="orderfinish-page">
@@ -61,15 +64,15 @@ const ShopFinish = () => {
         <div className="orderfinish-detail">
           <div className="detail-txt">
             <span>사용처</span>
-            <span className="grey">한솥도시락 신설동역점</span>
+            <span className="grey">{location.state.place}</span>
           </div>
           <div className="detail-txt">
             <span>금액권 후원자</span>
-            <span className="grey">이*림</span>
+            <span className="grey">{location.state.donator}</span>
           </div>
           <div className="detail-txt">
             <span className="medium">결제금액</span>
-            <span className="black bolder">12,000원</span>
+            <span className="black bolder">{location.state.price}원</span>
           </div>
         </div>
       </div>
