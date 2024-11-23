@@ -136,13 +136,11 @@ const SearchPage = () => {
       </section>
 
       <section className="popular-restaurants">
-        <h3>내 주변 인기 식당</h3>
-        <div className="shop-list">
-          {dummyPopularRestaurants.map((shop) => (
-            <ShopCard key={shop.id} imgSrc={shop.img} name={shop.name} rating={shop.rating} />
-          ))}
-        </div>
-      </section>
+  <h3>내 주변 인기 식당</h3>
+  <div className="shop-list">
+    <img src={require("../../assets/img/Search/near.svg").default} alt="인기 식당" className="scrollable-image" />
+  </div>
+</section>
     </div>
   );
 };
