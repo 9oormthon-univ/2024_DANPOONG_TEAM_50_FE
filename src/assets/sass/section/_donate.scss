@@ -166,6 +166,9 @@
   }
   .letter-zone {
     padding: 22px 15px 80px 15px;
+    .letter-area {
+      position: relative;
+    }
     .letter-title {
       font-family: "Pretendard-SemiBold";
       font-size: 1.2rem;
@@ -173,6 +176,40 @@
     .letter-img {
       margin-top: 28px;
       width: 360px;
+    }
+    .area {
+      padding: 15px;
+      width: 100%;
+      position: absolute;
+      z-index: 10;
+      bottom: 10px;
+    }
+    .text-box {
+      padding: 18px;
+      width: 100%;
+      background-color: white;
+      /* position: absolute; */
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      .profile {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .profile-img {
+        width: 42px;
+        height: 42px;
+      }
+      .child {
+        font-family: "Pretendard-SemiBold";
+        font-size: 1.37rem;
+      }
+      .message {
+        font-family: "Pretendard-Medium";
+        font-size: 1rem;
+      }
     }
   }
 }
