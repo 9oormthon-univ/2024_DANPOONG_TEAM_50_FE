@@ -35,7 +35,8 @@ const AppContent = () => {
       currentUrl.pathname === "/" && // 루트 경로 확인
       currentUrl.searchParams.has("code") // `code` 쿼리 파라미터 확인
     ) {
-      navigate("/intro"); // Intro 페이지로 리다이렉트
+     const code = currentUrl.searchParams.get("code"); // code 파라미터 값 가져오기
+      navigate("/intro", { state: { code } });
     }
   }, [navigate]);
   return (
