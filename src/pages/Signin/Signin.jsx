@@ -81,6 +81,8 @@ const Signin = () => {
                   navigate('/Main2'); 
               } else if (userRole === 'CHILD') {
                   navigate('/Main');
+              } else if (userRole === 'SHOP') {
+                  navigate('/Shop');
               } else {
                   alert('권한이 없는 사용자입니다.');
               }

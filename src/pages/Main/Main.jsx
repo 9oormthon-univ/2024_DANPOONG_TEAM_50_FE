@@ -22,7 +22,7 @@ import LogoIcon from "../../assets/img/Main/logo.svg";
 const dummyReviews = [
   {
     id: 1,
-    storeName: "철수네닭갈비 압구정점",
+    storeName: "교촌치킨 압구정점",
     nickname: "민트초코",
     profileImg: profileImg1,
     rating: 4,
