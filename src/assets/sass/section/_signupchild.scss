@@ -1,0 +1,128 @@
+.signupchild-page {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh; 
+    padding: 18px;
+    width: 100%;
+    background-color: white;
+    position: relative; 
+  }
+  
+  .signup-header {
+    display: flex;
+    align-items: center;
+    justify-content: left; 
+    padding: 17px 0; 
+    background-color: #ffffff;
+    position: fixed; 
+    top: 0;
+    border-bottom: 1px solid #eaeaea;
+    max-width: 360px; 
+    width: 100%;
+  }
+  
+  .signup-header h1 {
+    text-align: center;
+    font-size: 18px;
+    margin-left: 15px;
+    color: #000000;
+    font-family: "Pretendard-SemiBold";
+  }
+  
+  .back-button {
+    cursor: pointer;
+  }
+  
+  .form-container {
+    margin-top: 30px;
+  }
+  
+  .section-title {
+    margin-bottom: 20px;
+    font-size: 16px;
+    margin-top: 25px;
+    color: #000000;
+    font-family: "Pretendard-SemiBold";
+  }
+  
+  .label{
+    margin-bottom: 40px;
+  }
+
+  .label2 span{
+    font-size: 12px;
+    color: #000000;
+    font-family: "Pretendard-SemiBold";
+  }
+
+  .form-label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .input-box {
+    width: 350px;
+    height: 42px;
+    margin-top: 8px;
+    margin-bottom:16px;
+    border: 1px solid #b3b3b3;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 0 10px;
+    font-family: "Pretendard-Regular";
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .required {
+    color: red;
+    margin-left: 4px;
+  }
+  
+  .button {
+    width: 360px;
+    height: 47px;
+    padding: 12px;
+    margin-top: 24px;
+    position: fixed; /* 상단에 고정 */
+    bottom:0;  
+    font-size: 16px;
+    background: #f3f3f3;
+    color: #bbbbbb;
+    border: none;
+    border-radius: 5px;
+    font-family: "Pretendard-SemiBold";
+    cursor: pointer;
+  }
+  
+  .sucbutton {
+    width: 360px;
+    height: 47px;
+    padding: 12px;
+    margin-top: 24px;
+    font-size: 16px;
+    position: fixed; /* 상단에 고정 */
+    bottom:0;  
+    color: #000000;
+    background-color: #ffd700;
+    border: none;
+    border-radius: 5px;
+    font-family: "Pretendard-SemiBold";
+    cursor: pointer;
+  }
+
+  .card-box {
+    border: 1px solid #b3b3b3;
+    margin-top: 8px;
+    margin-bottom:16px;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 0 10px;
+    font-family: "Pretendard-Regular";
+    width: 80px;
+    height: 42px;
+  }

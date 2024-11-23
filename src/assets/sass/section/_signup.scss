@@ -1,0 +1,94 @@
+.signup-page {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh; 
+    padding: 18px;
+    width: 100%;
+    background-color: white;
+    position: relative; 
+  }
+  
+.signup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 17px 0; 
+    background-color: #ffffff;
+    position: fixed; 
+    top: 0;
+  }
+  
+.signup-header h1 {
+    text-align: center;
+    font-size: 18px;
+    margin-left: 18px;
+    font-family: "Pretendard-SemiBold";
+  }
+  
+  .back-button {
+    cursor: pointer;
+  }
+  
+  .textview {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px;
+  }
+
+  .welcome-text {
+    display: flex;
+    text-align: center;
+    margin: 68px 0;
+    font-size: 18px;
+    color: #000000;
+    font-family: "Pretendard-medium";
+  }
+  
+  
+  .type-selection {
+    display: flex;
+    width: 100%;
+    justify-content: center; 
+    gap: 18px;
+    align-items: center;
+  }
+  
+  .type-card img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 213px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .submit-button {
+    display: flex;
+    align-items: center;
+    position: fixed; /* 상단에 고정 */
+    bottom:0;  
+    background-color: #fdd835;
+    justify-content: center;
+    height:47px;
+    width:350px;
+    border: none;
+    color: #000000;
+    font-size: 16px;
+    border-radius: 5px;
+    font-family: "Pretendard-SemiBold";
+    cursor: pointer;
+    margin-top: 20px;
+    position: fixed;
+  }
+  
+  .submit-button:hover {
+    background-color: #fbc02d;
+  }
+  
