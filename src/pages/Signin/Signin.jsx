@@ -166,7 +166,7 @@ const Signin = () => {
         <img className={"VlineImg"} src={VlineImg} alt="Vline" />
         <div className={"TextDiv"}>비밀번호 찾기</div>
         <img className={"VlineImg"} src={VlineImg} alt="Vline" />
-        <div className={"TextDiv" onClick={handleSignupClick}}>회원가입</div>
+        <div className={"TextDiv"} onClick={handleSignupClick}>회원가입</div>
       </div>
 
       <div className={"LineTotalComponent"}>
