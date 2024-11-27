@@ -20,10 +20,9 @@ const SearchCard = ({
   location,
   reviewCount,
   likeCount,
-  usableDonation = 45000,
+  totalDonation,
   id,
-  distance, 
-  showDistance = false, 
+  distance,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
@@ -94,9 +93,13 @@ const SearchCard = ({
       );
     }
   };
+
   const handleCardClick = () => {
     navigate(`/order?key=${id}`);
   };
+
+  console.log("distance:", distance);
+  console.log("totalDonation:", totalDonation);
 
   return (
     <div className="list-card" onClick={handleCardClick}>
@@ -107,7 +110,11 @@ const SearchCard = ({
             <h4 className="title">{title}</h4>
             <div className="rating-row">
               <img src={StarIcon} alt="rating" className="star-icon" />
-              <span className="rating">{rating.toFixed(1)}</span>
+              <span className="rating">
+                {rating !== undefined && rating !== null
+                  ? rating.toFixed(1)
+                  : "4.5"}
+              </span>
             </div>
           </div>
           <img
@@ -126,9 +133,9 @@ const SearchCard = ({
             {truncateText(location, 20)}
           </span>
         </div>
-        {showDistance && distance && ( 
+        {distance && (
           <div className="distance-row">
-            <span>{distance.toFixed(1)} km</span>
+            <span>현재 위치에서 {(distance / 1000).toFixed(1)} km</span>
           </div>
         )}
         <div className="review-row">
@@ -140,7 +147,7 @@ const SearchCard = ({
         <div className="donation-row">
           <span className="label">총 후원금 </span>
           <span className="amount">
-            {usableDonation ? usableDonation.toLocaleString() : "0"}원
+            {totalDonation ? totalDonation.toLocaleString() : "0"}원
           </span>
         </div>
       </div>
@@ -149,4 +156,3 @@ const SearchCard = ({
 };
 
 export default SearchCard;
-
