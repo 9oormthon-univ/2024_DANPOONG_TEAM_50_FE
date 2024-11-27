@@ -18,6 +18,80 @@ const Map = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCardVisible, setIsCardVisible] = useState(false);
 
+  const refreshToken = async () => {
+    const storedData = JSON.parse(localStorage.getItem("mymoo"));
+    if (!storedData || !storedData["refresh-token"]) {
+      alert("로그인이 필요합니다.");
+      return null;
+    }
+
+    try {
+      const response = await axios.post("https://api.mymoo.site/api/v1/auth/token/refresh", {
+        refreshToken: storedData["refresh-token"],
+      });
+      const newAccessToken = response.data["user-token"];
+      storedData["user-token"] = newAccessToken;
+      localStorage.setItem("mymoo", JSON.stringify(storedData));
+      return newAccessToken;
+    } catch (error) {
+      console.error("토큰 갱신 실패:", error);
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      localStorage.removeItem("mymoo"); 
+      navigate("/");
+      return null;
+    }
+  };
+
+  const fetchStores = async (params) => {
+    let storedData = JSON.parse(localStorage.getItem("mymoo"));
+    if (!storedData || !storedData["user-token"]) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+      return;
+    }
+
+    let accessToken = storedData["user-token"];
+    try {
+      const response = await axios.get("https://api.mymoo.site/api/v1/stores", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          ...params,
+          size: 20,
+          sort: "asc",
+          sortby: "name",
+        },
+      });
+
+      const fetchedStores = response.data.stores.map((store) => ({
+        ...store,
+        phone: "02-0616-1014",
+        openingHours: "10:00 - 21:00",
+      }));
+      setStores(fetchedStores);
+
+      if (params.keyword && fetchedStores.length > 0) {
+        setSelectedStore(fetchedStores[0]);
+      } else {
+        setSelectedStore(null);
+      }
+
+      setIsCardVisible(fetchedStores.length > 0);
+    } catch (error) {
+      console.error("Error fetching stores:", error);
+
+      if (error.response?.status === 401) {
+        accessToken = await refreshToken();
+        if (accessToken) {
+          fetchStores(params); 
+        }
+      } else {
+        alert("가게 데이터를 불러오지 못했습니다.");
+      }
+    }
+  };
+
   useEffect(() => {
     const loadKakaoMap = () => {
       const script = document.createElement("script");
@@ -65,90 +139,21 @@ const Map = () => {
     }
   }, [selectedStore, map]);
 
-  const refreshToken = async () => {
-    const storedData = JSON.parse(localStorage.getItem("mymoo"));
-    if (!storedData || !storedData["refresh-token"]) {
-      alert("로그인이 필요합니다.");
-      return null;
-    }
-
-    try {
-      const response = await axios.post("https://api.mymoo.site/api/v1/refresh", {
-        refreshToken: storedData["refresh-token"],
-      });
-      const newAccessToken = response.data["user-token"];
-      storedData["user-token"] = newAccessToken;
-      localStorage.setItem("mymoo", JSON.stringify(storedData));
-      return newAccessToken;
-    } catch (error) {
-      console.error("토큰 갱신 실패:", error);
-      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
-      return null;
-    }
-  };
-
-  const fetchStores = async (params) => {
-    let storedData = JSON.parse(localStorage.getItem("mymoo"));
-    if (!storedData || !storedData["user-token"]) {
-      alert("로그인이 필요합니다.");
-      return;
-    }
-
-    let accessToken = storedData["user-token"];
-    try {
-      const response = await axios.get("https://api.mymoo.site/api/v1/stores", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        params: {
-          ...params,
-          size: 20,
-          sort: "asc",
-          sortby: "name",
-        },
-      });
-
-      const fetchedStores = response.data.stores.map((store) => ({
-        ...store,
-        phone: "02-0616-1014",
-        openingHours: "10:00 - 21:00",
-      }));
-      setStores(fetchedStores);
-
-      if (params.keyword && fetchedStores.length > 0) {
-        setSelectedStore(fetchedStores[0]);
-      } else {
-        setSelectedStore(null);
-      }
-
-      setIsCardVisible(fetchedStores.length > 0);
-    } catch (error) {
-      console.error("Error fetching stores:", error);
-
-      if (error.response?.status === 401) {
-        accessToken = await refreshToken();
-        if (accessToken) fetchStores(params);
-      } else {
-        alert("가게 데이터를 불러오지 못했습니다.");
-      }
-    }
-  };
-
   const handleSearch = () => {
     if (!keyword.trim()) {
       alert("검색어를 입력해주세요.");
       return;
     }
-  
+
     if (!map || !navigator.geolocation) {
       alert("지도 또는 위치 정보를 사용할 수 없습니다.");
       return;
     }
-  
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-  
+
         fetchStores({
           keyword: keyword.trim(),
           lat: latitude,
@@ -160,7 +165,6 @@ const Map = () => {
       }
     );
   };
-  
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
