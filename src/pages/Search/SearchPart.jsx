@@ -12,7 +12,6 @@ const SearchPage2 = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [filterRating, setFilterRating] = useState(false);
   const [selectedSort, setSelectedSort] = useState("좋아요 많은 순");
-  const [priceOrder, setPriceOrder] = useState("고가순");
   const [sortModalVisible, setSortModalVisible] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [userLocation, setUserLocation] = useState({ logt: null, lat: null });
@@ -23,12 +22,23 @@ const SearchPage2 = () => {
   const fetchRestaurants = async (params) => {
     try {
       const storedData = JSON.parse(localStorage.getItem("mymoo"));
-      if (!storedData || !storedData["user-token"]) {
-        console.error("Access token not found. Please log in.");
+      if (!storedData) {
+        console.error("No tokens found. Redirecting to login.");
+        window.location.href = "/";
         return;
       }
 
-      const accessToken = storedData["user-token"];
+      let accessToken = storedData["user-token"];
+      if (!accessToken) {
+        console.warn("Access token missing. Attempting to refresh token...");
+        accessToken = await refreshAccessToken();
+
+        if (!accessToken) {
+          console.error("Failed to refresh token. Redirecting to login.");
+          window.location.href = "/";
+          return;
+        }
+      }
 
       const response = await axios.get("https://api.mymoo.site/api/v1/stores", {
         headers: {
@@ -44,6 +54,30 @@ const SearchPage2 = () => {
       setNoResults(stores.length === 0);
     } catch (error) {
       console.error("Error fetching restaurants:", error);
+    }
+  };
+
+  const refreshAccessToken = async () => {
+    try {
+      const storedData = JSON.parse(localStorage.getItem("mymoo"));
+      if (!storedData || !storedData["refresh-token"]) {
+        console.error("Refresh token not found. Please log in.");
+        return null;
+      }
+
+      const refreshToken = storedData["refresh-token"];
+      const response = await axios.post(
+        "https://api.mymoo.site/api/v1/auth/token/refresh",
+        { refreshToken }
+      );
+
+      const { accessToken } = response.data;
+      storedData["user-token"] = accessToken;
+      localStorage.setItem("mymoo", JSON.stringify(storedData)); 
+      return accessToken;
+    } catch (error) {
+      console.error("Error refreshing access token:", error);
+      return null;
     }
   };
 
