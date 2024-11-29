@@ -4,7 +4,7 @@ const Rank = ({ topRankers }) => {
   return (
     <div className="rank-container">
       <ul className="rank-list">
-        {topRankers.map((ranker, index) => (
+        {topRankers.slice(0, 4).map((ranker, index) => ( 
           <li key={index} className="rank-item">
             <div className="rank-left">
               <span className="rank-number">{index + 1}</span>
@@ -18,7 +18,6 @@ const Rank = ({ topRankers }) => {
                   {ranker.name}
                   <span className="rank-gender">
                     {" "}
-                    {ranker.birthYear} / {ranker.gender}
                   </span>
                 </p>
                 <p className="rank-date">최근 후원 날짜 {ranker.lastDonationDate}</p>
