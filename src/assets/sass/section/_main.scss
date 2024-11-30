@@ -1,11 +1,11 @@
 .content-wrapper {
   position: relative;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto; 
+  overflow-y: auto;
 
   .home-container {
     width: 100%;
@@ -38,13 +38,30 @@
         }
       }
     }
-.real-header{
-     padding: 60px 5px 10px 5px !important;}
+    .real-header {
+      padding: 60px 5px 10px 5px !important;
+    }
     .banner-container {
       position: relative;
       overflow: hidden;
       height: 220px;
-      
+      .banner-container {
+        overflow: hidden;
+        width: 100%;
+        height: 200px; /* 배너 높이 */
+        position: relative;
+      }
+
+      .banner-slider {
+        display: flex;
+        width: 100%; /* 배너 개수에 따라 조정 */
+      }
+
+      .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
       .banner {
         display: flex;
@@ -65,7 +82,7 @@
       font-size: 12px;
       padding: 10px 0;
       padding-left: 90px;
-      margin-top: -35px;
+      margin-top: -20px;
       border-radius: 10px;
       background-image: url("../../img/Main/locate.svg");
       background-position: center;
@@ -89,7 +106,6 @@
           margin-bottom: 10px;
         }
       }
-      
 
       .review-list,
       .shop-list {
@@ -107,7 +123,7 @@
     }
 
     .recent-shops {
-      margin-bottom:5rem;
+      margin-bottom: 5rem;
       h3 {
         margin-left: 13px;
         padding-left: 3px;
@@ -290,9 +306,9 @@
   }
 }
 
-  //후원자 홈 화면
+//후원자 홈 화면
 
-  //내 후원
+//내 후원
 .donation {
   display: flex;
   justify-content: space-between;
@@ -301,7 +317,7 @@
   padding: 20px;
   margin: 10px auto;
   width: 160px;
-  height: auto; 
+  height: auto;
   margin-left: -10px;
 
   .user-info {
@@ -314,7 +330,6 @@
     border: 1px solid #e5e5e5;
     border-radius: 10px;
     margin-right: 20px;
-
 
     .user-details {
       margin-bottom: 10px;
@@ -348,16 +363,15 @@
   }
 
   .highlight-yellow {
-    color: #ffd700; 
+    color: #ffd700;
   }
 }
 
 .profile-img {
-  width: 45px; 
+  width: 45px;
   height: 45px;
-  border-radius: 50%; 
+  border-radius: 50%;
 }
-
 
 //랭크
 .rank-container {
@@ -380,7 +394,7 @@
   padding: 7px 0;
 
   &:last-child {
-    border-bottom: none; 
+    border-bottom: none;
   }
 }
 
@@ -447,16 +461,16 @@
 .reviews-content {
   display: flex;
   margin-bottom: -30px;
-  overflow: hidden; 
-  flex-wrap: nowrap; 
+  overflow: hidden;
+  flex-wrap: nowrap;
 }
 
 .rank-card {
- margin-left: -50px;
- margin-top: -17px;
+  margin-left: -50px;
+  margin-top: -17px;
 }
 
-.donation-card{
+.donation-card {
   margin-top: -25px;
   margin-left: 10px;
   z-index: 100;
@@ -465,100 +479,98 @@
 .reviews {
   overflow: hidden;
 }
-  .donate-page {
-    width: 100%;
-    height: 100dvh;
-  
-    .donate-page-top {
-      padding: 80px 17px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      .donate-price-box {
-        padding: 12px 25px 12px 12px;
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-        border: 1px solid #e2e2e2;
-        border-radius: 10px;
-      }
-      .donate-price-img {
-        flex: 2.5;
-        overflow: hidden;
-        border-radius: 5px;
-      }
-      .donate-price-detail {
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 9px;
-        .yellow {
-          color: #ffb800;
-          font-size: 1.1rem;
-          font-family: "Pretendard-SemiBold";
-        }
-        .date {
-          color: #999999;
-          font-size: 0.8rem;
-          font-family: "Pretendard-Regular";
-        }
-      }
-      .donate-checkbox {
-        flex: 0.5;
-  
-        display: flex;
-        align-items: center;
-        text-align: right;
-        input {
-          margin-left: auto;
-          width: 20px;
-          height: 20px;
-          border-radius: 999px;
-        }
-      }
-    }
+.donate-page {
+  width: 100%;
+  height: 100dvh;
 
-    .donate-btn-area {
-      position: fixed;
-      bottom: 65px;
-      width: 100%;
-      max-width: 390px;
-      background-color: white;
+  .donate-page-top {
+    padding: 80px 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    .donate-price-box {
+      padding: 12px 25px 12px 12px;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      padding: 0.8rem 0.9rem;
-      box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
-      .donate-btn {
-        border-radius: 5px;
-        width: 100%;
-        padding: 14px 0;
-        text-align: center;
-        font-family: "Pretendard-SemiBold";
-        font-size: 1.1rem;
-        background-color: #ffe136;
-      }
+      gap: 12px;
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
     }
-  }
-  
-  
-  .reviews {
-    .section-header {
-      h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
+    .donate-price-img {
+      flex: 2.5;
+      overflow: hidden;
+      border-radius: 5px;
     }
-  
-    .rank-icons {
+    .donate-price-detail {
+      flex: 2;
       display: flex;
-      width: 100%; 
-      margin-top: 10px; 
-  
-      .rank-icon {
-        height: auto;
-        margin-left: 15px;
+      flex-direction: column;
+      gap: 9px;
+      .yellow {
+        color: #ffb800;
+        font-size: 1.1rem;
+        font-family: "Pretendard-SemiBold";
+      }
+      .date {
+        color: #999999;
+        font-size: 0.8rem;
+        font-family: "Pretendard-Regular";
+      }
+    }
+    .donate-checkbox {
+      flex: 0.5;
+
+      display: flex;
+      align-items: center;
+      text-align: right;
+      input {
+        margin-left: auto;
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
       }
     }
   }
-  
+
+  .donate-btn-area {
+    position: fixed;
+    bottom: 65px;
+    width: 100%;
+    max-width: 390px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.8rem 0.9rem;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
+    .donate-btn {
+      border-radius: 5px;
+      width: 100%;
+      padding: 14px 0;
+      text-align: center;
+      font-family: "Pretendard-SemiBold";
+      font-size: 1.1rem;
+      background-color: #ffe136;
+    }
+  }
+}
+
+.reviews {
+  .section-header {
+    h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .rank-icons {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+
+    .rank-icon {
+      height: auto;
+      margin-left: 15px;
+    }
+  }
+}
