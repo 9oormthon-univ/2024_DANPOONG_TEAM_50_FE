@@ -88,7 +88,7 @@ const Order = () => {
           );
           setDonateData(response.data.donations);
         } catch (error) {
-          console.error("Error fetching donations:", error);
+          console.error("에러확인:", error);
         }
       };
 
@@ -99,9 +99,9 @@ const Order = () => {
   }, [token, storeId]);
 
   const toggleLike = async (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     const updatedIsLiked = !isLiked;
-    setIsLiked(updatedIsLiked); 
+    setIsLiked(updatedIsLiked);
 
     try {
       await axios.patch(
@@ -123,7 +123,7 @@ const Order = () => {
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     } catch (error) {
       console.error("Failed to toggle like status:", error);
-      setIsLiked(!updatedIsLiked); 
+      setIsLiked(!updatedIsLiked);
     }
   };
 
@@ -153,8 +153,8 @@ const Order = () => {
             </div>
             <div className="restaurant-title">{storeInfo.name}</div>
             <div className="restaurant-star">
-            <span className="star-icon">★</span> 3.9
-              </div>
+              <span className="star-icon">★</span> 3.9
+            </div>
             <div className="restaurant-place detail-txt">
               <img src={MapIcon} alt="icon" className="icon-img" />
               {storeInfo.address || "주소 정보 없음"}
