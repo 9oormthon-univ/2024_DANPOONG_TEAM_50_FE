@@ -3,10 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AlarmIcon from "../../assets/img/Main/alarm.svg";
 import SearchIcon from "../../assets/img/Main/Search.svg";
-import Ad1Icon from "../../assets/img/Main/ad.svg";
-import Ad2Icon from "../../assets/img/Main/ad2.png";
-import Ad3Icon from "../../assets/img/Main/ad3.png";
-import Ad4Icon from "../../assets/img/Main/ad4.png";
+
+import Ad1Icon from "../../assets/img/Main/ad4.png";
+import Ad2Icon from "../../assets/img/Main/ad3.png";
 import RecentImg from "../../assets/img/Main/recent.svg";
 import RecentImg2 from "../../assets/img/Main/recent2.svg";
 import RecentImg3 from "../../assets/img/Main/recent3.svg";
@@ -197,7 +196,7 @@ const Main2 = () => {
     fetchDonationData();
   }, []);
 
-  const banners = [Ad1Icon, Ad2Icon, Ad3Icon, Ad4Icon];
+  const banners = [Ad1Icon, Ad2Icon];
 
   useInterval(() => {
     setBannerIndex((prevIndex) => (prevIndex + 1) % banners.length);
@@ -265,7 +264,7 @@ const Main2 = () => {
         <div className="divider" />
 
         <section className="recent-shops">
-          <h3>최근 이용한 가게</h3>
+          <h3>최근 후원한 가게</h3>
           <div className="shop-list">
             {dummyRecentShops.map((shop) => (
               <ShopCard
