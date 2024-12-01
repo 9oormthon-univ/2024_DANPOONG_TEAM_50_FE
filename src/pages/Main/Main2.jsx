@@ -15,6 +15,7 @@ import ShopCard from "../../components/Main/ShopCard";
 import LogoIcon from "../../assets/img/Main/logo.svg";
 import Donation from "../../components/Main/Donation";
 import Rank from "../../components/Main/Rank";
+import Statistics from "../../components/Main/statistics";
 
 const dummyRecentShops = [
   {
@@ -97,6 +98,7 @@ const Main2 = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
   const [donationData, setDonationData] = useState(null);
   const [topRankers, setTopRankers] = useState([]);
+  const [accessToken, setAccessToken] = useState(null);
   const navigate = useNavigate();
 
   const fetchLocation = async () => {
@@ -147,8 +149,9 @@ const Main2 = () => {
 
   const fetchDonationData = async () => {
     try {
-      const accessToken = await getAccessToken();
-      if (!accessToken) {
+      const token = await getAccessToken();
+      setAccessToken(token);
+      if (!token) {
         console.error("인증 토큰을 가져올 수 없습니다.");
         return;
       }
@@ -157,7 +160,7 @@ const Main2 = () => {
         "https://api.mymoo.site/api/v1/donations/rankings",
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -203,7 +206,7 @@ const Main2 = () => {
   }, 3000);
 
   return (
-    <div className="content-wrapper">
+    <div className="content-wrapper scroll-hidden-but-scrollable">
       <div className="home-container">
         <header className="header real-header">
           <img src={LogoIcon} alt="로고" className="logo" />
@@ -260,6 +263,10 @@ const Main2 = () => {
             </div>
           </div>
         </section>
+
+        <div className="divider" />
+
+        {accessToken && <Statistics accessToken={accessToken} />}
 
         <div className="divider" />
 
