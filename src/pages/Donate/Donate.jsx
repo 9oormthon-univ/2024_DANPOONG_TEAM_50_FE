@@ -1,15 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
 import DonateBox from "../../components/Order/DonateBox";
 import addDonate from "../../assets/img/Order/add-donate.png";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 const Donate = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedPrice, setSelectedPrice] = useState(null); // 선택된 가격을 추적
   const store = location.state.storeName;
   const storeId = location.state.storeId;
+  const [token, setToken] = useState(0);
+
+  // 스토리지 불러오기
+  useEffect(() => {
+    const storedData = localStorage.getItem("mymoo");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setToken(parsedData["user-token"]);
+      console.log(storeId);
+    }
+  }, [token]);
+
+  const submitDonate = async () => {
+    if (token) {
+      try {
+        await axios.post(
+          `https://api.mymoo.site/api/v1/donations/stores/${storeId}`,
+          {
+            point: 20000,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // 올바른 위치로 이동
+            },
+          }
+        );
+        navigate("/donate/finish", {
+          state: { selectedPrice, store, storeId },
+        });
+      } catch (error) {
+        console.error("에러 확인:", error);
+        if (error.code === "ERR_BAD_REQUEST") {
+          alert("포인트가 부족합니다. 금액을 충전 후 후원해주세요😊");
+        }
+      }
+    } else {
+      alert("토큰 에러");
+    }
+  };
+
   const handleSelect = (price) => {
     setSelectedPrice(price); // 선택된 price 업데이트
     console.log(`후원금액: ${price}`);
@@ -34,14 +75,7 @@ const Donate = () => {
         </div>
       </div>
       <div className="donate-btn-area">
-        <div
-          className="donate-btn"
-          onClick={() =>
-            navigate("/donate/finish", {
-              state: { selectedPrice, store, storeId },
-            })
-          }
-        >
+        <div className="donate-btn" onClick={submitDonate}>
           금액권 후원하기
         </div>
       </div>
