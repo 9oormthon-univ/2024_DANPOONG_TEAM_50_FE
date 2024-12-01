@@ -184,7 +184,7 @@ const Order = () => {
                 className="donate-btn"
                 onClick={() =>
                   navigate("/donate", {
-                    state: { storeName },
+                    state: { storeName, storeId },
                   })
                 }
               >
