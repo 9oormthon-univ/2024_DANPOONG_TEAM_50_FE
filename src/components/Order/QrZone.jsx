@@ -53,7 +53,7 @@ const QrZone = ({ onClose, place, price, donator, dId }) => {
           <div
             className="QR-btn ok-btn"
             onClick={() => {
-              navigate("/finish");
+              navigate("/finish", { state: { dId } });
             }}
           >
             확인

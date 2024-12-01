@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import AlarmIcon from "../../assets/img/Main/alarm.svg"; 
+import AlarmIcon from "../../assets/img/Main/alarm.svg";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "../../assets/img/Main/Search.svg";
-import RightDirectionIcon from "../../assets/img/Main/right direction.svg"; 
+import RightDirectionIcon from "../../assets/img/Main/right direction.svg";
 import Ad1Icon from "../../assets/img/Main/ad.svg";
-import Ad2Icon from "../../assets/img/Main/ad.svg";
-import Ad3Icon from "../../assets/img/Main/ad.svg";
+import Ad2Icon from "../../assets/img/Main/ad2.png";
+import Ad3Icon from "../../assets/img/Main/ad3.png";
+import Ad4Icon from "../../assets/img/Main/ad4.png";
 import profileImg from "../../assets/img/Main/profile.svg";
 import profileImg1 from "../../assets/img/Main/profile1.svg";
 import profileImg2 from "../../assets/img/Main/profile2.svg";
@@ -38,7 +39,8 @@ const dummyReviews = [
     rating: 5,
     userInfo: "91년생 / 남",
     date: "1주 전",
-    description: "밑반찬도 메인메뉴도 맛있어요!여기선 꼭 제육볶음을 먹어보세요!",
+    description:
+      "밑반찬도 메인메뉴도 맛있어요!여기선 꼭 제육볶음을 먹어보세요!",
   },
   {
     id: 3,
@@ -48,7 +50,8 @@ const dummyReviews = [
     rating: 5,
     userInfo: "11년생 / 여",
     date: "5일전",
-    description: "양이 엄청 많아요 ㄷㄷ 계란듬뿍 김밥 진짜 간도 딱 맞고 맛있어요",
+    description:
+      "양이 엄청 많아요 ㄷㄷ 계란듬뿍 김밥 진짜 간도 딱 맞고 맛있어요",
   },
   {
     id: 4,
@@ -58,7 +61,8 @@ const dummyReviews = [
     rating: 5,
     userInfo: "03년생 / 여",
     date: "2주 전",
-    description: "종종 자주 먹고 있는데 항상 서비스를 잘 챙겨주세요 감사합니다!",
+    description:
+      "종종 자주 먹고 있는데 항상 서비스를 잘 챙겨주세요 감사합니다!",
   },
 ];
 
@@ -111,11 +115,12 @@ const useInterval = (callback, delay) => {
 };
 
 const Main = () => {
-  const [currentLocation, setCurrentLocation] = useState("위치 정보를 가져오는 중");
+  const [currentLocation, setCurrentLocation] =
+    useState("위치 정보를 가져오는 중");
   const [bannerIndex, setBannerIndex] = useState(0);
   const navigate = useNavigate();
 
-  const banners = [Ad1Icon, Ad2Icon, Ad3Icon];
+  const banners = [Ad1Icon, Ad2Icon, Ad3Icon, Ad4Icon];
 
   useInterval(() => {
     setBannerIndex((prevIndex) => (prevIndex + 1) % banners.length);
@@ -125,7 +130,7 @@ const Main = () => {
     const fetchLocation = async () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          async position => {
+          async (position) => {
             const { latitude, longitude } = position.coords;
             await new Promise((resolve) => {
               if (window.kakao && window.kakao.maps) {
@@ -164,69 +169,80 @@ const Main = () => {
 
   return (
     <div className="content-wrapper">
-  <div className="home-container">
-    <header className="header real-header">
-      <img src={LogoIcon} alt="로고" className="logo" />
-      <div className="icons">
-        <img
-          src={SearchIcon}
-          alt="검색 아이콘"
-          className="icon"
-          onClick={() => navigate("/search")}
-        />
-        <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
-      </div>
-    </header>
+      <div className="home-container">
+        <header className="header real-header">
+          <img src={LogoIcon} alt="로고" className="logo" />
+          <div className="icons">
+            <img
+              src={SearchIcon}
+              alt="검색 아이콘"
+              className="icon"
+              onClick={() => navigate("/search")}
+            />
+            <img src={AlarmIcon} alt="알림 아이콘" className="icon" />
+          </div>
+        </header>
 
-    <div className="banner-container">
-      <div className="banner">
-        {banners.map((banner, index) => (
-          <img key={index} src={banner} className="banner-image" />
-        ))}
+        <div className="banner-container">
+          <div
+            className="banner-slider"
+            style={{
+              transform: `translateX(-${bannerIndex * 100}%)`,
+              transition: "transform 0.5s ease-in-out",
+            }}
+          >
+            {banners.map((banner, index) => (
+              <img
+                key={index}
+                src={banner}
+                className="banner-image"
+                alt={`배너 ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="location">
+          <span>{currentLocation}</span>
+        </div>
+
+        <section className="reviews">
+          <div className="section-header">
+            <h3>리뷰 모아보기</h3>
+          </div>
+          <div className="review-list">
+            {dummyReviews.map((review) => (
+              <ReviewCard
+                key={review.id}
+                storeName={review.storeName}
+                nickname={review.nickname}
+                profileImg={review.profileImg}
+                rating={review.rating}
+                description={review.description}
+                userInfo={review.userInfo}
+                date={review.date}
+              />
+            ))}
+          </div>
+        </section>
+
+        <div className="divider" />
+
+        <section className="recent-shops">
+          <h3>최근 이용한 가게</h3>
+          <div className="shop-list">
+            {dummyRecentShops.map((shop) => (
+              <ShopCard
+                key={shop.id}
+                imgSrc={shop.img}
+                name={shop.name}
+                rating={shop.rating}
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
-
-    <div className="location">
-      <span>{currentLocation}</span>
-    </div>
-
-    <section className="reviews">
-      <div className="section-header">
-        <h3>리뷰 모아보기</h3>
-      </div>
-      <div className="review-list">
-        {dummyReviews.map((review) => (
-          <ReviewCard
-            key={review.id}
-            storeName={review.storeName}
-            nickname={review.nickname}
-            profileImg={review.profileImg}
-            rating={review.rating}
-            description={review.description}
-            userInfo={review.userInfo}
-            date={review.date}
-          />
-        ))}
-      </div>
-    </section>
-
-    <div className="divider" />
-
-    <section className="recent-shops">
-      <h3>최근 이용한 가게</h3>
-      <div className="shop-list">
-        {dummyRecentShops.map((shop) => (
-          <ShopCard
-            key={shop.id}
-            imgSrc={shop.img}
-            name={shop.name}
-            rating={shop.rating}
-          />
-        ))}
-      </div>
-    </section>
-  </div>
-</div>
   );
 };
 

@@ -3,10 +3,11 @@ import OrderNavbar from "../../components/Nav/OrderNavbar";
 import SuccessImg from "../../assets/img/Order/success.png";
 import RecoBox from "../../components/Order/RecoBox";
 import { useNavigate } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 const OrderFinish = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const dId = location.state.dId;
   return (
     <div className="orderfinish-page">
       <OrderNavbar text={"주문완료"} />
@@ -16,7 +17,10 @@ const OrderFinish = () => {
         </div>
 
         <div className="btn-area">
-          <div className="thanks-btn" onClick={() => navigate("/thanks")}>
+          <div
+            className="thanks-btn"
+            onClick={() => navigate("/thanks", { state: { dId } })}
+          >
             감사 편지 쓰기
           </div>
           <div className="orderlist-btn">주문 내역 보기</div>
@@ -39,7 +43,7 @@ const OrderFinish = () => {
       <div className="orderfinish-bottom">
         <div className="reco-title">미르미님이 좋아할 만한 다른 식당</div>
         <div className="reco-area">
-      <RecoBox
+          <RecoBox
             store={"미도인 강남점"}
             text={"그 유명한 스테이크 웨이팅 덮밥집"}
             img={

@@ -3,9 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AlarmIcon from "../../assets/img/Main/alarm.svg";
 import SearchIcon from "../../assets/img/Main/Search.svg";
-import Ad1Icon from "../../assets/img/Main/ad.svg";
-import Ad2Icon from "../../assets/img/Main/ad.svg";
-import Ad3Icon from "../../assets/img/Main/ad.svg";
+
+import Ad1Icon from "../../assets/img/Main/ad4.png";
+import Ad2Icon from "../../assets/img/Main/ad3.png";
 import RecentImg from "../../assets/img/Main/recent.svg";
 import RecentImg2 from "../../assets/img/Main/recent2.svg";
 import RecentImg3 from "../../assets/img/Main/recent3.svg";
@@ -73,9 +73,12 @@ const getAccessToken = async () => {
 
     if (!accessToken && refreshToken) {
       console.log("Access token expired. Refreshing token...");
-      const response = await axios.post("https://api.mymoo.site/api/v1/auth/refresh", {
-        refreshToken,
-      });
+      const response = await axios.post(
+        "https://api.mymoo.site/api/v1/auth/refresh",
+        {
+          refreshToken,
+        }
+      );
 
       accessToken = response.data.accessToken;
       storedData["user-token"] = accessToken;
@@ -90,11 +93,12 @@ const getAccessToken = async () => {
 };
 
 const Main2 = () => {
-  const [currentLocation, setCurrentLocation] = useState("위치 정보를 가져오는 중...");
+  const [currentLocation, setCurrentLocation] =
+    useState("위치 정보를 가져오는 중...");
   const [bannerIndex, setBannerIndex] = useState(0);
   const [donationData, setDonationData] = useState(null);
   const [topRankers, setTopRankers] = useState([]);
-  const [accessToken, setAccessToken] = useState(null); 
+  const [accessToken, setAccessToken] = useState(null);
   const navigate = useNavigate();
 
   const fetchLocation = async () => {
@@ -107,7 +111,8 @@ const Main2 = () => {
           script.src =
             "https://dapi.kakao.com/v2/maps/sdk.js?appkey=43c54f0fc07ce690e0bdb4a55145d1ab&libraries=services&autoload=false";
           script.async = true;
-          script.onload = () => window.kakao.maps.load(() => resolve(window.kakao.maps));
+          script.onload = () =>
+            window.kakao.maps.load(() => resolve(window.kakao.maps));
           script.onerror = () => reject(new Error("카카오 맵 로드 실패"));
           document.head.appendChild(script);
         }
@@ -124,7 +129,9 @@ const Main2 = () => {
           const geocoder = new kakaoMaps.services.Geocoder();
           geocoder.coord2Address(longitude, latitude, (result, status) => {
             if (status === kakaoMaps.services.Status.OK) {
-              setCurrentLocation(result[0]?.address?.address_name || "주소 정보 없음");
+              setCurrentLocation(
+                result[0]?.address?.address_name || "주소 정보 없음"
+              );
             } else {
               setCurrentLocation("주소 정보를 불러올 수 없습니다.");
             }
@@ -149,11 +156,14 @@ const Main2 = () => {
         return;
       }
 
-      const response = await axios.get("https://api.mymoo.site/api/v1/donations/rankings", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://api.mymoo.site/api/v1/donations/rankings",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const { donatorRanking, rankings } = response.data;
 
@@ -161,7 +171,9 @@ const Main2 = () => {
         name: donatorRanking.donator,
         profileImg: donatorRanking.profileImageUrl,
         donationAmount: `${donatorRanking.totalDonation.toLocaleString()}원`,
-        lastDonationDate: new Date(donatorRanking.lastDonatedAt).toLocaleDateString("ko-KR"),
+        lastDonationDate: new Date(
+          donatorRanking.lastDonatedAt
+        ).toLocaleDateString("ko-KR"),
         rank: donatorRanking.rank,
       });
 
@@ -169,7 +181,9 @@ const Main2 = () => {
         name: donation.donator,
         avatar: donation.profileImageUrl,
         donationAmount: donation.totalDonation,
-        lastDonationDate: new Date(donation.lastDonatedAt).toLocaleDateString("ko-KR"),
+        lastDonationDate: new Date(donation.lastDonatedAt).toLocaleDateString(
+          "ko-KR"
+        ),
         birthYear: "모름",
         gender: "모름",
       }));
@@ -185,7 +199,7 @@ const Main2 = () => {
     fetchDonationData();
   }, []);
 
-  const banners = [Ad1Icon, Ad2Icon, Ad3Icon];
+  const banners = [Ad1Icon, Ad2Icon];
 
   useInterval(() => {
     setBannerIndex((prevIndex) => (prevIndex + 1) % banners.length);
@@ -208,13 +222,19 @@ const Main2 = () => {
         </header>
 
         <div className="banner-container">
-          <div className="banner">
+          <div
+            className="banner-slider"
+            style={{
+              transform: `translateX(-${bannerIndex * 100}%)`,
+              transition: "transform 0.5s ease-in-out",
+            }}
+          >
             {banners.map((banner, index) => (
               <img
                 key={index}
                 src={banner}
+                className="banner-image"
                 alt={`배너 ${index + 1}`}
-                className={`banner-image ${index === bannerIndex ? "active" : ""}`}
               />
             ))}
           </div>
@@ -228,7 +248,11 @@ const Main2 = () => {
           </div>
           <div className="reviews-content">
             <div className="donation-card">
-              {donationData ? <Donation user={donationData} /> : <p>로딩 중...</p>}
+              {donationData ? (
+                <Donation user={donationData} />
+              ) : (
+                <p>로딩 중...</p>
+              )}
             </div>
             <div className="rank-card">
               {topRankers.length > 0 ? (
