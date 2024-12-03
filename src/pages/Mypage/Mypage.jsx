@@ -75,121 +75,119 @@ const MyPage = () => {
 
   return (
     <div>
-    <div className="mypage-page">
-      <header className="mypage-header">
-        <h1>My</h1>
-        <div className="header-icons">
-          <img className="searchImg" src={searchImg} alt="검색" />
-          <img className="alarmImg" src={alarmImg} alt="알림" />
-        </div>
-      </header>
-
-      <section className="profile-section">
-        <img
-          src={user.userRole === "CHILD" ? childProfile : adultProfile}
-          alt="프로필"
-          className="profile-image"
-        />
-        <div className="profile-info">
-          <div className="profile-info2">
-            <h2>
-              {user.nickname}
-              <span className="badge">
-                {user.userRole === "CHILD" ? "아동회원" : "일반회원"}
-              </span>
-            </h2>
+      <div className="mypage-page">
+        <header className="mypage-header">
+          <h1>My</h1>
+          <div className="header-icons">
+            <img className="searchImg" src={searchImg} alt="검색" />
+            <img className="alarmImg" src={alarmImg} alt="알림" />
           </div>
-          <p>{user.email}</p>
-        </div>
-      </section>
+        </header>
 
-      <section className="stats-section">
-        {user.userRole === "CHILD" ? (
-          <>
-            <div className="stat">
-              <p>잔액</p>
-              <img src={balanceImg} alt="잔액" />
-              <p>12,000원</p>
+        <section className="profile-section">
+          <img
+            src={user.userRole === "CHILD" ? childProfile : adultProfile}
+            alt="프로필"
+            className="profile-image"
+          />
+          <div className="profile-info">
+            <div className="profile-info2">
+              <h2>
+                {user.nickname}
+                <span className="badge">
+                  {user.userRole === "CHILD" ? "아동회원" : "일반회원"}
+                </span>
+              </h2>
             </div>
-            <div className="stat">
-              <p>포인트</p>
-              <img src={pointImg} alt="포인트" />
-              <p>{user.point}p</p>
-            </div>
-            <div className="stat">
-              <p>쿠폰</p>
-              <img src={couponImg} alt="쿠폰" />
-              <p>1장</p>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="stat">
-              <p>잔액</p>
-              <img src={balance2Img} alt="잔액" />
-              <p>12,000원</p>
-            </div>
-            <div className="stat">
-              <p>포인트</p>
-              <img src={point2Img} alt="포인트" />
-              <p>{user.point}p</p>
-            </div>
-            <div className="stat">
-              <p>쿠폰</p>
-              <img src={coupon2Img} alt="쿠폰" />
-              <p>1장</p>
-            </div>
-          </>
-        )}
-        {user.userRole === "CHILD" && (
-          <div className="stat">
-            <p>리뷰</p>
-            <img src={reviewcolorImg} alt="리뷰" />
-            <p>2개</p>
+            <p>{user.email}</p>
           </div>
-        )}
-      </section>
+        </section>
 
-      <section className="menu-section">
-        <h3>활동 관리</h3>
-        <ul>
+        <section className="stats-section">
           {user.userRole === "CHILD" ? (
             <>
-              <li>
-                <img src={donateImg} alt="후원 내역" />
-                <span>금액권 사용 내역</span>
-                <img className="donatego" src={goImg} alt="이동" />
-              </li>
-              <li>
-                <img src={reviewImg} alt="리뷰 관리" />
-                <span>리뷰 관리</span>
-                <img src={goImg} alt="이동" />
-              </li>
-              <li>
-                <img src={cardImg} alt="카드 관리" />
-                <span>카드 관리</span>
-                <img src={goImg} alt="이동" />
-              </li>
+              <div className="stat">
+                <p>잔액</p>
+                <img src={balanceImg} alt="잔액" />
+                <p>12,000원</p>
+              </div>
+              <div className="stat">
+                <p>포인트</p>
+                <img src={pointImg} alt="포인트" />
+                <p>{user.point}p</p>
+              </div>
+              <div className="stat">
+                <p>쿠폰</p>
+                <img src={couponImg} alt="쿠폰" />
+                <p>1장</p>
+              </div>
             </>
           ) : (
             <>
-              <li onClick={goDonateList}>
-                <img src={donateImg} alt="후원 내역" />
-                <span>후원 내역</span>
-                <img className="donatego" src={goImg} alt="이동" />
-              </li>
-              <li>
-                <img src={chargeImg} alt="충전하기" />
-                <span>충전하기</span>
-                <img src={goImg} alt="이동" />
-              </li>
+              <div className="stat">
+                <p>잔액</p>
+                <img src={balance2Img} alt="잔액" />
+                <p>12,000원</p>
+              </div>
+              <div className="stat">
+                <p>포인트</p>
+                <img src={point2Img} alt="포인트" />
+                <p>{user.point}p</p>
+              </div>
+              <div className="stat">
+                <p>쿠폰</p>
+                <img src={coupon2Img} alt="쿠폰" />
+                <p>1장</p>
+              </div>
             </>
           )}
-        </ul>
-      </section>
+          {user.userRole === "CHILD" && (
+            <div className="stat">
+              <p>리뷰</p>
+              <img src={reviewcolorImg} alt="리뷰" />
+              <p>2개</p>
+            </div>
+          )}
+        </section>
 
-      
-    </div>
+        <section className="menu-section">
+          <h3>활동 관리</h3>
+          <ul>
+            {user.userRole === "CHILD" ? (
+              <>
+                <li>
+                  <img src={donateImg} alt="후원 내역" />
+                  <span>금액권 사용 내역</span>
+                  <img className="donatego" src={goImg} alt="이동" />
+                </li>
+                <li>
+                  <img src={reviewImg} alt="리뷰 관리" />
+                  <span>리뷰 관리</span>
+                  <img src={goImg} alt="이동" />
+                </li>
+                <li>
+                  <img src={cardImg} alt="카드 관리" />
+                  <span>카드 관리</span>
+                  <img src={goImg} alt="이동" />
+                </li>
+              </>
+            ) : (
+              <>
+                <li onClick={goDonateList}>
+                  <img src={donateImg} alt="후원 내역" />
+                  <span>후원 내역</span>
+                  <img className="donatego" src={goImg} alt="이동" />
+                </li>
+                <li onClick={() => navigate("/my/charge")}>
+                  <img src={chargeImg} alt="충전하기" />
+                  <span>충전하기</span>
+                  <img src={goImg} alt="이동" />
+                </li>
+              </>
+            )}
+          </ul>
+        </section>
+      </div>
       <section className="menu-section menu-selection-2">
         <h3>문의 및 알림</h3>
         <ul>
