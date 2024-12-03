@@ -784,6 +784,7 @@
 }
 
 .bar {
+  width: 0%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -792,5 +793,5 @@
   color: #fff;
   font-weight: bold;
   font-size: 12px;
-  transition: width 0.3s ease;
+  transition: width 1s ease-in-out;
 }
