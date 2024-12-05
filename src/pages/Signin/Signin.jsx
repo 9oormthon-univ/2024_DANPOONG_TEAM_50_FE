@@ -9,6 +9,7 @@ import NaverLogoImage from "../../assets/img/Signin/naver.png";
 import KakaoLogoImage from "../../assets/img/Signin/kakao.png";
 import GoogleLogoImage from "../../assets/img/Signin/google.png";
 import FacebookLogoImage from "../../assets/img/Signin/facebook.png";
+import errorImg from "../../assets/img/Signin/error.png";
 import { SigninAPI } from "../../apis/user.jsx";
 import { userTokenState } from "../../stores/user.jsx";
 
@@ -17,11 +18,13 @@ const Signin = () => {
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const setUserToken = useSetRecoilState(userTokenState);
-  const [url, setUrl] = useState("");
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
+
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChangeEmail = (e) => {
     const emailRegex =
@@ -55,6 +58,16 @@ const Signin = () => {
   //window.location.href = kakaoURL;
   //};
 
+  const handleOnKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleOnClick(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
+  const handleOnClick = () => {
+    handleStartBtnClick();
+  };
+
   const handleStartBtnClick = async () => {
     console.log("로그인 버튼 클릭");
     try {
@@ -84,28 +97,47 @@ const Signin = () => {
           navigate("/Shop");
         } else {
           alert("권한이 없는 사용자입니다.");
+          setShowModal(true);
         }
       } else {
-        console.log("로그인 실패: 서버 응답에서 성공 상태를 찾을 수 없습니다.");
+        setErrorMessage("로그인 중 문제가 발생했습니다.");
+        setShowModal(true);
       }
     } catch (error) {
       if (error.response) {
-        const { code } = error.response.data;
-        console.log("에러 코드:", code);
-        if (code === "WRONG_PASSWORD") {
-          alert("비밀번호가 틀렸습니다.");
-        } else if (code === "NOT_FOUND_EMAIL") {
-          alert("존재하지 않는 이메일입니다.");
+        const errorData = error.response.data;
+        const statusCode = error.response.status;
+    
+        console.log("서버 응답 상태 코드:", statusCode);
+        console.log("서버 에러 응답 데이터:", errorData);
+    
+        // 응답 데이터에서 특정 메시지나 오류 코드를 기준으로 처리
+        if (errorData && errorData.error === "EMAIL_NOT_FOUND") {
+          setErrorMessage("이메일이 존재하지 않습니다. 다시 확인해주세요.");
+          setShowModal(true);
+        } else if (errorData && errorData.error === "PASSWORD_INCORRECT") {
+          setErrorMessage("비밀번호가 틀렸습니다. 다시 확인해주세요.");
+          setShowModal(true);
+        } else {
+          setErrorMessage("로그인 중 문제가 발생했습니다.");
+          setShowModal(true);
         }
       } else {
-        console.error("로그인 실패:", error.message);
+        setErrorMessage("네트워크 오류가 발생했습니다.");
+        setShowModal(true);
       }
     }
-  };
+    };
+
+    const handleModalClose = () => {
+      setShowModal(false);
+      setErrorMessage("");
+    };
 
   const handleSignupClick = () => {
     navigate("/signup"); // 회원가입 페이지로 이동
   };
+
   const handleKakaoLogin = () => {
     fetch(`https://api.mymoo.site/api/v1/oauth/kakao`, {
       method: "GET",
@@ -129,6 +161,18 @@ const Signin = () => {
 
   return (
     <div className={"signin-page"}>
+      
+      {showModal && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <img src={errorImg} alt="error" width={56} height={56} />
+              <h2>로그인 오류</h2>
+              <p>{errorMessage}</p>
+              <button onClick={handleModalClose}>다시 입력하기</button>
+            </div>
+          </div>
+        )}
+
       <div className={"LogoSection"}>
         <img className={"logo"} src={logo} alt="" />
       </div>
@@ -150,6 +194,7 @@ const Signin = () => {
           placeholder="비밀번호"
           name="password"
           value={loginInfo.password}
+          onKeyDown={handleOnKeyDown}
         />
 
         <button
