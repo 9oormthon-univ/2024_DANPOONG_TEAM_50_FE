@@ -22,7 +22,7 @@ const ShopFinish = () => {
   // 가게 정보
   const fetchScan = () => {
     if (token !== 0) {
-      fetch(`https://api.mymoo.site/api/v1/donation-usages`, {
+      fetch(`https://api.mymoo.site/api/v1/donation-usages/`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -79,7 +79,7 @@ const ShopFinish = () => {
       <div className="orderfinish-bottom">
         <div className="reco-title">미르미님이 좋아할 만한 다른 식당</div>
         <div className="reco-area">
-       <RecoBox
+          <RecoBox
             store={"미도인 강남점"}
             text={"그 유명한 스테이크 웨이팅 덮밥집"}
             img={
