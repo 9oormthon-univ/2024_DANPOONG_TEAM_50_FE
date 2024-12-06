@@ -8,7 +8,9 @@ const Rank = ({ topRankers }) => {
           <li
             key={index}
             className="rank-item"
-            style={{ animationDelay: `${index * 0.3}s` }}
+            style={{
+              animationDelay: `${index * 0.8}s`,
+            }}
           >
             <div className="rank-left">
               <span className="rank-number">{index + 1}</span>
