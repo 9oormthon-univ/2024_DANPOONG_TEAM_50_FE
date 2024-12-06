@@ -15,7 +15,8 @@ const DonateCharge = () => {
     let value = e.target.value.replace(/,/g, ""); // 기존 콤마 제거
     if (!isNaN(value)) {
       // 숫자만 입력되도록
-      setRealAmount(value);
+      const numericValue = parseInt(value, 10); // 숫자 변환
+      setRealAmount(numericValue); // 숫자 값 저장
       setAmount(Number(value).toLocaleString()); // 숫자 포맷팅
     }
   };
