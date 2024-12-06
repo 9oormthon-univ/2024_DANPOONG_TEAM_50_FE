@@ -6,7 +6,7 @@ const baseURL = 'https://api.mymoo.site';
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
   baseURL,
-  timeout: 1000 * 60 * 5, // 요청 타임아웃 설정 (5분)
+  timeout: 1000 * 60 * 300, // 요청 타임아웃 설정 (300분)
 });
 
 // 요청 인터셉터 설정
