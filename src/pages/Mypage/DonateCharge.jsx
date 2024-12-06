@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OrderNavbar from "../../components/Nav/OrderNavbar";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { getUserInfoAPI } from "../../apis/user.jsx";
 const DonateCharge = () => {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState("");
-
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(); // 사용자 정보 상태 관리
+  const [chargeData, setChargeData] = useState(null);
   // 입력값 포맷팅
   const handleInputChange = (e) => {
     let value = e.target.value.replace(/,/g, ""); // 기존 콤마 제거
@@ -21,8 +26,73 @@ const DonateCharge = () => {
       return;
     }
     alert(`충전 금액: ${numericAmount}원`);
+    goCharge();
   };
+  const fetchUserInfo = async () => {
+    try {
+      const responseData = await getUserInfoAPI(); // 사용자 정보 API 호출
+      setUser({
+        accountId: responseData.accountId,
+        email: responseData.email,
+        phone_number: responseData.phone_number,
+        nickname: responseData.nickname,
+        point: responseData.point,
+        profileImageUrl: responseData.profileImageUrl,
+        userRole: responseData.role,
+      });
+    } catch (error) {
+      console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+    }
+  };
+  // 카카오페이 로직
+  useEffect(() => {
+    // Recoil 상태에 토큰이 없는 경우 로컬 스토리지에서 가져옴
+    if (!token) {
+      const storedData = localStorage.getItem("mymoo");
+      if (storedData) {
+        const { "user-token": storedToken } = JSON.parse(storedData);
+        if (storedToken) {
+          setToken(storedToken); // Recoil 상태에 토큰 저장
+        } else {
+          console.error("로컬 스토리지에 JWT 토큰이 없습니다.");
+        }
+      } else {
+        console.error("로컬 스토리지에 데이터가 없습니다.");
+      }
+    } else {
+      // 토큰이 존재하면 사용자 정보 가져오기
+      fetchUserInfo();
+    }
+  }, [token, setToken]);
 
+  const goCharge = async () => {
+    if (token) {
+      try {
+        const response = await axios.post(
+          "https://api.mymoo.site/api/v1/payment/ready",
+          {
+            name: user.nickname,
+            totalPrice: 2000,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setChargeData(response.data);
+      } catch (error) {
+        console.error("로그아웃 중 오류 발생:", error);
+      }
+    }
+  };
+  useEffect(() => {
+    console.log("ddd", chargeData);
+    if (chargeData) {
+      localStorage.setItem("tId", chargeData.tId);
+      window.location.href = chargeData.next_redirect_pc_url;
+    }
+  }, [chargeData]);
   return (
     <div className="donatecharge-page">
       <OrderNavbar text="충전하기" />
