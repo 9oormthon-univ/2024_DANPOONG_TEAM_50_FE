@@ -24,7 +24,7 @@ import balance2Img from "../../assets/img/Mypage/balance2.png";
 import point2Img from "../../assets/img/Mypage/point2.png";
 import coupon2Img from "../../assets/img/Mypage/coupon2.png";
 import chargeImg from "../../assets/img/Mypage/charge.png";
-
+import axios from "axios";
 const MyPage = () => {
   const [token, setToken] = useRecoilState(userTokenState);
   console.log("JWT 토큰:", token); // Recoil 상태에서 가져온 JWT 토큰 출력
@@ -45,7 +45,7 @@ const MyPage = () => {
         nickname: responseData.nickname,
         point: responseData.point,
         profileImageUrl: responseData.profileImageUrl,
-        userRole: responseData.userRole,
+        userRole: responseData.role,
       });
     } catch (error) {
       console.error("사용자 정보를 가져오는 중 오류 발생:", error);
@@ -72,6 +72,24 @@ const MyPage = () => {
       fetchUserInfo();
     }
   }, [token, setToken]);
+
+  const logout = async () => {
+    if (token) {
+      try {
+        await axios.get(`https://api.mymoo.site/api/v1/auth/logout`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        console.error("Error fetching store info:", error);
+      }
+    }
+  };
+  const goOut = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <div>
@@ -167,7 +185,7 @@ const MyPage = () => {
                 </li>
                 <li>
                   <img src={cardImg} alt="카드 관리" />
-                  <span>카드 관리</span>
+                  <span>아동 카드 관리</span>
                   <img src={goImg} alt="이동" />
                 </li>
               </>
@@ -215,6 +233,12 @@ const MyPage = () => {
             <img src={settingImg} alt="환경 설정" />
             <span>환경 설정</span>
             <img src={goImg} alt="이동" />
+          </li>
+          <li
+            onClick={goOut}
+            style={{ textAlign: "center", marginLeft: "-0.5rem" }}
+          >
+            <span>로그아웃</span>
           </li>
         </ul>
       </section>
