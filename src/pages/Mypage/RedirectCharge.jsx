@@ -48,6 +48,10 @@ const RedirectCharge = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Received data:", data);
+        const name = data.account_name;
+        const date = data.approved_at;
+        const price = data.total;
+        navigate("/", { state: { price, date, name } });
       }
     } catch (error) {
       console.error("Login request error:", error);
