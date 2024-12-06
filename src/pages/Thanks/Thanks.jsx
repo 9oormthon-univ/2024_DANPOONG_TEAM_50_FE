@@ -27,7 +27,7 @@ const Thanks = () => {
     if (token) {
       try {
         await axios.patch(
-          `https://api.mymoo.site/api/v1/donation-usages`,
+          `https://api.mymoo.site/api/v1/donation-usages/`,
           {
             donationId: location.state.dId,
             message: message, // 전송할 데이터
