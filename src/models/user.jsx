@@ -15,7 +15,7 @@ export class SigninResponse{
 }
 
 export class UserInfoResponse {
-  constructor(accountId, email, phone_number, nickname, point, profileImageUrl, userRole) {
+  constructor(accountId, email, phone_number, nickname, point, profileImageUrl, userRole,province,sigun,gu) {
     this.accountId = accountId;
     this.email = email;
     this.phone_number = phone_number;
@@ -23,5 +23,8 @@ export class UserInfoResponse {
     this.point = point;
     this.profileImageUrl = profileImageUrl;
     this.userRole = userRole;
+    this.province = province;
+    this.sigun = sigun;
+    this.gu = gu;
   }
 }

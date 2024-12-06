@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; // useLocation 추가
 import back from "../../assets/img/Signup/back.png";
 import { SignupAPI } from "../../apis/user.jsx"; // Signup API 가져오기
@@ -15,7 +15,10 @@ const Signupadult = () => {
 
   const navigate = useNavigate();
   const location = useLocation(); // useLocation 사용
-  const userRole = location.state?.userRole || "DONATOR"; // userRole 가져오기, 기본값 설정
+  const userRole = location.state?.userRole || "DONATOR"; // userRole 가져오기
+  const [province, setProvince] = useState("");
+  const [sigun, setSigun] = useState("");
+  const [gu, setGu] = useState("");
 
   const onChangeNickName = (e) => {
     setNickName(e.target.value);
@@ -57,7 +60,7 @@ const Signupadult = () => {
 
   // 회원가입 요청
   const onApply = async () => {
-    if (email && password && nickname && phonenumber) {
+    if (email && password && nickname && phonenumber && province && sigun && gu) {
       const userInfo = {
         email,
         password,
@@ -65,10 +68,10 @@ const Signupadult = () => {
         phoneNumber: phonenumber,
         userRole: "DONATOR", // 서버 요구사항에 맞춤
         cardNumber: "0000000000000000", // 일반회원은 0으로 채운 16자리
+        Do: province,
+        sigun,
+        gu
       };
-      
-      console.log("회원가입 요청 데이터:", userInfo); // 요청 데이터 확인
-
       try {
         // 회원가입 API 호출
         const response = await SignupAPI(userInfo);
@@ -79,11 +82,22 @@ const Signupadult = () => {
           navigate("/");
         }
       } catch (error) {
-        console.error("회원가입 요청 실패:", error.response?.data || error.message);
-        alert("회원가입 중 오류가 발생했습니다.");
+        if (error.response) {
+          // 서버에서 응답을 반환한 경우
+          console.error("응답 에러:", error.response.data);
+          alert(`회원가입 실패: ${error.response.data.message}`);
+        } else if (error.request) {
+          // 요청이 전송되었으나 응답을 받지 못한 경우
+          console.error("요청 에러:", error.request);
+          alert("서버 응답이 없습니다. 서버 상태를 확인하세요.");
+        } else {
+          // 기타 에러
+          console.error("에러 메시지:", error.message);
+          alert("요청 중 문제가 발생했습니다.");
+        }
       }
     } else {
-      alert("입력값을 확인해주세요.");
+      alert("모든 필드를 입력하세요.");
     }
   };
 
@@ -197,22 +211,55 @@ const Signupadult = () => {
               placeholder="01000000000"
             />
           </label>
-          {nickname &&
-          birthdate &&
-          email &&
-          password &&
-          confirmPassword &&
-          phonenumber ? (
-            <button className="sucbutton" type="button" onClick={onApply}>
-              회원가입
-            </button>
-          ) : (
-            <button className="button" type="button">회원가입</button>
-          )}
-        </form>
+          <div>
+          <label className="label">
+          <div className="label2">
+          <span>사는지역</span>
+          <span className="required">*</span>
+          </div>
+          <input
+              className="input-box2"
+              type="text"
+              value={province}
+              onChange={(e) => setProvince(e.target.value)}
+              placeholder="도/시"
+            />
+            <input
+              className="input-box2"
+              type="text"
+              value={sigun}
+              onChange={(e) => setSigun(e.target.value)}
+              placeholder="군/시/구"
+            />
+            <input
+              className="input-box2"
+              type="text"
+              value={gu}
+              onChange={(e) => setGu(e.target.value)}
+              placeholder="읍/면/동"
+            />
+            </label>
+          </div>
+            {nickname &&
+            birthdate &&
+            email &&
+            password &&
+            confirmPassword &&
+            phonenumber &&
+            province && 
+            sigun &&
+            gu
+             ? (
+              <button className="sucbutton" type="button" onClick={onApply}>
+                회원가입
+              </button>
+            ) : (
+              <button className="button" type="button">회원가입</button>
+            )}
+          </form>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default Signupadult;
