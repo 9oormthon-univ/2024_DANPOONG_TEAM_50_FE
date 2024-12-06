@@ -28,6 +28,8 @@ import { useNavigate } from "react-router-dom";
 import Heart from "./pages/Heart/Heart";
 import DonateCharge from "./pages/Mypage/DonateCharge";
 import RedirectCharge from "./pages/Mypage/RedirectCharge";
+import DonateChargeFinish from "./pages/Mypage/DonateChargeFinish";
+
 const AppContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -85,6 +87,7 @@ const AppContent = () => {
           <Route path="/heart" element={<Heart />} />
           <Route path="/my/charge" element={<DonateCharge />} />
           <Route path="/my/charge/redirect" element={<RedirectCharge />} />
+          <Route path="/my/charge/finish" element={<DonateChargeFinish />} />
         </Routes>
         {location.pathname !== "/" && <NavBar />}
       </div>
