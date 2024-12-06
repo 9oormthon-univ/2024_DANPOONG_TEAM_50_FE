@@ -6,14 +6,16 @@ const RedirectCharge = () => {
   const location = useLocation();
   const pgToken = location.state?.pgToken;
   const tid = localStorage.getItem("tId");
+  console.log(pgToken, tid);
   useEffect(() => {
     if (pgToken && tid) {
       console.log(pgToken, tid);
       approveCharge();
     }
-  }, []);
+  }, [pgToken, tid]);
 
   const approveCharge = async () => {
+    console.log("일단 들어옴");
     try {
       const response = await fetch(
         `https://api.mymoo.site/api/v1/payment/approve?pgToken=${pgToken}&tid=${tid}`,
