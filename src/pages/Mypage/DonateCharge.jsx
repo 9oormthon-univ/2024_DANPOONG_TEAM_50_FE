@@ -89,9 +89,12 @@ const DonateCharge = () => {
   };
   useEffect(() => {
     console.log("ddd", chargeData);
-    if (chargeData) {
-      localStorage.setItem("tId", chargeData.tId);
+    if (chargeData !== null && chargeData.tid) {
+      localStorage.setItem("tid", chargeData.tid);
+      console.log(chargeData.tid, "dd");
       window.location.href = chargeData.next_redirect_pc_url;
+    } else {
+      console.log("chargeData is not ready", chargeData);
     }
   }, [chargeData]);
   return (
