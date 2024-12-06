@@ -51,7 +51,7 @@ const RedirectCharge = () => {
         const name = data.account_name;
         const date = data.approved_at;
         const price = data.total;
-        navigate("/", { state: { price, date, name } });
+        navigate("/my/charge/finish", { state: { price, date, name } });
       }
     } catch (error) {
       console.error("Login request error:", error);
