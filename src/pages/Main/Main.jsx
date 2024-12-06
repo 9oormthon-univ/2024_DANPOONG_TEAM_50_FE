@@ -64,6 +64,39 @@ const dummyReviews = [
     description:
       "종종 자주 먹고 있는데 항상 서비스를 잘 챙겨주세요 감사합니다!",
   },
+  {
+    id: 5,
+    storeName: "한끼식당 용산",
+    nickname: "규성",
+    profileImg: profileImg2,
+    rating: 5,
+    userInfo: "91년생 / 남",
+    date: "1주 전",
+    description:
+      "밑반찬도 메인메뉴도 맛있어요!여기선 꼭 제육볶음을 먹어보세요!",
+  },
+  {
+    id: 6,
+    storeName: "신의한국수 이수점",
+    nickname: "도도희",
+    profileImg: profileImg2,
+    rating: 5,
+    userInfo: "11년생 / 여",
+    date: "5일전",
+    description:
+      "양이 엄청 많아요 ㄷㄷ 계란듬뿍 김밥 진짜 간도 딱 맞고 맛있어요",
+  },
+  {
+    id: 7,
+    storeName: "아차산떡볶이 사당점",
+    nickname: "개굴이",
+    profileImg: profileImg1,
+    rating: 5,
+    userInfo: "03년생 / 여",
+    date: "2주 전",
+    description:
+      "종종 자주 먹고 있는데 항상 서비스를 잘 챙겨주세요 감사합니다!",
+  },
 ];
 
 const dummyRecentShops = [
@@ -117,6 +150,10 @@ const useInterval = (callback, delay) => {
 const Main = () => {
   const [currentLocation, setCurrentLocation] =
     useState("위치 정보를 가져오는 중");
+  const [reviewIndex, setReviewIndex] = useState(0);
+  useInterval(() => {
+    setReviewIndex((prevIndex) => (prevIndex + 1) % dummyReviews.length);
+  }, 2000); // Adjust time as needed
   const [bannerIndex, setBannerIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -210,7 +247,15 @@ const Main = () => {
           <div className="section-header">
             <h3>리뷰 모아보기</h3>
           </div>
-          <div className="review-list">
+          <div
+            className="review-list"
+            style={{
+              transform: `translateX(-${reviewIndex * 3}%)`,
+              transition: "transform 0.5s ease-in-out",
+              display: "flex",
+              width: `${dummyReviews.length * 100}%`, // Ensures smooth sliding
+            }}
+          >
             {dummyReviews.map((review) => (
               <ReviewCard
                 key={review.id}
