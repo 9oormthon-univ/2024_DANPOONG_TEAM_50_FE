@@ -24,11 +24,7 @@ import balance2Img from "../../assets/img/Mypage/balance2.png";
 import point2Img from "../../assets/img/Mypage/point2.png";
 import coupon2Img from "../../assets/img/Mypage/coupon2.png";
 import chargeImg from "../../assets/img/Mypage/charge.png";
-<<<<<<< HEAD
-=======
 import charge2Img from "../../assets/img/Mypage/charge2.png";
-
->>>>>>> origin/main
 import axios from "axios";
 const MyPage = () => {
   const [token, setToken] = useState(null);
@@ -85,7 +81,6 @@ const MyPage = () => {
   const logout = async () => {
     if (token) {
       try {
-<<<<<<< HEAD
         await axios.post(
           "https://api.mymoo.site/api/v1/auth/logout",
           {},
@@ -101,18 +96,6 @@ const MyPage = () => {
     }
   };
 
-=======
-        await axios.get(`https://api.mymoo.site/api/v1/auth/logout`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      } catch (error) {
-        console.error("Error fetching store info:", error);
-      }
-    }
-  };
->>>>>>> origin/main
   const goOut = async () => {
     await logout();
     navigate("/");
@@ -218,7 +201,7 @@ const MyPage = () => {
               </>
             ) : (
               <>
-              <li onClick={() => navigate("/my/charge")}>
+                <li onClick={() => navigate("/my/charge")}>
                   <img src={chargeImg} alt="충전하기" />
                   <span>충전하기</span>
                   <img src={goImg} alt="이동" />
