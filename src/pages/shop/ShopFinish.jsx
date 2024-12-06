@@ -36,6 +36,9 @@ const ShopFinish = () => {
       })
         .then((response) => {
           console.log("Response status:", response.status);
+          if (response.status === 400) {
+            alert("후원권은 하루에 2번까지만 사용 가능합니다.");
+          }
         })
         .then((data) => {
           console.log("Fetched data:", data);
