@@ -6,6 +6,7 @@ import { getUserInfoAPI } from "../../apis/user.jsx";
 const DonateCharge = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState("");
+  const [realAmount, setRealAmount] = useState(0);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(); // 사용자 정보 상태 관리
   const [chargeData, setChargeData] = useState(null);
@@ -14,6 +15,7 @@ const DonateCharge = () => {
     let value = e.target.value.replace(/,/g, ""); // 기존 콤마 제거
     if (!isNaN(value)) {
       // 숫자만 입력되도록
+      setRealAmount(value);
       setAmount(Number(value).toLocaleString()); // 숫자 포맷팅
     }
   };
@@ -73,7 +75,7 @@ const DonateCharge = () => {
           "https://api.mymoo.site/api/v1/payment/ready",
           {
             name: user.nickname,
-            totalPrice: amount,
+            totalPrice: realAmount,
           },
           {
             headers: {
