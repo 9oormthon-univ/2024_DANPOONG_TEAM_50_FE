@@ -73,7 +73,7 @@ const DonateCharge = () => {
           "https://api.mymoo.site/api/v1/payment/ready",
           {
             name: user.nickname,
-            totalPrice: 2000,
+            totalPrice: amount,
           },
           {
             headers: {
