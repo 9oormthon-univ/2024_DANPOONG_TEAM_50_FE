@@ -22,13 +22,11 @@ const Rank = ({ topRankers }) => {
                   {ranker.name}
                   <span className="rank-gender"> </span>
                 </p>
-                <p className="rank-date">
-                  최근 후원 날짜 {ranker.lastDonationDate}
-                </p>
+                <p className="rank-date">최근 후원 {ranker.lastDonationDate}</p>
               </div>
             </div>
             <div className="rank-right">
-              <p className="rank-amount">누적 후원금액</p>
+              <p className="rank-amount">후원금액</p>
               <p className="rank-total">
                 {Number(ranker.donationAmount || 0).toLocaleString()}원
               </p>
