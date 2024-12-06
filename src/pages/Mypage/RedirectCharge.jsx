@@ -5,8 +5,9 @@ const RedirectCharge = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const pgToken = location.state?.pgToken;
-  const tid = localStorage.getItem("tId");
+  const tid = localStorage.getItem("tid");
   console.log(pgToken, tid);
+
   useEffect(() => {
     if (pgToken && tid) {
       console.log(pgToken, tid);
