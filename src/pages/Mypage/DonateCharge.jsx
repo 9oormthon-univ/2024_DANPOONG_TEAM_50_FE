@@ -26,6 +26,7 @@ const DonateCharge = () => {
       return;
     }
     alert(`충전 금액: ${numericAmount}원`);
+    console.log(token, "dma?");
     goCharge();
   };
   const fetchUserInfo = async () => {
