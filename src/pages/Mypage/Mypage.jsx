@@ -45,7 +45,7 @@ const MyPage = () => {
         nickname: responseData.nickname,
         point: responseData.point,
         profileImageUrl: responseData.profileImageUrl,
-        userRole: responseData.userRole,
+        userRole: responseData.role,
       });
     } catch (error) {
       console.error("사용자 정보를 가져오는 중 오류 발생:", error);
@@ -169,7 +169,7 @@ const MyPage = () => {
                 </li>
                 <li>
                   <img src={cardImg} alt="카드 관리" />
-                  <span>카드 관리</span>
+                  <span>아동 카드 관리</span>
                   <img src={goImg} alt="이동" />
                 </li>
               </>
