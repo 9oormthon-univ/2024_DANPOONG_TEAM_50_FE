@@ -4,7 +4,7 @@
   overflow-x: hidden;
 
   .back-icon {
-cursor: pointer;
+    cursor: pointer;
     height: 19px;
     left: 10px;
     position: absolute;
@@ -115,10 +115,10 @@ cursor: pointer;
     }
 
     .time-icon {
-      display: block; 
-      width: 360px; 
-      height: 180px; 
-      margin-left:-4px;
+      display: block;
+      width: 360px;
+      height: 180px;
+      margin-left: -4px;
     }
   }
 
@@ -241,24 +241,9 @@ cursor: pointer;
           gap: 8px;
 
           .title {
-            font-size: 13px;
+            font-size: 13.7px;
             font-weight: bold;
             color: #333;
-          }
-
-          .rating-row {
-            display: flex;
-            align-items: center;
-
-            .star-icon {
-              width: 12px;
-              height: 12px;
-              margin-right: 4px;
-            }
-
-            .rating {
-              font-size: 11px;
-            }
           }
         }
 
@@ -284,7 +269,20 @@ cursor: pointer;
           margin-right: 4px;
         }
       }
+      .rating-row {
+        display: flex;
+        align-items: center;
+        margin-top: 0.1rem;
+        .star-icon {
+          width: 12px;
+          height: 12px;
+          margin-right: 4px;
+        }
 
+        .rating {
+          font-size: 11px;
+        }
+      }
       .distance-row {
         font-size: 10px;
         margin-top: 5px;
@@ -311,7 +309,7 @@ cursor: pointer;
       }
 
       .donation-row {
-        font-size: 10px;
+        font-size: 12px;
         text-align: right;
         margin-top: 15px;
 
@@ -322,7 +320,7 @@ cursor: pointer;
 
           &.amount {
             color: #ff9900;
-            font-weight: bold;
+            font-family: "Pretendard-SemiBold";
           }
         }
       }
@@ -330,15 +328,15 @@ cursor: pointer;
   }
 }
 
-  .location-text {
-    display: inline-block;
-    max-width: 200px; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    vertical-align: middle;
-  }
-  
+.location-text {
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -394,12 +392,11 @@ cursor: pointer;
 
 .sort-button .arrow-icon.rotated {
   transform: rotate(180deg);
-  
 }
 //
 .restaurant-list-container {
-  height: calc(100vh - 180px); 
-  padding-bottom: 40px; 
+  height: calc(100vh - 180px);
+  padding-bottom: 40px;
   overflow: scroll;
 }
 .restaurant-list-container::-webkit-scrollbar {

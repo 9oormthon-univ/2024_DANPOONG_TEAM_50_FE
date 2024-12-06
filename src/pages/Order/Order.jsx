@@ -37,6 +37,7 @@ const Order = () => {
         setStoreId(id);
       }
     }
+    console.log(token);
   }, [location]);
 
   useEffect(() => {
@@ -102,28 +103,31 @@ const Order = () => {
     e.stopPropagation();
     const updatedIsLiked = !isLiked;
     setIsLiked(updatedIsLiked);
+    console.log("s", token);
+    if (token) {
+      try {
+        await axios.patch(
+          `https://api.mymoo.site/api/v1/stores/${storeId}/likes`,
 
-    try {
-      await axios.patch(
-        `https://api.mymoo.site/api/v1/stores/${storeId}`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      const storedFavorites =
-        JSON.parse(localStorage.getItem("favorites")) || {};
-      const updatedFavorites = {
-        ...storedFavorites,
-        [storeId]: updatedIsLiked,
-      };
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    } catch (error) {
-      console.error("Failed to toggle like status:", error);
-      setIsLiked(!updatedIsLiked);
+        const storedFavorites =
+          JSON.parse(localStorage.getItem("favorites")) || {};
+        const updatedFavorites = {
+          ...storedFavorites,
+          [storeId]: updatedIsLiked,
+        };
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      } catch (error) {
+        console.error("Failed to toggle like status:", error);
+        setIsLiked(!updatedIsLiked);
+      }
     }
   };
 

@@ -4,8 +4,12 @@ const Rank = ({ topRankers }) => {
   return (
     <div className="rank-container">
       <ul className="rank-list">
-        {topRankers.slice(0, 4).map((ranker, index) => ( 
-          <li key={index} className="rank-item">
+        {topRankers.slice(0, 4).map((ranker, index) => (
+          <li
+            key={index}
+            className="rank-item"
+            style={{ animationDelay: `${index * 0.3}s` }}
+          >
             <div className="rank-left">
               <span className="rank-number">{index + 1}</span>
               <img
@@ -16,11 +20,11 @@ const Rank = ({ topRankers }) => {
               <div className="rank-info">
                 <p className="rank-name">
                   {ranker.name}
-                  <span className="rank-gender">
-                    {" "}
-                  </span>
+                  <span className="rank-gender"> </span>
                 </p>
-                <p className="rank-date">최근 후원 날짜 {ranker.lastDonationDate}</p>
+                <p className="rank-date">
+                  최근 후원 날짜 {ranker.lastDonationDate}
+                </p>
               </div>
             </div>
             <div className="rank-right">

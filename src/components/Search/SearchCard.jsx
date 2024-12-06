@@ -72,11 +72,15 @@ const SearchCard = ({
 
       const updatedFavoriteStatus = !isFavorite;
 
-      await axios.patch(`https://api.mymoo.site/api/v1/stores/${id}`, null, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await axios.patch(
+        `https://api.mymoo.site/api/v1/stores/${id}/likes`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
       const storedFavorites =
         JSON.parse(localStorage.getItem("favorites")) || {};
@@ -108,14 +112,6 @@ const SearchCard = ({
         <div className="title-row">
           <div className="title-and-rating">
             <h4 className="title">{title}</h4>
-            <div className="rating-row">
-              <img src={StarIcon} alt="rating" className="star-icon" />
-              <span className="rating">
-                {rating !== undefined && rating !== null
-                  ? rating.toFixed(1)
-                  : "4.5"}
-              </span>
-            </div>
           </div>
           <img
             src={isFavorite ? HeartFilledIcon : HeartIcon}
@@ -127,11 +123,17 @@ const SearchCard = ({
             }}
           />
         </div>
+        <div className="rating-row">
+          <img src={StarIcon} alt="rating" className="star-icon" />
+          <span className="rating">
+            {rating !== undefined && rating !== null
+              ? rating.toFixed(1)
+              : "4.5"}
+          </span>
+        </div>
         <div className="location-row">
           <img src={LocationIcon} alt="location" className="location-icon" />
-          <span className="location-text">
-            {truncateText(location, 20)}
-          </span>
+          <span className="location-text">{truncateText(location, 20)}</span>
         </div>
         {distance && (
           <div className="distance-row">

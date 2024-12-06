@@ -167,7 +167,7 @@
 
           .store-name {
             font-size: 10px;
-            font-weight: bold;
+            font-family: "Pretendard-Medium";
             margin: 0;
           }
 
@@ -282,12 +282,12 @@
       align-items: center;
       justify-content: flex-start;
       width: 100%;
-      padding: 0 4px;
+
       gap: 5px;
 
       .shop-name {
         font-size: 12px;
-        font-weight: bold;
+        font-family: "Pretendard-Regular";
       }
 
       .rating {
@@ -305,7 +305,18 @@
     }
   }
 }
-
+//애니메이션
+@keyframes popUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 //후원자 홈 화면
 
 //내 후원
@@ -319,7 +330,10 @@
   width: 160px;
   height: auto;
   margin-left: -10px;
-
+  .user-avatar {
+    width: 100%;
+    animation: popUp 2s 3;
+  }
   .user-info {
     flex: 1;
     display: flex;
@@ -336,14 +350,14 @@
 
       h3 {
         margin: 0;
-        font-size: 9px;
-        font-weight: bold;
+        font-size: 12px;
+        font-family: "Pretendard-Medium";
         color: #333;
       }
 
       p {
         margin: 5px 0;
-        font-size: 8px;
+        font-size: 9px;
         color: #666;
       }
     }
@@ -355,7 +369,7 @@
         color: #666;
 
         span {
-          font-weight: bold;
+          font-family: "Pretendard-Medium";
           color: #ffd700;
         }
       }
@@ -381,10 +395,23 @@
   margin-top: -3px;
 }
 
+/* rank-list 관련 스타일 */
 .rank-list {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+/* @keyframes 정의 */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .rank-item {
@@ -392,6 +419,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 7px 0;
+  opacity: 0;
+  transform: translateY(20px); /* 초기 위치 */
+  animation: slide-up 0.5s ease-out forwards;
 
   &:last-child {
     border-bottom: none;
@@ -405,7 +435,7 @@
 
   .rank-number {
     font-size: 13px;
-    font-weight: bold;
+    font-family: "Pretendard-SemiBold";
     margin-right: 10px;
   }
 
@@ -422,7 +452,7 @@
 
     .rank-name {
       font-size: 10px;
-      font-weight: bold;
+      font-family: "Pretendard-SemiBold";
 
       .rank-gender {
         font-size: 7px;
@@ -453,7 +483,7 @@
 
   .rank-total {
     font-size: 10px;
-    font-weight: bold;
+    font-family: "Pretendard-SemiBold";
     color: #333;
   }
 }
@@ -463,6 +493,7 @@
   margin-bottom: -30px;
   overflow: hidden;
   flex-wrap: nowrap;
+  cursor: pointer;
 }
 
 .rank-card {
@@ -597,7 +628,7 @@
   &-header {
     h3 {
       font-size: 1.2rem;
-      font-weight: bold;
+      font-family: "Pretendard-SemiBold";
     }
   }
 
@@ -621,7 +652,7 @@
         background-color: #fff;
         border: 2px solid #ffc107;
         color: #ffc107;
-        font-weight: bold;
+        font-family: "Pretendard-SemiBold";
       }
     }
   }
@@ -633,10 +664,10 @@
     border-radius: 15px;
 
     .region-stats-title {
-      font-size: 10px;
+      font-size: 11px;
       color: #8b8b8b;
       margin-bottom: 10px;
-      font-weight: bold;
+      font-family: "Pretendard-Medium";
       text-align: right;
     }
 
@@ -696,7 +727,7 @@
             left: 50%;
             transform: translate(-50%, -130%);
             font-size: 7px;
-            font-weight: bold;
+            font-size: "Pretendard-Medium";
             color: #555;
           }
 
@@ -728,7 +759,7 @@
             margin-right: 10px;
 
             &:first-child {
-              font-weight: bold;
+              font-family: "Pretendard-Bold";
             }
 
             &:last-child {
@@ -768,8 +799,8 @@
 }
 
 .bar-rank {
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 12.7px;
+  font-family: "Pretendard-SemiBold";
   color: #000000;
   margin-right: 10px;
   margin-left: 5px;
@@ -791,7 +822,11 @@
   padding-left: 10px;
   border-radius: 15px;
   color: #fff;
-  font-weight: bold;
+
   font-size: 12px;
   transition: width 1s ease-in-out;
+  .bar-value {
+    font-family: "Pretendard-Regular";
+    font-size: 0.75rem;
+  }
 }
