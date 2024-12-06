@@ -223,21 +223,21 @@ const Signupadult = () => {
                 type="text"
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
-                placeholder="도/시"
+                placeholder="도"
               />
               <input
                 className="input-box2"
                 type="text"
                 value={sigun}
                 onChange={(e) => setSigun(e.target.value)}
-                placeholder="군/시/구"
+                placeholder="군/시"
               />
               <input
                 className="input-box2"
                 type="text"
                 value={gu}
                 onChange={(e) => setGu(e.target.value)}
-                placeholder="읍/면/동"
+                placeholder="구"
               />
               </div>
             </label>
