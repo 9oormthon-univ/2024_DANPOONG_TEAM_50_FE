@@ -33,7 +33,7 @@ const RedirectCharge = () => {
     console.log("일단 들어옴");
     try {
       const response = await fetch(
-        `https://api.mymoo.site/api/v1/payment/approve?pgToken=${pgToken}&tid=${tid}`,
+        `https://api.mymoo.site/api/v1/payment/approve?pg_Token=${pgToken}&tid=${tid}`,
         {
           method: "GET",
           headers: {
