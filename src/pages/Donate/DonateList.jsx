@@ -58,6 +58,7 @@ const DonateList = () => {
         {donateList.map((donate) => (
           <DonatePrice
             key={donate.donationId}
+            id={donate.donationId}
             price={donate.point}
             donator={""}
             date={donate.donatedAt}
