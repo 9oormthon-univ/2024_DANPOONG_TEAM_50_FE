@@ -24,6 +24,8 @@ import balance2Img from "../../assets/img/Mypage/balance2.png";
 import point2Img from "../../assets/img/Mypage/point2.png";
 import coupon2Img from "../../assets/img/Mypage/coupon2.png";
 import chargeImg from "../../assets/img/Mypage/charge.png";
+import charge2Img from "../../assets/img/Mypage/charge2.png";
+
 import axios from "axios";
 const MyPage = () => {
   const [token, setToken] = useRecoilState(userTokenState);
@@ -34,7 +36,11 @@ const MyPage = () => {
   const goDonateList = () => {
     navigate("/my/donatelist");
   };
-  // 사용자 정보를 가져오는 함수
+
+  const goDonateCharge = () => {
+    navigate("/my/charge");
+  };
+
   const fetchUserInfo = async () => {
     try {
       const responseData = await getUserInfoAPI(); // 사용자 정보 API 호출
@@ -143,14 +149,14 @@ const MyPage = () => {
           ) : (
             <>
               <div className="stat">
-                <p>잔액</p>
-                <img src={balance2Img} alt="잔액" />
-                <p>12,000원</p>
-              </div>
-              <div className="stat">
                 <p>포인트</p>
                 <img src={point2Img} alt="포인트" />
                 <p>{user.point}p</p>
+              </div>
+              <div className="stat">
+                <p>금액권</p>
+                <img src={balance2Img} alt="금액권" />
+                <p>2장</p>
               </div>
               <div className="stat">
                 <p>쿠폰</p>
@@ -185,21 +191,26 @@ const MyPage = () => {
                 </li>
                 <li>
                   <img src={cardImg} alt="카드 관리" />
-                  <span>아동 카드 관리</span>
+                  <span>카드 관리</span>
                   <img src={goImg} alt="이동" />
                 </li>
               </>
             ) : (
               <>
+              <li onClick={() => navigate("/my/charge")}>
+                  <img src={chargeImg} alt="충전하기" />
+                  <span>충전하기</span>
+                  <img src={goImg} alt="이동" />
+                </li>
                 <li onClick={goDonateList}>
                   <img src={donateImg} alt="후원 내역" />
                   <span>후원 내역</span>
                   <img className="donatego" src={goImg} alt="이동" />
                 </li>
-                <li onClick={() => navigate("/my/charge")}>
-                  <img src={chargeImg} alt="충전하기" />
-                  <span>충전하기</span>
-                  <img src={goImg} alt="이동" />
+                <li onClick={goDonateCharge}>
+                  <img src={charge2Img} alt="금액권 보관함" />
+                  <span>금액권 보관함</span>
+                  <img className="donatego" src={goImg} alt="이동" />
                 </li>
               </>
             )}
