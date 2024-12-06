@@ -121,8 +121,15 @@
   cursor: pointer;
 }
 
+.living-area {
+  display: flex; /* 가로로 배치 */
+  gap: 4px; /* 입력창 간격 */
+  width: 100%; /* 부모 컨테이너의 너비를 채움 */
+  flex-wrap: nowrap; /* 줄바꿈 방지 */
+}
+
 .input-box2 {
-  width: 110px;
+  width: 107px;
   height: 42px;
   margin-top: 8px;
   margin-bottom:16px;
@@ -131,6 +138,5 @@
   font-size: 14px;
   padding: 0 10px;
   font-family: "Pretendard-Regular";
-  flex: 1 0 0;
-  margin-right: 8px;
+  flex: 1; /* 각 입력 필드가 동일한 비율로 크기 조정 */
 }
