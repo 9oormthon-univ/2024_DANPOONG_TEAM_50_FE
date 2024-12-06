@@ -24,7 +24,7 @@ import balance2Img from "../../assets/img/Mypage/balance2.png";
 import point2Img from "../../assets/img/Mypage/point2.png";
 import coupon2Img from "../../assets/img/Mypage/coupon2.png";
 import chargeImg from "../../assets/img/Mypage/charge.png";
-
+import axios from "axios";
 const MyPage = () => {
   const [token, setToken] = useRecoilState(userTokenState);
   console.log("JWT 토큰:", token); // Recoil 상태에서 가져온 JWT 토큰 출력
@@ -51,9 +51,7 @@ const MyPage = () => {
       console.error("사용자 정보를 가져오는 중 오류 발생:", error);
     }
   };
-  const goOut = () => {
-    navigate("/");
-  };
+
   // 컴포넌트가 마운트될 때 사용자 정보 가져오기
   useEffect(() => {
     // Recoil 상태에 토큰이 없는 경우 로컬 스토리지에서 가져옴
@@ -74,6 +72,24 @@ const MyPage = () => {
       fetchUserInfo();
     }
   }, [token, setToken]);
+
+  const logout = async () => {
+    if (token) {
+      try {
+        await axios.get(`https://api.mymoo.site/api/v1/auth/logout`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        console.error("Error fetching store info:", error);
+      }
+    }
+  };
+  const goOut = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <div>
