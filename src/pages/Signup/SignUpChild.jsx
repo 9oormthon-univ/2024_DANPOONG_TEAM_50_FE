@@ -18,6 +18,10 @@ const Signupchild = () => {
   const location = useLocation(); // useLocation 사용
   const userRole = location.state?.userRole || "CHILD"; // userRole 가져오기, 기본값 설정
 
+  const [province, setProvince] = useState("");
+  const [sigun, setSigun] = useState("");
+  const [gu, setGu] = useState("");
+
   const onChangeNickName = (e) => {
     setNickName(e.target.value);
   };
@@ -76,7 +80,10 @@ const Signupchild = () => {
       password &&
       nickname &&
       phonenumber &&
-      cardNumbers.every((num) => num.length === 4) // 카드 번호가 4자리씩 입력되었는지 확인
+      cardNumbers.every((num) => num.length === 4) && 
+      province && 
+      sigun && 
+      gu 
     ) {
       const userInfo = {
         email,
@@ -85,7 +92,13 @@ const Signupchild = () => {
         phoneNumber: phonenumber,
         userRole: "CHILD", // 서버 요구사항에 따라 대문자로 변환
         cardNumber: getFullCardNumber() || "0000000000000000", // 카드 번호 추가 (4칸의 입력을 합쳐 16자리)
+        Do: province,
+        sigun,
+        gu
       };
+
+      console.log("회원가입 요청 데이터:", userInfo); // 요청 데이터 확인
+
   
       try {
         // 회원가입 API 호출
@@ -234,13 +247,45 @@ const Signupchild = () => {
               ))}
             </div>
           </label>
+          <div>
+          <label className="label">
+          <div className="label2">
+          <span>사는지역</span>
+          <span className="required">*</span>
+          </div>
+          <input
+              className="input-box2"
+              type="text"
+              value={province}
+              onChange={(e) => setProvince(e.target.value)}
+              placeholder="도/시"
+            />
+            <input
+              className="input-box2"
+              type="text"
+              value={sigun}
+              onChange={(e) => setSigun(e.target.value)}
+              placeholder="군/시/구"
+            />
+            <input
+              className="input-box2"
+              type="text"
+              value={gu}
+              onChange={(e) => setGu(e.target.value)}
+              placeholder="읍/면/동"
+            />
+            </label>
+          </div>
           {nickname &&
           birthdate &&
           email &&
           password &&
           confirmPassword &&
           phonenumber &&
-          cardNumbers.every((num) => num.length === 4) ? (
+          cardNumbers.every((num) => num.length === 4) &&
+          province && 
+          sigun &&
+          gu ? (
             <button className="sucbutton" type="button" onClick={onApply}>
               회원가입
             </button>
