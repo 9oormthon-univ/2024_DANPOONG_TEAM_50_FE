@@ -94,7 +94,7 @@ const Signupchild = () => {
         if (response.status === 201) {
           console.log("회원가입 성공:", response.data);
           alert("회원가입이 성공적으로 완료되었습니다.");
-          navigate("/signin");
+          navigate("/");
         }
       } catch (error) {
         console.error("회원가입 요청 실패:", error.response?.data || error.message);
