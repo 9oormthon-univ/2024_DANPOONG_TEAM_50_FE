@@ -95,7 +95,8 @@ const DonateCharge = () => {
     if (chargeData !== null && chargeData.tid) {
       localStorage.setItem("tid", chargeData.tid);
       console.log(chargeData.tid, "dd");
-      window.location.href = chargeData.next_redirect_pc_url;
+      // window.location.href = chargeData.next_redirect_pc_url;
+      window.location.href = chargeData.next_redirect_mobile_url;
     } else {
       console.log("chargeData is not ready", chargeData);
     }
