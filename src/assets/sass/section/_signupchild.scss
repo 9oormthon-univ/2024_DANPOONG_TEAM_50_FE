@@ -132,8 +132,14 @@
     height: 42px;
   }
 
+  .living-area {
+    display: flex; /* 가로로 배치 */
+    gap: 8px; /* 입력창 간격 */
+    width: 100%; /* 부모 컨테이너의 너비를 채움 */
+    flex-wrap: nowrap; /* 줄바꿈 방지 */
+  }
+
   .input-box2 {
-    width: 110px;
     height: 42px;
     margin-top: 8px;
     margin-bottom:16px;
@@ -142,6 +148,4 @@
     font-size: 14px;
     padding: 0 10px;
     font-family: "Pretendard-Regular";
-    margin-right: 8px;
-    flex: none; /* 고정 너비를 유지 */
   }
