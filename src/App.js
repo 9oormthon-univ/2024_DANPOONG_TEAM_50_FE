@@ -27,6 +27,7 @@ import Redirection from "./pages/Signin/Redirection";
 import { useNavigate } from "react-router-dom";
 import Heart from "./pages/Heart/Heart";
 import DonateCharge from "./pages/Mypage/DonateCharge";
+import RedirectCharge from "./pages/Mypage/RedirectCharge";
 const AppContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -43,7 +44,17 @@ const AppContent = () => {
       const code = currentUrl.searchParams.get("code"); // code 파라미터 값 가져오기
       navigate("/intro", { state: { code } });
     }
+    // 카카오페이 토큰 저장
+    if (
+      currentUrl.hostname === "mymoo.site" && // 메인 도메인 확인
+      currentUrl.pathname === "/" && // 루트 경로 확인
+      currentUrl.searchParams.has("pg_token") // `code` 쿼리 파라미터 확인
+    ) {
+      const pgToken = currentUrl.searchParams.get("pg_token"); // code 파라미터 값 가져오기
+      navigate("/my/charge/redirect", { state: { pgToken } });
+    }
   }, [navigate]);
+
   return (
     <div className="common-layout">
       <div className="app-main">
@@ -73,6 +84,7 @@ const AppContent = () => {
           <Route path="/intro" element={<Redirection />} />
           <Route path="/heart" element={<Heart />} />
           <Route path="/my/charge" element={<DonateCharge />} />
+          <Route path="/my/charge/redirect" element={<RedirectCharge />} />
         </Routes>
         {location.pathname !== "/" && <NavBar />}
       </div>
