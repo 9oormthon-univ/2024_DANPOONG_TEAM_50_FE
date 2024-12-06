@@ -51,7 +51,9 @@ const MyPage = () => {
       console.error("사용자 정보를 가져오는 중 오류 발생:", error);
     }
   };
-
+  const goOut = () => {
+    navigate("/");
+  };
   // 컴포넌트가 마운트될 때 사용자 정보 가져오기
   useEffect(() => {
     // Recoil 상태에 토큰이 없는 경우 로컬 스토리지에서 가져옴
@@ -215,6 +217,12 @@ const MyPage = () => {
             <img src={settingImg} alt="환경 설정" />
             <span>환경 설정</span>
             <img src={goImg} alt="이동" />
+          </li>
+          <li
+            onClick={goOut}
+            style={{ textAlign: "center", marginLeft: "-0.5rem" }}
+          >
+            <span>로그아웃</span>
           </li>
         </ul>
       </section>
