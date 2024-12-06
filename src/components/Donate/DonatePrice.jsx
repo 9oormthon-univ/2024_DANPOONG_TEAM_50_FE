@@ -3,7 +3,7 @@ import Price1 from "../../assets/img/Order/price/1.png";
 import Price2 from "../../assets/img/Order/price/2.png";
 import Price3 from "../../assets/img/Order/price/3.png";
 import { useNavigate } from "react-router-dom";
-const DonatePrice = ({ price, donator, date, place, donateStatus }) => {
+const DonatePrice = ({ id, price, donator, date, place, donateStatus }) => {
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState("");
   useEffect(() => {
@@ -17,7 +17,9 @@ const DonatePrice = ({ price, donator, date, place, donateStatus }) => {
     if (userRole === "CHILD") {
       navigate("/orderpay", { state: { price, donator, date, place } });
     } else {
-      navigate("/my/donatedetail", { state: { price, donator, date, place } });
+      navigate("/my/donatedetail", {
+        state: { id, price, donator, date, place },
+      });
     }
   };
   let priceImg;

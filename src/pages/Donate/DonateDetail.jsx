@@ -12,6 +12,7 @@ const DonateDetail = () => {
   const [id, setId] = useState(0);
   const [token, setToken] = useState(0);
   const [detail, setDetail] = useState([]);
+  const location = useLocation();
   // 스토리지 끌어오기
   useEffect(() => {
     const storedData = localStorage.getItem("mymoo");
@@ -24,7 +25,7 @@ const DonateDetail = () => {
   }, [token]);
   const fetchData = () => {
     if (token !== 0) {
-      fetch(`https://api.mymoo.site/api/v1/donations/1`, {
+      fetch(`https://api.mymoo.site/api/v1/donations/${location.state.id}`, {
         method: "GET",
         credentials: "include",
         headers: {
