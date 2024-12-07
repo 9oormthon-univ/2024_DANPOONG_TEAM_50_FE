@@ -98,7 +98,7 @@ const DonateFinish = () => {
           </div>
           <div className="detail-txt">
             <span>금액권 후원자</span>
-            <span className="grey">{user.nickname}</span>
+            <span className="grey">{user ? user.nickname : "로딩 중..."}</span>
           </div>
           <div className="detail-txt">
             <span className="medium">결제금액</span>
