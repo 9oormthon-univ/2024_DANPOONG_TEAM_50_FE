@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background:white;
+    background: white;
     .donate-price-box {
       padding: 12px 25px 12px 12px;
       display: flex;
@@ -176,14 +176,14 @@
     }
     .letter-img {
       margin-top: 28px;
-      width: 360px;
+      width: 100%;
     }
     .area {
       padding: 15px;
       width: 100%;
       position: absolute;
       z-index: 10;
-      bottom: 10px;
+      bottom: 5px;
     }
     .text-box {
       padding: 18px;
