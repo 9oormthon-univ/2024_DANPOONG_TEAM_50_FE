@@ -60,12 +60,12 @@ const QrScan = () => {
               delay={500}
               onError={handleError}
               onScan={handleScan}
-              style={{ width: "300px", height: "300px", objectFit: "cover" }}
               constraints={{
                 video: {
-                  facingMode: "environment",
+                  facingMode: { exact: "environment" }, // "environment"를 강제로 지정
                 },
               }}
+              style={{ width: "300px", height: "300px", objectFit: "cover" }}
             />
           </div>
           <div className="notice-txt">QR 코드를 스캔하세요.</div>

@@ -4,11 +4,30 @@ import DonateSuccessImg from "../../assets/img/Order/donate-success.png";
 import RecoBox from "../../components/Order/RecoBox";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { getUserInfoAPI } from "../../apis/user";
 const DonateFinish = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const price = location.state.selectedPrice;
   const [token, setToken] = useState("");
+  const [user, setUser] = useState();
+  const fetchUserInfo = async () => {
+    try {
+      const responseData = await getUserInfoAPI(); // 사용자 정보 API 호출
+      console.log(responseData);
+      setUser({
+        accountId: responseData.accountId,
+        email: responseData.email,
+        phone_number: responseData.phone_number,
+        nickname: responseData.nickname,
+        point: responseData.point,
+        profileImageUrl: responseData.profileImageUrl,
+        userRole: responseData.role,
+      });
+    } catch (error) {
+      console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+    }
+  };
   useEffect(() => {
     console.log("here");
     const storedData = localStorage.getItem("mymoo");
@@ -16,8 +35,9 @@ const DonateFinish = () => {
       const parsedData = JSON.parse(storedData);
       console.log(parsedData);
       setToken(parsedData["user-token"]);
+      fetchUserInfo();
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (token) {
@@ -64,7 +84,12 @@ const DonateFinish = () => {
           <div className="thanks-btn" onClick={() => navigate("/main2")}>
             홈으로
           </div>
-          <div className="orderlist-btn"  onClick={() => navigate("/my/donatelist")}>후원 내역 보기</div>
+          <div
+            className="orderlist-btn"
+            onClick={() => navigate("/my/donatelist")}
+          >
+            후원 내역 보기
+          </div>
         </div>
         <div className="orderfinish-detail">
           <div className="detail-txt">
@@ -73,7 +98,7 @@ const DonateFinish = () => {
           </div>
           <div className="detail-txt">
             <span>금액권 후원자</span>
-            <span className="grey">이*림</span>
+            <span className="grey">{user.nickname}</span>
           </div>
           <div className="detail-txt">
             <span className="medium">결제금액</span>
@@ -86,7 +111,7 @@ const DonateFinish = () => {
       <div className="orderfinish-bottom">
         <div className="reco-title">미르미님이 좋아할 만한 다른 식당</div>
         <div className="reco-area">
- <RecoBox
+          <RecoBox
             store={"미도인 강남점"}
             text={"그 유명한 스테이크 웨이팅 덮밥집"}
             img={
