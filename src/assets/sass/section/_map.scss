@@ -7,7 +7,8 @@
   .top-bar {
     position: absolute;
     left: 0;
-    width: 390px;
+    width: 100vw;
+    max-width: 390px;
     height: 100px;
     background-color: #fff;
     display: flex;
@@ -22,7 +23,7 @@
       margin-top: 45px;
 
       &.search-icon {
-        margin-left: 230px;
+        margin-left: 57%;
       }
 
       &.back-icon {
@@ -31,7 +32,7 @@
       }
 
       &.alarm-icon {
-        margin-right: 5px;
+        margin-left: 5px;
       }
     }
   }
@@ -43,7 +44,7 @@
     right: 16px;
     display: flex;
     align-items: center;
-    width: 360px;
+    width: 90%;
     height: 44px;
     padding: 0 10px;
     background-color: #f9f9f9;
@@ -76,8 +77,8 @@
 
   .locate-icon {
     position: absolute;
-    left: 80%; 
-    top: 75vh; 
+    left: 80%;
+    bottom: 10dvh;
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -87,20 +88,20 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    transition: top 0.3s ease; 
-  
+    transition: top 0.3s ease;
+
     &.card-visible {
       z-index: -1;
     }
-  }  
+  }
 }
 
 //
 .bottom-card {
   position: fixed;
   bottom: 0;
-  left: 50%; 
-  transform: translateX(-50%); 
+  left: 50%;
+  transform: translateX(-50%);
   width: 359px;
   margin-bottom: 100px;
   background-color: white;
@@ -117,15 +118,15 @@
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 15px;
-    white-space: nowrap; 
-    overflow: hidden; 
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .card-row {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
-    overflow: hidden; 
+    overflow: hidden;
 
     .icon {
       width: 15px;
@@ -138,8 +139,8 @@
       color: #555;
       margin: 1px 0;
       white-space: nowrap;
-      overflow: hidden; 
-      text-overflow: ellipsis; 
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
@@ -152,8 +153,8 @@
   bottom: 16px;
   left: 0;
   right: 0;
-  justify-content: space-between; 
-  overflow: visible; 
+  justify-content: space-between;
+  overflow: visible;
 }
 
 .card-wrapper {
@@ -161,7 +162,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .prev-btn,
@@ -172,9 +173,8 @@
   cursor: pointer;
   padding: 10px;
   border-radius: 50%;
-  position: relative; 
-  top: -110px; 
-  z-index: 1000; 
-  color:#333;
+  position: relative;
+  top: -110px;
+  z-index: 1000;
+  color: #333;
 }
-
