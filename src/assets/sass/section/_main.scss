@@ -9,7 +9,7 @@
 
   .home-container {
     width: 100%;
-    max-width: 420px;
+    max-width: 390px;
     margin: 0 auto;
     margin-top: -50px;
     display: flex;
@@ -87,6 +87,7 @@
       background-image: url("../../img/Main/locate.svg");
       background-position: center;
       background-repeat: no-repeat;
+      background-size: 93vw;
       color: #000;
       position: relative;
       z-index: 1000;
@@ -463,7 +464,7 @@
 
     .rank-date {
       font-size: 6px;
-      color: #aaa;
+      color: rgb(255, 193, 7);
       margin-top: 3px;
     }
   }

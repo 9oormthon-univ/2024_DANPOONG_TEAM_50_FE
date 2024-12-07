@@ -164,9 +164,9 @@ const Main2 = () => {
           },
         }
       );
-
+      console.log(response.data);
       const { donatorRanking, rankings } = response.data;
-
+      console.log(rankings);
       setDonationData({
         name: donatorRanking.donator,
         profileImg: donatorRanking.profileImageUrl,
@@ -177,7 +177,7 @@ const Main2 = () => {
         rank: donatorRanking.rank,
       });
 
-      const formattedRankers = rankings.donations.map((donation) => ({
+      const formattedRankers = rankings.map((donation) => ({
         name: donation.donator,
         avatar: donation.profileImageUrl,
         donationAmount: donation.totalDonation,
