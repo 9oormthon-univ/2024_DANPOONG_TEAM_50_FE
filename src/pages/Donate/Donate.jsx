@@ -22,14 +22,16 @@ const Donate = () => {
       console.log(storeId);
     }
   }, [token]);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const submitDonate = async () => {
+    if (isSubmitting) return; // 이미 제출 중이라면 종료
+    setIsSubmitting(true); // 제출 중으로 설정
     if (token) {
       try {
         await axios.post(
           `https://api.mymoo.site/api/v1/donations/stores/${storeId}`,
           {
-            point: 20000,
+            point: selectedPrice,
           },
           {
             headers: {
@@ -45,9 +47,12 @@ const Donate = () => {
         if (error.code === "ERR_BAD_REQUEST") {
           alert("포인트가 부족합니다. 금액을 충전 후 후원해주세요😊");
         }
+      } finally {
+        setIsSubmitting(false);
       }
     } else {
       alert("토큰 에러");
+      setIsSubmitting(false);
     }
   };
 
